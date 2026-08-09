@@ -1,0 +1,5460 @@
+         10224
+          B18140101
+    
+
+             
+
+    
+                
+
+         
+       
+       
+
+      
+Classified Index:                         Code:10224
+Confidential (yes/no): no                 NO. B18140101
+
+    Dissertation for the Doctor Degree
+
+Study on Pig Cough Sound Recognition
+Based on Muti-domain Feature Fusion
+
+Candidate: Ji Nan
+Supervisor: Prof. Shen Weizheng
+Degree Category: Doctor of Science in Engineering
+College: College of Electrical Engineering and Information
+First level discipline: Agricultural Engineering
+Second level discipline: Agricultural Electrification and
+
+                               Automation
+
+                           Harbin  China
+                            June   2023
+                                  
+
+1 .........................................................................................................1
+  1.1 ...............................................................................1
+  1.2 ...............................................................................3
+    1.2.1 .................................................3
+    1.2.2 .................................................6
+    1.2.3 .....................................................9
+  1.3 .................................................................10
+    1.3.1 ...................................................10
+    1.3.2 ...................................................................10
+  1.4 .........................................................................................11
+  1.5 .....................................................................14
+
+2  ..........................................................16
+  2.1 .................................................................................................16
+  2.2 .....................................................................16
+    2.2.1 ...................................................................16
+    2.2.2 ...............................................................19
+    2.2.3 ...........................................................20
+  2.3 .............................................................................22
+    2.3.1 .......................................................................................22
+    2.3.2 ...........................................................................................22
+    2.3.3 ...........................................................................................23
+  2.4 .....................................................................24
+    2.4.1 ...........................................................................24
+    2.4.2 ...........................................................................26
+  2.5 .........................................................................................28
+
+3  ......................................29
+  3.1 .................................................................................................29
+  3.2 .........................................................................29
+    3.2.1 ...................................................................................30
+    3.2.2 ...................................................................................30
+    3.2.3 ...............................................................................31
+  3.3 .............................................................................34
+    3.3.1  XGBoost-RFECV  .....................................35
+    3.3.2  XGBoost-SHAP  ........................................37
+  3.4 .....................................................................38
+    3.4.1 ...................................................................38
+    3.4.2 .......................................................................41
+
+  3.5 .............................................................................42
+    3.5.1 ...................................................................................42
+    3.5.2 .......................................................43
+    3.5.3 ...............................................46
+
+  3.6 .........................................................................................49
+4  ..........................................51
+
+  4.1 .................................................................................................51
+  4.2 .....................................................................................52
+
+    4.2.1 .......................................................................52
+    4.2.2  Q ..............................................................................54
+  4.3  ........................................................56
+    4.3.1 ...........................................................................56
+    4.3.2 .......................................................................59
+    4.3.3 ...............................................62
+  4.4  ........................................................62
+    4.4.1 ...........................................................63
+    4.4.2 ...........................................65
+    4.4.3 ...............................................66
+    4.4.4 ...................................................................66
+  4.5 .............................................................................68
+    4.5.1 ...................................................................................68
+    4.5.2 .......................................................68
+    4.5.3 .......................................................74
+  4.6 .........................................................................................78
+5  ......................79
+  5.1 .................................................................................................79
+  5.2 .........................................................................79
+    5.2.1 ...................................................................80
+    5.2.2 ...................................................................82
+  5.3  ................83
+    5.3.1 ...........................................................................83
+    5.3.2 ...........................................................................84
+  5.4 .............................................................................87
+    5.4.1 ...................................................................................87
+    5.4.2  ..............88
+    5.4.3  ..........95
+    5.4.4  ........101
+  5.5 .......................................................................................106
+6 .........................................................................................108
+  6.1 ...............................................................................................108
+  6.2 ...................................................................................109
+  6.3 ...............................................................................................109
+................................................................................................. 111
+                                                                     
+
+                                
+
+      
+
+
+
+
+
+
+
+      
+
+
+
+
+
+      1
+
+
+ XGBoost 
+ XGBoost-SHAP 
+
+K 
+
+
+ 94.46% 1.14%
+
+      2
+
+Q 1
+PR
+
+ RGB 
+ 93.98%
+2
+
+
+ VGG16VGG19  Resnet152 
+
+
+                                                                         I
+                                                    
+
+
+ 94.51%
+
+      3
+
+
+Acoustic-TFRs fusionA-TF
+ 97.57%
+
+
+ A-TF 
+A-TF 
+A-TF  F1  90.36%
+ 8.89% 8.31% A-TF 
+
+
+      4
+
+
+
+F1  92.19% SVM 
+
+
+
+      
+
+
+
+
+
+
+                                                                        II
+                                                                    Abstract
+
+    Study on Recognition of Pig Cough Sound Based on
+
+                   Muti-domain Feature Fusion
+
+                               Abstract
+
+      The modern pig farming industry is developing in the way of intensification, which is likely
+to induce pig respiratory diseases and to increase the pressure of pig disease prevention and
+control. As one of the main clinical symptoms of respiratory diseases in pigs, coughing has
+become a key indicator for monitoring of respiratory diseases. At present, pig cough monitoring is
+mainly conducted by manual inspection. However, the traditional monitoring method is not only
+time-consuming and laborious, but also difficult to achieve continuous monitoring and to miss the
+detection of disease in the early stage. Audio analysis technology has sufficient feasibility and
+technical advantages in detecting pig coughing sounds. For this reason, it is potential and effective
+to identify pig coughs from the sounds collected from commercial pig houses. It is of great
+importance to achieve the auxiliary early warning of herd respiratory diseases and thus reduce the
+infection rate of respiratory diseases in pig farms.
+
+      At present, the following issues exist in the application of audio technology to identify pig
+coughs: inadequate extraction of acoustic features in complex pig housing environments, lack of
+effective feature selection and fusion methods, and lack of research on pig cough recognition
+under unbalanced data sets. To overcome the above problems, this dissertation proposed a feature
+fusion method under different domains based on the extraction of traditional acoustic features and
+time-frequency representation features. Furthermore, a hybrid ensemble learning algorithm was
+proposed to achieve high-precision pig cough recognition under imbalanced datasets. The main
+work is as follows:
+
+      (1) Pig cough sound recognition method based on the fusion of traditional acoustic features
+was studied. Firstly, multiple traditional acoustic features in the time domain (root mean square
+energy and zero-crossing rate), frequency domain (spectral centroid, spectral flatness, spectral
+bandwidth, spectral roll-off, spectral contrast and spectral flux) and cepstrum spectral domain
+(Mel frequency cepstral coefficient, MFCC) of different sounds were extracted in pig barns.
+According to the correlation and difference between multiple acoustic features, a recursive feature
+elimination method based on XGBoost was proposed to realize acoustic feature selection. At the
+same time, feature interpretation based on XGBoost-SHAP method was used to deeply explore the
+correlation between features and its influence on recognition accuracy under different domains. A
+gridsearch method was used replace the traditional empirical determination of parameters to
+optimize the classifier and compare the performance of pig coughing sound classification under
+three different machine learning algorithms: support vector machine (SVM), K-Nearestneighbor
+
+                                                                        III
+                                                    
+
+algorithm (KNN) and random forest (RF). The results show that the time-domain features and
+cepstral domain features have stronger discrimination in the recognition of pig coughing sounds
+compared to the frequency domain features. The Mel frequency cepstral coefficients contributed
+the most to the model output. The acoustic feature fusion subset combined with support vector
+machine identified pig coughing sounds with an accuracy of 94.46%, an improvement of 1.14%
+compared to the Mel frequency cepstral coefficient in a single domain.
+
+      (2) Pig cough sound recognition based on the fusion of time-frequency representation
+features was investigated. Considering the compactness of information expression in both time
+and frequency dimensions, this paper further explores the two-dimensional time-frequency
+representation features were explored, including short-time Fourier transform (STFT) and constant
+Q transform (CQT). Then, the visual features and deep features of the time-frequency
+representations were further extracted. 1) To further enhance the description of visual features, the
+local binary patterns under different image resolutions were extracted by varying the (P, R) values.
+And the fused LBP under different resolutions was proposed. At the same time, the strategy of
+fusing the histogram of oriented gradient (HOG) features under three-channel and single-channel
+was proposed by using the effect of the colour channel of the time-frequency representation. The
+results show that the fusion of HOG under multi-channel images achieves an accuracy of 93.98%
+for pig cough recognition. 2) To further explore the deep features in the time-frequency domain,
+shallow convolutional neural network was constructed. Then, two feature fusion architectures
+based on single and bispectrogram input were proposed in combination with this model with the
+difference of element-wise method for deep feature fusion. The results show that the accuracy of
+pig cough recognition based on shallow convolutional neural networks outperforms that of three
+deep convolutional neural networks, VGG16, VGG19 and Resnet152. And the model computation
+time is much lower than that of deep convolutional neural networks, which is more suitable for pig
+cough recognition under small datasets in pig barns. Compared with the single-input spectrogram
+feature layer fusion method, the bispectrogram deep feature fusion method has better performance
+in pig cough recognition, with an accuracy of 94.51%. It can effectively capture the recognisable
+sound features in the barn.
+
+      (3) Pig cough sound recognition based on multi-feature fusion was investigated. First, for the
+balanced data set, fusion methods based on traditional acoustic features and time-frequency
+representation features were investigated to construct multiple fusion strategies based on three
+fusion architectures. Also, concatenation fusion, canonical correlation analysis, and decision
+fusion were applied in the three fusion architectures for further comparison and analysis. It is
+found that the combination of Acoustic-TFRs fusion (A-TF) achieves the best accuracy of 97.57%
+in identifying pig coughs, with the shortest time. It indicates that this fusion of feature subset can
+enhance the expression of sound features in pig house and effectively improve the recognition
+accuracy of pig cough sounds. Secondly, by reducing the number of pig cough sound samples and
+increasing the ratio of non-cough sounds by cough sounds, the balanced dataset was divided into
+
+                                                                        IV
+                                                                    Abstract
+
+three degree of imbalanced datasets: mild, moderate and severe degree of datasets. And six sets of
+imbalanced datasets were constructed under the three degrees. The three feature subset of acoustic
+features, deep features of bispectrogram and the fused A-TF subset were adopted for comparative
+analysis of recognition performance on the unbalanced dataset. The results show that as the
+imbalanced degree deepens, the A-TF features achieve the best recognition results on all six
+imbalanced datasets. In particular, the F1 score of A-TF reaches 90.36%, which is 8.89% and
+8.31% higher than that of acoustic features and deep features of bispectrogram under severe
+imbalanced degree, respectively. It shows that the A-TF fusion features exhibit strong robustness
+under data skew, which provides technical support for the study of data imbalance problems in pig
+houses.
+
+      (4) A hybrid ensemble learning algorithm for pig cough recognition was proposed.
+Considering the differences between heterogeneous and homogeneous models among features,
+ensemble learning could be used to combine them together. Firstly, the method designed
+differentiated and multi-layer base classifiers for keeping the stable performance of the base
+classifiers. Secondly, it performed secondary sampling and final decision on the output results of
+base classifiers. Comparative experiments were conducted on six imbalanced datasets. The method
+shows different degrees of recognition performance could be improved under six imbalanced
+datasets. And the F1 score improved to 92.19% when the data was heavily imbalanced,
+outperforming both the single SVM algorithm and the conventional data balancing algorithm. It
+shows that the method can overcome the recognition limitations of certain algorithm, fully exploit
+the advantages of the ensemble algorithm, and effectively improve the overall recognition
+performance of the model under imbalanced data sets.
+
+      In summary, the extraction of multi-domain features and the combination of hybrid ensemble
+learning algorithms can effectively improve the performance of pig cough recognition in
+unbalanced datasets. To some extent, this study has overcome the problem of accuracy
+degradation caused by imbalanced datasets. Also, it is of academic significance and application
+value for achieving high accuracy pig cough recognition in complex pig housing sound
+environment. And it provides a theoretical basis and technical support for early monitoring of herd
+respiratory diseases in pigs. Overall, it provides a new idea for healthy pig breeding and precision
+management.
+
+Key words: Pig; Cough sound recognition; Feature fusion; Audio detection; Healthy breeding;
+Smart livestock
+
+                                                                                                       Candidate: Ji Nan
+
+                                                                        V
+
+
+            Specialty: Agricultural electrification and automation
+                                      Supervisor: Prof. Shen Weizheng
+
+                   VI
+                                                                     
+
+1 
+
+1.1 
+
+       2  4 
+                  [1,2]                    
+ 2029  58277.44 
+
+    [3,4]                                  
+ 1-1
+[5]
+
+
+[6]
+
+
+
+
+                                            1-1 [4]
+                               Figure 1-1 Intensive environment for pig farming
+      
+[7]
+[8] 1-1
+ 1-1 
+
+      
+
+
+[9]
+
+
+                                                                         1
+              
+
+
+
+
+
+[10]
+
+                                          1-1 
+                   Table 1-1 Differential diagnosis of common pig respiratory diseases
+
+                   
+
+[11]               
+
+[12]  2-4          
+
+[13]  1.5-3        
+
+[14]               
+
+[15]  3-5          
+
+[15]               
+
+                                [16]          
+
+                           [17]           
+
+
+
+
+      
+
+          [18]                           [19] 
+
+
+
+[20,21]
+
+
+[22]                                      
+
+
+
+
+      
+
+
+[23]                                      
+
+                2
+                                                                     
+
+          [24]                            
+
+[25]
+
+      
+32172784CARS35
+
+
+1.2 
+
+      
+                              [26]        
+
+
+
+2015 [27]
+
+1-2 
+
+                                           1-2 
+                                 Figure 1-2 Flowchart of pig cough recognition
+      
+
+
+
+      
+
+                           [28]           
+
+
+
+1.2.1 
+
+      
+
+[23,29][17,30]
+
+                                                                         3
+                                                    
+
+
+
+
+      
+
+
+[31]                                      
+ 1-3 
+
+                                       1-3 
+                 Figure 1-3 Evolution of feature extraction methods of pig cough sounds
+      
+                      [32]                
+                  [33-35]                   
+
+[36]
+[37]Ferrari 
+
+
+                       [33]               
+
+[38]
+Van [39]
+
+
+
+
+                      [40]                
+
+[20]
+
+                                                                         4
+                                                                     
+
+      Van Hirtum 
+                                 [41]     
+
+
+[42]Exadaktylos 
+                       [43]               
+Guarino 
+
+       [44]                               
+[45,46]
+Guarino 
+
+[35]
+
+      
+Mel Frequency Cepstral
+Coefficient  MFCC                               
+MFCC  Davis  Mermelstein  1980 
+[47]
+Chung  12  MFCC 
+ MFCC [48]Giesert 
+ 20  MFCC [49]
+ MFCC 
+ MFCC [50]
+
+Principal Component AnalysisPCA
+
+ 85%[51] Wang  PCA  85%
+[52] 85% 95%
+ 90% PCA [11]
+ 98.01%[53]
+
+      
+
+
+
+
+[54]Short-time Fourier transform
+STFT
+
+
+                                                                         5
+                                                    
+
+                         Yin           
+STFT  Alexnet [55]HONG  MnasNet
+ STFT [56]
+Convolutional Neural NetworkCNN
+          [57]                            
+ Lee 
+ CNN [58] Shen 
+ CNN Support Vector MachineSVM
+                               [59]       
+
+
+
+
+
+
+1.2.2 
+
+      
+[60]
+
+
+
+
+
+                                      [61]    
+
+                     ANO VA             [62] 
+
+
+            [33,35]                         
+[63]                                      
+ANOVA 
+[51]
+
+[51]
+
+                          [64]                
+ C [65]
+                            [42]          
+[43]SVM 
+
+                                                                         6
+                                                                     
+
+Lee  SVM [66]
+Wang  SVM [52]20  80 
+HMM [67]2011 
+Giesert  HMM [49][68]
+[27][69] HMM 
+                             [70]         
+
+[71]
+
+                             [72]             
+
+
+
+Moshou [73]
+                        [74]              
+ BP [75,76] HMM 
+Deep Neural NetworkDNN DNN-HMM 
+                      [77]                
+                              [78­80]      
+DenseNet  DenseNet-121DenseNet-169  ResNet-34 
+[81] STFT 
+ CNN  Alexnet [82] CNN 
+
+ CNN  CNN 
+                                [57]      
+ CNN 
+                       [83]            
+Recurrent Neural NetworkRNN
+[75,84,85]
+
+
+
+ Hong  MnasNet 
+ MobileNetV2 
+[56,86]
+
+
+      
+
+
+
+                                                                         7
+                                                    
+
+[87]                                      
+
+
+         [88]                             
+
+ [89]                                     
+
+[90]Pessoa 
+                         [91]             
+
+
+
+
+      
+
+
+                 [92]                     
+
+[93]Li 
+
+[94]Anders 
+[95]
+Zhang 
+
+                   [96]                   
+ Chawla 
+Synthetic Minority Over-sampling TechniqueSMOTE
+
+[97]Sheryn  SMOTE  SMOTE 
+SVM [98]Rafael 
+ SMOTE 
+[99] SMOTE 
+Borderline-SMOTE  SMOTE 
+[100]
+Jin  Borderline-SMOTE                     
+    Borderline-SMOTE [101]
+
+
+
+
+                                                                         8
+                                                                     
+
+1.2.3 
+
+      
+[102]
+
+
+
+
+      
+Liao 
+ MFCC  Log 
+[103]
+
+ 8 Linear
+predictive cepstral coefficientLPCC MFCC 
+ 8 [68]
+MFCC  LPCC [4]
+
+
+[104]
+
+
+ MFCC 
+[105]Wang 
+ 12  12  24  MFCC 
+[52,106]Zhao 
+ 13  MFCC  MFCC  39 
+MFCC[107] 12  LPCC  12
+ LPCC  24  LPCC 
+[108]
+
+      
+ MFCC  LPCC 
+ Fisher 
+[109]Cordeiro 
+ 10  Wrapper 
+[110]Tallet 
+                             [111]        
+
+
+
+                                                                         9
+                                                    
+
+1.3 
+
+1.3.1 
+
+      
+
+
+
+      1
+      
+
+
+
+
+
+      2
+      
+
+
+
+
+      3
+      
+
+
+
+
+
+1.3.2 
+
+      
+
+
+
+
+
+
+
+
+      1
+
+                                                                        10
+                                                                     
+
+
+
+ XGBoost 
+ XGBoost-SHAP 
+
+K 
+
+      2
+ Q
+1
+PR
+
+ RGB 
+2
+
+
+
+
+
+      3
+
+
+
+
+
+
+
+
+
+1.4 
+
+      
+
+ 1-4 
+
+      1
+      
+
+
+      2
+      
+
+                                                                        11
+                                                    
+
+XGBoost-RFECV  XGBoost-SHAP 
+
+RFK KNN
+SVM
+
+      3
+      
+STFT Q CQT
+
+
+                    LBP           HOG         
+KPCA
+PR
+
+ RGB 
+
+      CNN
+Layer fusionTFRs fusion
+
+Element-wise
+
+      4
+      
+
+      
+
+      
+
+
+                                                                        12
+                                 
+
+                     1-4 
+Figure 1-4 Schematic diagram of the technical flow
+
+                                     13
+                                                    
+
+1.5 
+
+       1-5 
+      
+
+
+
+
+                                             1-5 
+                           Figure 1-5 Research content and arrangement of sections
+      
+
+
+      
+
+
+
+      
+
+ Q 
+
+
+      
+
+
+
+                                                                        14
+                                                                     
+
+
+
+
+
+
+
+
+      
+
+
+                                                                        15
+                                                    
+
+2 
+
+2.1 
+
+      
+[112]
+
+
+
+
+
+
+2.2 
+
+2.2.1 
+
+      
+ 126°40~ 127°39 45°10~ 45°50
+
+162  2-1 
+
+                                               2-1 
+                                Figure 2-1 Layout of the experimental pig house
+       27.5m×13.7m×3.2m×× 21 
+ 1.1m 1  12  4.15m×3.6m 13  21 
+3.6m×2.75m
+ 1.35m  128 ×
+ 60kg  1-13  2-1 
+
+                                                                        16
+                                                      
+
+      
+ 13
+ 2
+ 10~15 
+
+2-2  2-2 a)
+ 2-2 b)7  2-2 c)13 
+ 2-2 d)
+
+
+            a)                                     b) 
+a) Internal environment of the pig house      b) Electrical fan switched on
+
+c) 7                                          d) 13 
+
+c) Top view of Pen 7 in barn                  d) Pig condition in Pen 13
+
+        2-2 
+
+Figure 2-2 Experimental environment of pig house
+
+ LIQI LM320E 
+
+ 50 Hz~16000 Hz-45dB±3dB 1.5VAA 
+
+ 7  13 
+
+ 1.4  0.8 
+
+ Conexant Smart Audio HD 
+
+                                          17
+                                                    
+
+  44.1kHz   16bit 
+.wav  2-3  2-3 a)
+ 2-3 b)
+
+a)                                              b) 
+
+a) The process of audio acquisition with laptop b) Installation position of the microphone
+
+ 2-3 
+
+Figure 2-3 Audio collection on-site in the pig house
+
+            a)                                               b) 
+a) Electrical fan switched on in pig house      b) Electrical fan switched off in pig house
+
+c)                                              d) 
+
+c) Silent conditions at night in pig house d) Vocal condition at night in pig house
+
+ 2-4 
+
+Figure 2-4 Part of the acquired original sound segments
+
+                                            18
+                                                      
+
+       7  10 .wav 
+ 791 .wav  2-4 
+ 2-4 a) 2-4 b)
+ 2-4 a) 2-4 b) 2-4 c)
+ 2-4 d)
+
+
+
+
+2.2.2 
+
+      
+[113]
+
+
+
+      
+
+
+
+
+
+
+
+      
+ Cool Edit Pro  2-5  2-
+5 a) 10 
+
+
+2-5 b)
+
+
+
+
+      
+
+
+
+
+
+
+                                                                        19
+                                                    
+
+                                                  a)  10 
+                                         a) A ten-minute audio recording in vocal condition
+
+                                                         b) 
+                                          b) Interface of audio segmentation and labelling
+
+                           2-5 Cool Edit Pro 
+                      Figure 2-5 The process of reading and labeling sound recordings
+
+2.2.3 
+
+      
+ 2-1  2546 
+ 1273  1273  957 
+
+ 188 
+
+                                                                        20
+  
+
+ 100  28 
+                                             2-1 
+
+                 Table 2-1 Dataset of different types of sounds collected from pig house
+
+                                                                  
+
+  1273                                                            1273
+
+                                                                  957
+
+                                                                  188
+
+  1273
+
+                                                                  100
+
+                                                                  28
+
+                     2-6 
+  Figure 2-6 Time-to-amplitude waveform plots of noncough sounds
+
+                                                  21
+        
+
+                                     2-7 
+                       Figure 2-7 Time-to-amplitude waveform plots of cough sounds
+       2-6  2-7  2-6 
+
+ 2-7 
+
+
+
+2.3 
+
+2.3.1 
+
+
+
+
+
+
+
+
+
+             H z = 1-z-1               2-1
+
+ 0.9 <  < 1
+
+ 0.97
+
+2.3.2 
+
+      
+
+
+
+
+
+
+        fn=  N-overlap  =  N-wlen  +1  2-2
+                 inc         inc
+
+
+
+        wlen=fs× length                2-3
+
+Frequency of sampling
+
+Hz
+
+                           22
+                                                      
+
+ 44100Hz 20~40ms 25ms 
+ 25ms 
+
+overlap wlen  inc
+inc  50%
+N  N  2-8 
+
+
+                      2-8 
+        Figure 2-8 Framing schematic diagram of pig cough sound
+
+2.3.3 
+
+
+
+[114]
+
+
+
+Sw n 2-4
+
+            Sw n =S(n)×w(n)                                      2-4
+
+S(n)  
+
+
+
+
+
+
+
+
+
+
+
+Rectangular window2-5
+
+            1, 0     - 1                                         2-5
+             = 0
+                                 , 
+
+Hamming window
+
+2-6
+
+         =  0.54 - 0.46 cos  2   ,0-1                            2-6
+                             -1
+
+            0                    , 
+
+      Hanning window
+2-7
+
+                             23
+    
+
+ =  0.5  1  -  cos  (  2   ,0-1  2-7
+                       -1
+
+               0           , 
+
+      2-5~2-7 N
+ 2048  2-9 
+
+
+
+
+
+
+
+
+                                                2-9 
+                                   Figure 2-9 Three types of window functions
+
+2.4 
+
+2.4.1 
+
+      k-fold Cross ValidationCV
+[115]
+ - 1 
+
+
+Nested k-fold Cross ValidationNCV
+[116]
+
+ 2-1 
+
+                                                                        24
+                         
+
+ 2-1  k 
+Algorithm2-1 Nested k-fold cross validation
+
+ M D P j = 1,2...k
+ i = 12...n
+
+ k  Avg_best
+
+1: for j = 1,2...k
+
+2:    D  Dtrain  Dtest 
+
+3:       for i = 12...n
+
+4:            Dtrain  Itrain  Itest
+
+5:            for p = 12...P
+
+6:             p  Itrain  M
+
+7:             M  Itest 
+
+8:            End
+
+9:             P  p_best
+
+10:      End
+
+11:       p_best  Dtrain
+
+12: End
+
+13:  k  Dtest 
+
+14:  Avg_best
+
+       2-10  3 
+      1 3 
+
+      2 3 
+
+      3
+
+      4
+2~4
+      5
+      
+
+
+
+
+                              25
+
+
+                                         2-10  3 
+                              Figure 2-10 Nested 3-fold cross validation diagram
+
+2.4.2 
+
+      
+
+
+
+      [117]Confusion MatrixCM × 
+
+
+
+ 2-11 
+
+a)                                     b) 
+
+a) Confusion matrix for two class      b) Confusion matrix for mutil-class
+
+ 2-11 
+
+Figure 2-11 Confusion matrix diagram
+
+                                   26
+
+
+       2×2 1 
+ 2 TPTrue Positive
+FNFalse Negative
+FPFalse Positive
+TNTrue Negative
+
+          Accuracy                             
+
+2-8
+
+Accuracy= TP+TN                    2-8
+
+                    TP+TN+FP+FN
+
+      Precision
+2-9
+
+Precision= TP                      2-9
+
+                    TP+FP
+
+      Recall
+2-10
+
+Recall = TP                        2-10
+
+                TP+FN
+
+F1 F1-Score2-11
+
+F1-score  =  2×Recall×Precision    2-11
+              Recall+Precision
+
+           [118]  Area under the curve  AUC              Receiver
+Operating Characteristic  ROC       -      Precision-recall  PR   ROC-
+AUC  PR-AUC
+
+      ROC              False Positive Rate FPR        
+True Positive RateTPRFPR  TPR 2-122-13
+
+FPR= FP                            2-12
+
+           FP+TN
+
+TPR= TP                            2-13
+
+           TP+FN
+
+ FPR  TPR  ROC-AUC2-14
+
+ROC-AUC= 1+TPR-FPR                 2-14
+
+                              2
+
+PR-AUC 
+
+    2-15PR 
+
+ AUC PR-AUC  ROC-AUC 
+
+AUC  1
+
+- =                                2-15
+             =1
+
+             27
+      
+
+
+
+G-mean
+
+G-mean 2-16
+
+      - =  ×    2-16
+
+Recall Spec Spec
+
+2-17
+
+        =       2-17
+           +
+
+      G-mean 
+
+ G-mean 
+
+2.5 
+
+      
+
+
+      1
+
+
+      2
+
+
+      3
+
+           28
+                                              
+
+3 
+
+3.1 
+
+      
+
+
+
+
+
+      
+
+[119]
+
+
+
+
+      
+
+
+ 
+
+ 3-1 
+
+                             3-1  2 
+              Figure 3-1 The main research content of this and relationship with Chapter 2
+
+3.2 
+
+      
+
+
+
+                                                                        29
+                                                    
+
+
+
+
+[120]
+
+
+[121]
+
+3.2.1 
+
+                                Root mean square 
+RMS                 [122]                   
+3-1
+
+         =      1              2 1+ 2 2+...+ 2   3-1
+                                         
+                          2 =
+
+                    =1
+
+      Zero-crossing rateZCR[40]
+3-2
+
+          =  1  -1             - sgn   + 1       3-2
+             2
+                     sgn  
+
+                =0
+
+sgn   3-3
+
+                sgn    =   1,    0               3-3
+                          -1, () < 0
+
+3.2.2 
+
+
+
+             [123]                     Discrete
+
+Fourier TransformDFT3-4
+
+         =      -1       -2,   = 0, ...,  - 1    3-4
+
+                     
+
+                =0
+
+  
+
+[124]Spectral centroidCentroid
+
+
+
+3-5
+
+ k 
+
+                 =          -1                   3-5
+
+                                    
+
+                            =1
+                              -1
+
+                                    
+
+                              =1
+
+                          30
+          
+
+      [125]Spectral flatnessFlatness
+
+
+
+                          =-01          1
+
+                       =  1      -1                      3-6
+                          
+                                        
+
+                                 =0
+
+[126]Spectral bandwidthBandwidth
+
+
+
+         =                   -1                          3-7
+
+                                   -  
+
+                             =0
+                                  -1
+
+                                       |()|2
+
+                                  =0
+
+[127]Spectral roll-offRolloff  
+
+ 0.85Rolloff 
+
+
+
+           =                 -1                          3-8
+
+                                 
+
+                             =1
+
+[128]Spectral contrastContrast
+
+
+
+
+
+0.02
+
+   = log   1           - log      1                      3-9
+                                 
+                   ',                            ' ,-+1
+
+              =1                            =1
+
+[129]Spectral fluxFlux
+
+
+
+
+
+           =  1      -   2                               3-10
+                 =1                     -1
+
+ = 1,2, ...,  - 1
+
+3.2.3 
+
+      [47]Mel Frequency Cepstral CoefficientMFCC
+MFCC 
+MFCC 
+
+ MFCC 
+
+
+                             31
+                                                    
+
+
+MFCCMFCC  3-2 
+
+      1
+       2.3 
+ MFCC 
+
+
+
+
+     3-2 
+
+   Figure 3-2 Extraction process of MFCC
+
+2
+
+ 3-
+
+3 
+
+ =  -1       -2,   = 0, ...,  - 1         3-11
+
+         
+
+    =0
+
+
+
+                                          3-3 
+                                   Figure 3-3 Fast Fourier transform
+3
+
+
+                                                                 32
+
+
+
+
+
+ 3-4 3-12
+
+ = 2595 log          1+                  3-12
+
+                            700
+
+                                     3-4 
+                          Figure 3-4 Relationship between Mel and linear frequency
+Fmel Melf Hz
+      
+ 1000 
+
+() = 1,2......()
+
+() =    F-1  F       +   F        -F     3-13
+                                   +1
+
+
+               F          F-1  F        
+F3-12,
+
+
+3-14
+
+  =          0         < -1              3-14
+                  -1  
+          - -1
+          -(-1)    <  +1
+                       > +1
+           +1 -
+         +1 - 
+
+            0
+
+      
+
+
+
+                 33
+    
+
+3-15(, )
+
+(, ) DFT                                                        3-15
+                                                    ,  =  ,  2
+
+3-16
+
+
+
+     ,  =  -1    ,          ,  0                                3-16
+           =0
+
+
+
+    3-14
+
+
+4
+
+ Mel 
+
+ MFCC3-
+
+17
+
+     ,  =  2   -1  log    ,    cos   2-1                        3-17
+               =0                        2
+
+3-17(, )
+
+
+
+MFCC  3-5  13 
+
+                                                  3-5 
+                                 Figure 3-5 Mel frequency cepstral coefficients
+
+3.3 
+
+      
+
+
+
+
+                                                                        34
+                                              
+
+   XGBoost         Recursive feature elimination with cross validation 
+RFECV
+ XGBoost  SHAPSHapley Additive exPlanations
+
+
+
+3.3.1  XGBoost-RFECV 
+
+3.3.1.1 
+
+      Recursive feature eliminationRFE
+[130]
+
+
+
+
+
+
+
+
+
+ n 
+
+
+
+ 3-1 
+
+ 3-1 
+
+Algorithm 3-1 Recursive feature elimination with cross validation
+
+Fi  i = 12...f  M D j = 1,2...n
+
+ F_best
+
+1: for j = 1,2...n
+
+2:        D  D-1  1 
+
+3:        Fi
+
+4:       for i = 12...f
+
+5:        Fi  i  M 
+
+6:        i 
+
+7:       
+
+8:       
+
+9:       end
+
+10: end
+
+11:  n 
+
+12:  F_best
+
+3.3.1.2 XGBoost 
+
+       XGBoost  RFECV 
+XGBoost  Boosting 
+
+                         35
+             
+
+                              [131]     XGBoost
+ CPU  XGBoost [132]
+
+
+
+ SHAP 
+
+
+
+XGBoost  2016 
+
+
+
+         =                                     3-18
+
+                      ,   
+
+               =1
+
+  
+
+
+
+       obj  =                                  3-19
+
+                     ,  +   
+
+               =1
+
+               =     +  1                      3-20
+                        2
+                                  2
+
+                             =1
+
+ ,  (  )
+
+
+(  
+
+
+
+              = -1 +                           3-21
+
+
+Obj  =                                         3-22
+
+                   , -1 +   +  
+
+             =1
+
+
+
+obj            +  1   +  2   +  +    constant  3-23
+                  2
+           
+
+       =1
+
+ =   =  
+
+ =    =  
+       XGBoost-RFECV  3-6 
+
+
+ XGBoost  F Cover 
+ Gain F  XGBoost 
+Gain
+
+XGBoost 
+[133]
+
+                        36
+                                              
+
+      
+
+
+ SHAP 
+
+             3-6  XGBoost-RFECV 
+Figure 3-6 Recursive feature elimination with cross validation based on XGBoost
+
+3.3.2  XGBoost-SHAP 
+
+      Lundberg  Lee  SHAP 
+[134]SHAP  Shapley  Shapley 
+ SHAP 
+ SHAP 
+ SHAP 
+
+
+      SHAP SHAP 
+ Shapley 
+ Shapley 
+
+
+  =            -1 ! -   !×      -        3-24
+                     !
+        
+
+  
+
+   i  Shapley Shapley 
+ Shapley 
+
+ , ' =             ! -  -1 !      '  -   3-25
+                         !
+        {' }
+
+                        37
+       
+
+'
+' {'}'{}
+ Shapley 
+
+  =          !  -  -1  !               -        3-26
+                  !
+         
+
+                          S!  n- S -1  !        -   
+                               n!
+                sN i
+
+
+
+  
+      SHAP  Shapley 
+
+SHAP 
+
+        ' = 0 +                                 3-27
+
+                            '
+
+                       =1
+
+'  0,1 
+
+ Shapley ' 1 
+
+' 0 0
+' 1
+
+        ' = 0 +                                 3-28
+
+                               
+
+                          =1
+
+  XGBoost-RFECV             SHAP         
+
+TreeExplainer
+
+SHAP 
+
+
+
+
+
+
+
+ SHAP
+
+
+
+SHAP 
+
+
+
+ Shapley 
+
+ SHAP 
+
+3.4 
+
+3.4.1 
+
+                        [64]                  
+
+
+                                                                        38
+                                              
+
+ Random forest  RF        Support vector machine  SVM  [135]  K-    
+K-Nearest NeighborKNN[136]
+
+3.4.1.1 
+
+       Bagging 
+Bagging bootstraping
+
+
+
+
+      
+
+
+
+
+
+      1
+      2
+         3                                 
+
+         4                                 
+
+      5      2 
+4
+         6                                 
+
+      Bagging 
+
+ Bagging 
+
+       Bagging 
+
+
+
+
+3-7 
+
+                                                                        39
+                                                    
+
+                                             3-7 
+                                 Figure 3-7 Schematic diagram of random forest
+
+3.4.1.2 
+
+      
+
+
+ 3-8  SVM 
+
+
+
+
+
+                                           3-8 
+                                      Figure 3-8 Schematic diagram of SVM
+      C C 
+gamma
+ gamma 
+
+                                                                        40
+                                              
+
+
+ gamma 
+
+
+      SVM 
+[137]
+SVM 
+[138]
+
+3.4.1.3 K 
+
+      K 
+[139]KNN 
+
+KNN 
+
+      1 1 
+      2
+         3                                  
+
+      4Minkowski
+
+      5
+      6
+
+       KNN 
+
+
+
+
+ KNN 
+
+3.4.2 
+
+      
+
+
+
+
+[140]
+
+
+
+                                                                        41
+      
+
+       = arg                                                      3-29
+
+                    
+
+          
+
+   = 
+'  
+  '
+
+      '
+
+
+[141]
+
+
+
+
+
+
+
+       3-1 SVM 
+linear RBF rbfKNN 
+_ K  RF _
+
+
+__
+
+
+                  3-1 
+Table 3-1 Grid search of the main parameters for each classifier
+
+                      
+
+SVM   : `linear', `rbf'; :1, 10, 100; :0.1, 0.01,0.001;
+KNN                             _: (1,50);
+ RF
+             _: (10,50); __: (2,9);
+
+3.5 
+
+3.5.1 
+
+       Librosa 0.8.1[142] 44.1kHz
+      Intel(R) Core (TM) i7-10750H CPU 2.6GHz  RAM 16GB  NVIDIA GeForce
+GTX 1650 Ti GPU64  Windows 10 
+Python 3.7Scikit-learn  PyCharm Community Edition 2020 
+ Matplotlib 3.3.1  Seaborn 0.11.1
+
+       2.2.3  50%
+ 2546 2.4.1 
+
+      42
+                                              
+
+ 2.4.2 
+AccuracyPrecisionRecallF1 F1-Score%
+
+
+
+
+3.5.2 
+
+       XGBoost-SHAP 
+ XGBoost-RFECV 
+
+3.5.2.1 
+
+       XGBoost  RFECV 
+ SHAP 
+
+
+       3-9 x (| SHAP|)
+ SHAP 
+      ZCR 
+RMS                                   
+MFCC  MFCC5RMS 
+ Flatness  Contrast Centroid 
+
+                                                3-9 
+                                  Figure 3-9 Ranking of the feature importance
+
+                                                                        43
+                                                    
+
+      
+ 3-10 
+ Shapley 
+ SHAP y x 
+ Shapley x 
+SHAP 
+
+
+       3-10 MFCC5  y  MFCC5 
+SHAP  MFCC5  13
+ RMS  y 
+ RMS  y 
+ RMS 
+Centroid
+ MFCC 
+MFCC12MFCC1MFCC8MFCC10  MFCC4  MFCC 
+MFCC 
+
+
+SHAP 
+
+
+                                      3-10  SHAP 
+                        Figure 3-10 Distribution of SHAP values for feature samples
+
+                                                                        44
+                                              
+
+      
+ SHAP Centroid  MFCC5  3-11 
+ Centroid  2700Hz  MFCC5 
+ Centroid MFCC5 
+
+
+                                            3-11 
+                Figure 3-11 SHAP feature dependence plot with interaction visualization
+
+3.5.2.2 
+
+       3-12  XGBoost-RFECV  SHAP 
+
+ XGBoost 
+ score  F1 
+
+                                3-12  XGBoost-RFECV 
+              Figure 3-12 Predictive scores of recursive feature elimination with XGBoost
+
+                                                                        45
+                                                    
+
+       3-12 
+ 15 
+ 20  F1
+ 0.8890 20 
+ Centroid ZCR  RMS
+ 13  MFCC  FluxBandwidthFlatnessContrast  Rolloff 
+ 20 
+ Acoustic
+
+3.5.3 
+
+       k 
+
+
+3.5.3.1 
+
+       k 
+ Acoustic  SVMKNN  RF 
+ k 
+
+       3-2    SVM    k                       
+Inner_CVOut_CV k  k 
+ k=3k=5  k=10 k 
+ 56.372s k 
+Out_CV  k=10  Inner_CV  k SVM 
+               F1                  95.13% 
+95.11%95.50% 94.75% RBFC=1  Gamma=0.1
+
+                                  3-2 SVM  k 
+               Table 3-2 Cough recognition rates of SVM based on k fold cross validation
+
+Out_CV  Inner_CV  (%) F1  (%)  (%)  (%)    (s)
+
+        k=3   94.46  94.45  94.72  94.19  3.476
+
+k=3     k=5   94.23  94.22  94.41  94.03  5.779
+
+        k=10  94.46  94.45  94.72  94.19  11.184
+
+        k=3   94.54  94.54  94.43  94.66  7.769
+
+k=5     k=5   94.23  94.24  94.06  94.44  12.856
+
+        k=10  94.82  94.82  94.83  94.82  24.987
+
+        k=3   95.13  95.11  95.50  94.75  18.698
+
+k=10    k=5   95.13  95.11  95.50  94.75  31.102
+
+        k=10  95.13  95.11  95.50  94.75  59.848
+
+                     46
+                 
+
+       3-3    KNN    k                  Out_CV 
+Inner_CV  k  10  61.434s F1 
+ 93.76% 93.80% n_neighbors=6
+
+                                  3-3 KNN  k 
+               Table 3-3 Cough recognition rates of KNN based on k fold cross validation
+
+Out_CV Inner_CV   (%) F1  (%)  (%)  (%)       (s)
+
+      k=3        92.85  94.45  92.93  92.02  9.735
+
+k=3   k=5        92.85  92.85  92.88  92.85  10.969
+
+      k=10       92.85  92.85  92.88  92.85  12.311
+
+      k=3        93.64  93.64  93.69  93.64  21.232
+
+k=5   k=5        93.13  93.13  93.19  93.13  23.417
+
+      k=10       93.64  93.64  93.69  93.64  26.066
+
+      k=3        93.56  93.61  92.86  94.45  51.069
+
+k=10  k=5        93.56  93.62  92.66  94.69  55.652
+
+      k=10       93.76  93.80  93.17  94.52  61.434
+
+       3-4    RF    k                    Out_CV 
+Inner_CV  k  10  3221.054sF1
+            91.44%  91.47%  91.84%           
+min_samples_split=3n_estimators=26
+
+                                   3-4 RF  k 
+                Table 3-4 Cough recognition rates of RF based on k fold cross validation
+
+Out_CV Inner_CV   (%) F1  (%)  (%)  (%)       (s)
+
+      k=3        91.16  91.16  91.17  91.16  181.151
+
+k=3   k=5        90.73  90.73  90.73  90.73  342.101
+
+      k=10       91.16  91.16  91.17  91.16  745.983
+
+      k=3        91.24  91.24  91.26  91.24  334.602
+
+k=5   k=5        91.28  91.28  91.31  91.28  661.769
+
+      k=10       91.32  91.32  91.35  91.32  1478.98
+
+      k=3        91.05  91.04  91.10  91.05  740.211
+
+k=10  k=5        91.60  91.62  91.23  92.07  1419.563
+
+      k=10       91.44  91.47  91.15  91.84  3221.054
+
+       Inner_CV 
+
+k 
+
+       3-2 3-3  3-4 SVM 
+
+                        47
+                 
+
+ KNN  RF SVM  10  3 
+ 94.46% 95.13%F1  94.45% 95.11%
+                           RF        
+181.151s  3221.054s
+ 3 
+
+3.5.3.2 
+
+       Acoustic MFCC13  MFCC20
+ 3-5 
+
+                           3-5 
+      Table 3-5 Comparision of cough recognition rates based on different acoustic feature set
+
+           (%)   F1  (%)   (%)    (%)
+
+Acoustic  94.46  94.45    94.72  94.19
+MFCC13    93.32  93.37    92.80  93.95
+
+MFCC20    93.83  93.87    93.50  94.26
+
+       13  MFCC  20  MFCC  MFCC 
+
+
+93.32%  93.83% F1   93.37%  93.87%      MFCC20 
+Acoustic  Acoustic 13  MFCC 
+
+F1  94.46%94.45%
+94.72%
+ 3-13 
+
+       3-4  MFCC20  MFCC13
+ 3-13 a) 3-13 b)MFCC20  404 
+ 402  17  21
+ 266  274 51 
+ 57 MFCC20 
+MFCC13 
+
+       3-13 a) 3-13 c) Acoustic 
+ 404 
+
+Acoustic  MFCC 
+
+
+
+                 48
+
+
+   a) MFCC13                      b) MFCC20 
+a) Confusion matrix on MFCC13  b) Confusion matrix on MFCC20
+
+                                                        c) Acoustic 
+                                                    c) Confusion matrix on Acoustic
+
+                                         3-13 
+                                 Figure 3-13 Confusion matrix for three features
+
+3.6 
+
+      
+
+
+
+
+      1 XGBoost-SHAP 
+XGBoost-SHAP 
+
+
+
+
+                                                                        49
+                                                    
+
+      2 XGBoost 
+
+ ZCR
+ RMS       13   MFCC         Flux  Bandwidth  Flatness 
+Contrast  Rolloff  Acoustic
+
+      3
+ SVMKNN  RF 
+SVM  Acoustic  94.46%
+ KNN  RFAcoustic  MFCC 
+
+
+
+                                                                        50
+                                                
+
+4 
+
+4.1 
+
+      [143]
+
+[144]
+
+
+[103]
+
+ Q 
+
+
+      
+
+
+
+
+[145]
+
+
+
+ 4-1 
+
+                                4-1  2 
+                           Figure 4-1 Cohesion diagram of chapter 2 and chapter 4
+      1
+
+
+                                                                        51
+                                                    
+
+ Q 
+
+
+      2LBPHOG
+ LBP 
+HOG  RGB 
+
+      3
+
+
+
+
+
+4.2 
+
+      
+[146,147]
+[148,149] Q 
+
+
+4.2.1 
+
+Short-time Fourier TransformSTFT
+
+
+
+
+
+  
+
+  
+
+4-1
+
+      STFT ,  =         -2  4-1
+
+                 =1
+
+    STFT 
+
+
+
+
+
+
+
+
+
+ 4-2  N  2048  STFT 
+
+
+
+
+
+
+
+ 4-2 a) 4-2 b) 4-2 d)
+
+ 4-2 c) 4-2 e)
+
+                 52
+                                            
+
+                                               a) 
+                                             a) STFT spectrograms of cough sounds
+
+                                               b) 
+                                               b) STFT spectrograms of pig sounds
+
+                                               c) 
+                                            c) STFT spectrograms of speech sounds
+
+                                               d) 
+                                              d) STFT spectrograms of clear sounds
+
+                                                 e) 
+                                             e) STFT spectrograms of water sounds
+
+                         4-2 
+Figure 4-2 STFT spectrograms of pig sounds including cough, scream, speech, clear and water
+
+                                                                     53
+                                                    
+
+      
+
+
+
+
+4.2.2  Q 
+
+       Q Constant Q TransformCQT
+1991 Brown  CQT 
+ 12 
+CQT [150]
+
+
+
+
+      CQT 
+ 500Hz  20kHz  Q [151] CQT 
+
+4-2CQT 
+
+
+              =      =          =          1       4-2
+                         +1 -                      4-3
+                                           1
+
+                                         2-1
+
+ 
+
+                                     -1
+
+                  = 12 
+
+1
+     ,  
+
+              =   1     -1                 ,   -2  4-4
+                 
+                             
+                        =0
+
+
+
+                        =                          4-5
+                             
+
+       4-3  B  32
+1 22.05Hz  CQT 
+
+
+
+
+CQT  CQT 
+
+                            54
+                                            
+
+                                                  a)  Q 
+                                             a) CQT spectrograms of cough sounds
+
+                                                 b)  Q 
+                                              b) CQT spectrograms of pig sounds
+
+                                                  c)  Q 
+                                            c) CQT spectrograms of speech sounds
+
+                                                 d)  Q 
+                                             b) CQT spectrograms of clear sounds
+
+                                                   e)  Q 
+                                             e) CQT spectrograms of water sounds
+
+                           4-3  Q 
+Figure 4-3 CQT spectrograms of pig sounds including cough, scream, speech, clear and water
+
+                                                                    55
+                                                    
+
+      5-10kHz
+ 2.5kHz  8kHz 
+ 4-4  STFT  CQT 
+
+
+       4-4 a) 4-4 b)CQT 
+ STFT 
+ 4-4 c) 4-4 d)
+ 4-4 a) 4-4 c) 4-4 b) 4-4 d)
+
+
+
+a)  STFT                   b)  CQT
+a) STFT of pig cough       b) CQT of pig cough
+
+c)  STFT                   d)  CQT
+
+c) STFT of pig scream      d) CQT of pig scream
+
+ 4-4 
+
+Figure 4-4 Time frequency representations of cough and scream
+
+4.3 
+
+4.3.1 
+
+      Local Binary PatternLBP
+[152]4-6
+
+                       56
+       
+
+       , =  -1                                                             4-6
+
+                  , -  2
+
+            =0
+
+      LBP 
+ R  , -  
+,
+4-7 1  0 
+
+        , -       =  1,   , -   0                                          4-7
+                     0,           
+
+LBP LBP 
+
+ 4-5 
+
+                                                  4-5 LBP 
+                                          Figure 4-5 LBP encoding process
+       LBP  LBP 
+                       P,R               
+ R  P  P  R  TFR 
+                   P,R                   
+ 4-6 P,R8,112,216,112,1
+
+       a) LBP8,1             b) LBP12,2
+
+       c) LBP16,1            d) LBP12,1
+
+             4-6  LBP 
+
+Figure 4-6 Four LBP descriptors with LBP8,1, LBP12,2, LBP16,1 and LBP12,1
+
+                         57
+                             
+
+       LBP 
+ 1, 2, 3, ... 4-84-9
+
+                    , =           (, ) =   (, )                                        4-8
+
+                             ,
+
+   =                1,    =     ,    =  0,1,  ...,    -  1,    =  0,1,  ...,    -  1   4-9
+                    0,    =  
+
+ LBP 4-10
+
+                     = , ,  = 0,1, ...,  - 1;  = 0,1, ...,  - 1                        4-10
+
+(, ) LBP 
+       4-7  CQT  STFT  LBP 
+
+ LBP12,2  4-7 a) CQT  4-7 b) 4-7 c)
+
+ 4-7 a) CQT  LBP  4-7 d)
+
+ STFT  4-7 e) 4-7 f) 4-7 d) STFT 
+
+ LBP 
+
+a) CQT              b)  CQT                                       c)  CQT 
+                                      LBP                                           LBP 
+
+  a) Sub-blocks in    b) LBP histogram of blue sub-block in         c) LBP histogram of red sub-block in
+   grayscale CQT            grayscale CQT of pig cough                    grayscale CQT of pig cough
+
+d) STFT  e)  STFT  f)  STFT 
+
+                              LBP                                                LBP 
+
+d) Sub-blocks in    e) LBP histogram of blue sub-block in         f) LBP histogram of red sub-block in
+
+grayscale STFT          grayscale STFT of pig cough                     grayscale STFT of pig cough
+
+ 4-7  CQT  STFT  LBP 
+
+Figure 4-7 LBP histogram of sub-blocks based on grayscale CQT and STFT spectrograms
+
+                                              58
+                                                
+
+       LBP  CQT 
+STFT  4-7 a) 4-7 d)
+ LBP12,2 
+        4-7       CQT  STFT        
+LBP  4-7 b) 4-7 c)CQT 
+ 4-7 e) 4-7 f)LBP 
+ 4-7 b) 4-7 e) LBP 
+
+
+4.3.2 
+
+Histogram of Oriented GradientHOG Dalal  Triggs 
+
+HOG 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[153]
+
+
+
+ HOG 
+
+1 CQT 
+
+
+
+2Pixels
+
+4-11
+
+                           (, ) = ( + 1, ) - ( - 1, )                                  4-11
+4-12
+
+(, ) = (,  + 1) - (,  - 1)                                                             4-12
+
+ (, )    (, )     (, )   
+
+(, )(, )(, )
+
+
+
+                                G(x,y)= Gx(x,y)2+Gy(x,y)2                              4-13
+(, )                                                                                   4-14
+
+                                 (, ) = tan-1 (,)
+
+                                                                                  (,)
+
+        59
+                                                    
+
+         3                  Cell              
+ Cell  0  180 
+                                    Nb.
+Orient 8  180  8  22.5  4-
+8  Cell  8  Cell  8
+
+
+                                                4-8 
+                             Figure 4-8 Division of the number of orientation bins
+      4 Cell 
+Block Block  Cell Cell 
+ L2-Hys  Block 
+L2-Hys  L2-norm L2-norm 
+
+                                 /  22 + 2                 4-15
+
+ L2-norm 
+
+                                         /  1 +            4-16
+
+
+5
+
+ Cell  Block  HOG 
+
+ Block  HOG 
+
+a)  CQT                        b) 25×25                    c) 
+
+a) Grayscale CQT of pig cough  b) Splitted CQT with 25×25  c) Setting of Cell and block size
+
+                                4-9  CQT  HOG 
+
+Figure 4-9 Schematic representation of the HOG descriptor
+
+                                                  60
+                                                
+
+       4-9  CQT  HOG  4-9 a) 100 × 100 × 1 
+ CQT  4-9 b) CQT  25×25 4-9 c)
+4×4 8 
+Block2×23×3
+Nb. OrientCell sizeBlock size
+ HOG 
+
+       4-9 a) CQT  4-10  HOG  4-10 a)-d)
+ Nb. Orient  9  Block 2×2Cell 4×48
+×816×1632×32 HOG 
+HOG  Cell 
+16×16 HOG 
+ Cell 
+Block  Nb. Orient  HOG 
+ Nb. Orient  8  93×32×2 Block 
+Cell 4×48×816×1632×32
+ HOG 
+
+  a) 4×4                      b) 8×8
+a) Cell size with4×4        b) Cell size with8×8
+
+c) 16×16                    d) 32×32
+
+c) Cell size with16×16      c) Cell size with16×16
+
+ 4-10  CQT  HOG 
+
+Figure 4-10 The gray-level CQT spectrogram and the corresponding HOG descriptors
+
+                        61
+                  
+
+4.3.3 
+
+
+
+
+
+
+
+Principal Component AnalysisPCA
+
+(Principal ComponentsPCs)
+                             [154]  Kernel Principal
+
+Component AnalysisKPCA
+      KPCA [155]
+
+
+
+
+
+                  :                             4-17
+
+                                                4-18
+
+
+
+                =  1                            4-19
+                   
+                               
+
+                      =1
+
+
+
+    =          =  1                             4-20
+                  
+                             .   
+
+                      =1
+
+   1 , ...,   
+
+ = 1, ..., 
+
+               =                                4-21
+                      =1
+
+
+
+             =  1                               4-22
+                
+                                              
+
+  =1                  =1            =1
+
+ = 1, ..., 
+
+ × 
+
+              1, 1  1, 2   1, 
+
+    =         2, 1         2, 2     2,          4-23
+                               
+                                    
+
+              , 1  , 2   , 
+
+  th 
+
+  .   =                                         4-24
+
+                        .   =              , 
+
+                =1                  =1
+
+4.4 
+
+Convolutional Neural Network, CNN
+
+                              62
+                                                
+
+[156] CNN 
+[157]
+ CNN  CNN 
+
+ CNN [30]
+
+ CNN 
+
+
+4.4.1 
+
+      
+Fully connected layerFC[158]
+
+
+
+
+       CNN [159]
+
+
+
+4-25
+
+
+ =   -1 ×  +   4-25
+
+                     ×                 
+                
+
+      
+
+Rectified Linear UnitReLU
+
+
+
+ReLU 
+
+
+
+
+
+
+
+4-26
+
+- =   -1 +     4-26
+
+ · 
+
+ · 
+
+
+
+        63
+                                                    
+
+
+      
+
+
+
+
+[160]
+
+
+
+
+
+       CNN 
+[161]
+ CNN  VGG[162] Resnet[163]
+
+[162,164] CNN 
+[165­167]
+
+      
+ CNN  4-11  100×100×3×
+× 32
+ 5×5  48  5×5
+ 1 2×2  ReLU  512 
+        FC                              
+
+
+                                           4-11 
+                         Figure 4-11 Shallow convolutional neural network structure
+       4-1      CNN                       
+100×100×3
+ 22×22×48 
+ Softmax 
+
+                                                                        64
+        
+
+                       4-1 
+        Table 4-1 Improved parameter settings of the CNN structure
+
+                     
+      
+        -            100×100×3
+    
+        325×5Relu 1  96×96×32
+    
+         2×2 2       48×48×32
+ FC1
+ FC2    485×5Relu 1  44×44×48
+          2×2 2      22×22×48
+
+        -            23232×1
+
+        Relu         512×1
+
+        Relu         512×1
+
+        -            -Softmax
+
+4.4.2 
+
+      
+
+
+
+
+
+      
+ 4-12  CNN 
+ CNN  FC1  FC2 
+ SVM 
+
+                                   4-12 
+                        Figure 4-12 Feature fusion architecture based on certain TFR
+       CNN STFT
+ CQT  CNN 
+ CNN [168] CNN 
+ CNN 
+
+                                                                        65
+                                                    
+
+
+
+ SVM  SVM 
+ SVM 
+
+
+4.4.3 
+
+      
+STFT
+CQT 
+
+ CNN 
+ 4-13 
+
+       CQT  STFT  CNN 
+ CNN  FC1  SVM
+
+
+
+
+
+
+                                    4-13 
+                   Figure 4-13 Feature fusion architecture based on bispectrogram input
+
+4.4.4 
+
+       CNN 
+
+                                                                        66
+  
+
+[169]CNN 
+
+ CNN 
+[168]
+
+
+
+
+
+ CNN 
+
+
+
+
+
+
+
+
+
+       CNN 12 CNN 
+12
+ = 1, 2, ...512 
+
+      
+
+
+
+4-27
+
+   =  1, 2   4-27
+
+
+
+
+
+
+
+
+
+4-28
+
+   = 1  2    4-28
+
+Mul4-29
+
+   = 1  2    4-29
+
+
+
+
+
+
+
+
+   = (1, 2)  4-30
+
+   = (1, 2)  4-31
+
+   =  -      4-32
+
+
+
+
+
+
+
+
+
+
+
+
+
+      67
+      
+
+
+
+4.5 
+
+4.5.1 
+
+       2.2.3 
+50%    2546                              
+Librosa 0.8.1[142]                 44.1kHz           
+Viridis
+
+
+
+
+ HOG 
+[170] 100 × 100 
+
+100 × 100 × 3 2048  1024 
+2048 STFT  CQT  2546 1024 STFT 
+ CQT  2546 
+
+                 Intel(R) Core (TM) i7-10750H CPU 2.6GHz  RAM 16GB 
+NVIDIA GeForce GTX 1650 Ti GPU64  Windows 10 
+       Python 3.7  Scikit-learn  TensorFlow 2.6.2  Keras 2.6.0  PyCharm
+Community Edition 2020 
+ Adam  0.01
+ Matplotlib 3.3.1  Seaborn 0.11.1
+
+       SVM 
+                            2.4.3     
+AccuracyPrecisionRecallF1 F1-Score%
+
+
+
+4.5.2 
+
+       STFT  CQT  LBP 
+ KPCA  LBP 
+ HOG 
+HOG 
+
+      68
+                       
+
+4.5.2.1  STFT  CQT  LBP 
+
+      1 STFT  LBP 
+       STFT N=2048N=1024
+ 4-2  STFT  LBP 
+
+       N  2048  LBP12,2  88.84%F1 
+90.68%LBP12,1  LBP8,1 LBP8,1  F1  LBP12,1
+90.20% 90.73%
+       N    1024      LBP12,2      F1             
+81.31%84.49%  85.05%                   STFT  
+LBP  STFTLBP12,2  LBP16,1LBP12,1  LBP8,1
+
+                      4-2  STFT  LBP 
+             Table 4-2 Pig cough classification results extracted from LBP based on STFT
+
+              LBPP,R    (%)       F1  (%)   (%)    (%)
+
+STFT(N=2048)  LBP16,1  87.89      90.01    90.07  89.95
+
+STFT(N=2048)  LBP12,1  88.04      90.16    89.99  90.34
+
+STFT(N=2048)  LBP12,2  88.84      90.68    91.83  89.56
+
+STFT(N=2048)  LBP8,1   88.04      90.20    89.68  90.73
+
+STFT(N=1024)  LBP16,1  77.28      81.52    80.43  82.64
+
+STFT(N=1024)  LBP12,1  78.78      82.82    81.36  84.33
+
+STFT(N=1024)  LBP12,2  81.31      84.49    85.05  83.94
+
+STFT(N=1024)  LBP8,1   78.70      82.66    81.66  83.68
+
+      2 CQT  LBP 
+      B  CQT B  32  641 22.05Hz
+ 4-3  CQT  LBP 
+       B    32  64   LBP12,2                  89.70%
+78.62%F1  91.21% 82.56% B 
+
+
+      LBP P,R B  32  LBP
+F1  2.92%1.83%
+3.19% 1.75%
+
+       4-2  4-3  LBP12,2  STFT  CQT CQT F1 
+ STFT 0.86%0.53% 1.57%STFT 
+ 91.83% CQT  90.30%CQT  STFT
+ STFTCQT 
+
+
+                              69
+                    
+
+               4-3  CQT  LBP 
+      Table 4-3 Pig cough classification results extracted from LBP based on CQT
+
+           LBPP,R    (%)         F1  (%)   (%)    (%)
+
+CQT(B=32)  LBP16,1  86.78        89.38    87.11                                   89.38
+
+CQT(B=32)  LBP12,1  87.49        89.92    87.91                                   89.92
+
+CQT(B=32)  LBP12,2  89.70        91.21    90.30                                   91.13
+
+CQT(B=32)  LBP8,1   88.04        90.33    88.68                                   90.33
+
+CQT(B=64)  LBP16,1  77.99        82.06    81.12                                   82.06
+
+CQT(B=64)  LBP12,1  78.01        82.04    81.20                                   82.04
+
+CQT(B=64)  LBP12,2  78.62        82.56    81.71                                   82.56
+
+CQT(B=64)  LBP8,1   78.07        82.28    80.68                                   82.28
+
+      CQT 
+ CQT 
+ F1  82.56% 91.17%
+
+
+
+
+4.5.2.2 KPCA 
+
+       CQTB=32 LBP12,2 
+ PCA  KPCA [171]
+ 85%
+ 95% 4-4 NonePCA  KPCA 
+ PCA  NoneKPCA 
+PCA  None  PCA KPCA  SVM F1
+ 2.25%2.11%2.54% 1.68%
+ 48.355s  23.561sKPCA 
+
+
+ KPCA 
+ Farzana [154]
+
+                          4-4 
+            Table 4-4 Pig cough classification performance of original and reduced datasets
+
+            (%)     F1  (%)       (%)      (%)   s
+
+KPCA       91.95    92.32        92.84    91.81                                   23.561
+
+PCA        89.70    90.21        90.30    90.13                                   32.451
+
+None       89.70    91.21        90.30    91.13                                   48.355
+
+                             70
+                        
+
+4.5.2.3 LBP 
+
+       LBP 
+               LBP             CQT      
+LBP12,2  LBP8,1  LBP  4-5 
+
+                           4-5  LBP 
+             Table 4-5 Pig cough classification results obtained by multiresolution analysis
+
+                  (%)           F1  (%)   (%)                                     (%)
+
+LBP12,2          91.95          92.32    92.84                                   91.81
+
+LBP12,2+LBP12,2  91.85          92.24    92.67                                   91.81
+
+LBP12,2+LBP8,1   90.87          92.05    90.50                                   91.27
+
+      LBP12,2+LBP8,1  LBP  LBP12,2 
+                           LBP12,2+LBP12,2  
+LBP12,2+LBP8,1 91.81% LBP12,2 
+F1  LBP12,2
+
+       LBP12,2  LBP12,2+LBP12,2 
+ 4-14  LBP12,2
+
+
+         a) LBP12,2                      b) LBP12,2+LBP12,2 
+
+a) Confusion matrix on LBP12,2           b) Confusion matrix on LBP12,2+LBP12,2
+
+                  4-14 
+
+                 Figure 4-14 Time frequency representations of cough and scream
+
+ LBP LBP 
+
+
+
+2kHz 
+
+ LBP 
+
+
+
+ LBP12,2 
+
+                                71
+                
+
+4.5.2.4  HOG 
+
+       CQT Cell sizeBlock size
+No. orient HOG 
+
+      1 8  HOG 
+       4-6  8  HOG 
+
+      3×332×328×84×4
+16×16F1 
+ 93.67%94.83%93.49% 95.82%
+      2×232×328×84×4
+16×16F1 
+ 93.67%94.83%93.57% 95.69%
+      16×163×32×2
+ F1 
+3×32×2
+ 0.08% 0.13%
+
+
+              4-6  8  HOG 
+         Table 4-6 Pig cough classification results extracted from HOG based on No. orient 8
+
+                 (%)       F1  (%)   (%)    (%)
+
+(3×3)  (32×32)  93.19      94.42    93.32  94.91
+
+(3×3)  (16×16)  93.67      94.83    93.49  95.82
+
+(3×3)  (8×8)    93.19      94.44    93.36  95.43
+
+(3×3)  (4×4)    92.16      93.66    92.31  95.43
+
+(2×2)  (32×32)  93.59      94.75    93.62  95.43
+
+(2×2)  (16×16)  93.67      94.83    93.57  95.69
+
+(2×2)  (8×8)    93.59      94.76    93.72  95.56
+
+(2×2)  (4×4)    93.59      94.78    93.82  95.95
+
+      2 9  HOG 
+       4-7  9  HOG 
+3×332×328×84×4
+16×16F1 
+ 93.98%95.08%93.90% 95.95%2×2
+32×328×84×416×16
+F1  94.06%95.15%93.89  95.95%
+
+                       72
+                     
+
+    4-7  9  HOG 
+Table 4-7 Pig cough classification results extracted from HOG based on No. orient 9
+
+                      (%)              F1  (%)   (%)    (%)
+
+(3×3)       (32×32)         93.35      94.55    93.33  95.04
+(3×3)       (16×16)         93.98      95.08    93.90  95.95
+(3×3)                       93.27      94.51    93.08  95.56
+(3×3)        (8×8)          92.32      93.77    92.28  95.30
+(2×2)        (4×4)          93.67      94.83    93.65  95.69
+            (32×32)
+
+(2×2)       (16×16)         94.06      95.15    93.89  95.95
+
+(2×2)       (8×8)           93.59      94.76    93.65  95.69
+
+(2×2)       (4×4)           92.72      94.07    92.88  95.30
+
+      16×163×32×2
+
+ 4-6  8 
+ 9 16×162×2
+ F1  95.15% 9 16×16
+2×2
+
+4.5.2.5 HOG 
+
+         RG B
+RGB  CQT HOG-Colour HOG 
+ 4-8 HOG-Gray  CQT 
+HOGHOG-Gray+HOG-Colour  HOG-Colour  HOG-Gray 
+
+           HOG-Gray+HOG-Colour  HOG-Gray            HOG-
+Colour HOG-Gray+HOG-Colour HOG-Gray F1 
+ 94.06%95.15% 95.95%
+
+          4-8  HOG 
+     Table 4-8 Pig cough classification results of HOG features from grayscale and RGB TFRs
+
+                      (%)          F1  (%)       (%)    (%)
+
+HOG-Gray             94.06             95.15    93.89  95.95
+
+HOG-Colour           93.90             95.00    94.45  95.56
+
+HOG-Gray+HOG-Colour  93.98             95.08    94.17  95.76
+
+       HOG-Gray  HOG-Gray+HOG-Colour 
+ 4-15  HOG-Gray
+
+HOG-Colour 
+
+                                   73
+                                                    
+
+ RGB 
+ HOG-Gray 
+
+      a) ) HOG-Gray                  b) HOG-Gray+HOG-Colour 
+
+a) Confusion matrix on HOG-Gray      b) Confusion matrix on HOG-Gray+HOG-Colour
+
+            4-15  HOG 
+
+      Figure 4-15 Confusion matrix for two feature sets based on HOG
+
+4.5.3 
+
+       CNN  CNN 
+
+
+
+4.5.3.1  CNN 
+
+       4-9  CNN FC1FC2
+ SVM  CQT  STFT 
+
+
+      CQT-FC1  CQT-FC2F1 
+    92.94%92.65% 94.03% 93.33%   STFT-FC2  STFT-FC1     F1
+ 92.35%93.21% 92.68%
+
+      FC1  FC2 CQT  STFT
+ CQT 
+
+                 4-9  CQT  STFT 
+   Table 4-9 Pig cough recognition performance of FC1 and FC2 extracted from CQT and STFT
+
+            (%)                      F1  (%)   (%)                     (%)
+
+      FC1             92.94          92.65    94.03                   93.33
+
+CQT
+
+      FC2             91.56          92.61    92.30                   91.95
+
+      FC1             92.35          93.21    92.16                   92.68
+
+STFT
+
+      FC2             91.37          91.73    92.42                   91.04
+
+                                 74
+                 
+
+4.5.3.2  CNN 
+
+
+
+
+
+
+
+
+
+
+
+
+
+      VGG  Resnet 
+ CNN 
+                    VGG    VGG16  VGG19   
+Resnet152  CNN 
+
+      
+
+
+
+ ImageNet  224×224×3  RGB
+ 224×224×3
+VGG16VGG19  Resnet152  1000 
+
+
+ SVM  SVM 
+
+
+
+
+      1 CNN 
+       4-10  CNN 
+ VGG19 VGG16 
+ 90.85% 94.57%F1  91.57% 90.05%
+Resnet152 F1 
+ VGG16  VGG19
+       CNN F1 
+ 91.56%92.61% 92.30%
+
+
+        4-10  CNN 
+Table 4-10 Pig cough performance based on transfer learning compared to propsosed CNN
+
+                  (%)   F1  (%)     (%)    (%)
+
+VGG16            90.85      91.75  90.50  94.57
+VGG19            90.66      92.50  91.00  94.06
+
+ResNet152        90.59      90.94  91.98  89.93
+
+Proposed method  91.56      92.61  92.30  91.95
+
+                        75
+                                                    
+
+      2 CNN 
+       4-16 
+
+ CNNVGG16VGG19  ResNet152 
+12.57s197.25s243.25  234.97s
+ CNN  VGG19  230.67s
+ CNN 
+      Amiriparian  CNN 
+ [145]                   Viridis                
+
+ CNN 
+
+
+
+                     4-16  CNN 
+     Figure 4-16 Pointplots of computational time based on VGG, ResNet and proposed method
+
+4.5.3.3 
+
+       4-9 
+ CQT  FC1  FC2 Layer FusionLF
+ CQT  STFT  FC1 
+TFRs FusionTFSub
+ConcatAddMulFmax
+Fmin
+
+      1
+      
+ 4-11 
+SubF1 
+94.14% 93.43% FC1-CQT F1  1.49%
+
+                                                                        76
+                   
+
+            4-11 
+Table 4-11 Pig cough recognition of layer fusion of FC1 and FC2 extracted from CQT
+
+             (%)   F1  (%)   (%)    (%)
+
+LF(Add)     91.20  91.25    90.75  91.75
+
+LF(Fmax)    91.27  91.36    90.51  92.22
+
+LF(Fmin)    89.39  89.26    90.34  88.21
+
+LF(Mul)     88.81  89.04    87.93  90.19
+
+LF(Concat)  92.55  92.91    92.49  92.06
+
+LF(Sub)     93.13  94.14    92.74  93.43
+
+      Concat  Sub F1  92.91%
+
+
+
+
+      2
+       4-12  4-12 
+
+      F1  94.74%
+FC1-CQT  2.09%
+       93.52%Add
+Fmax
+      Fmin  Mul Mul
+ F1  90.57%
+      
+
+
+                         4-12 
+   Table 4-12 Pig cough recognition performance of TFRs fusion extracted from CQT and STFT
+
+             (%)   F1  (%)   (%)    (%)
+
+TF(Add)     93.42  93.55    93.08  94.03
+
+TF(Fmax)    93.36  93.39    92.92  93.87
+
+TF(Fmin)    91.40  91.42    91.18  91.67
+
+TF(Mul)     90.53  90.57    90.80  91.03
+
+TF(Sub)     93.43  93.52    94.04  93.78
+
+TF(Concat)  94.51  94.74    95.45  94.03
+
+      
+
+
+
+                   77
+                                                    
+
+
+      
+
+
+
+
+      
+
+
+
+4.6 
+
+      
+ Q 
+
+
+
+      1
+ Q 
+
+      2
+
+
+      3
+
+
+
+                                                                        78
+                                        
+
+5 
+
+5.1 
+
+      
+
+
+
+      
+
+
+
+
+      
+
+ 34  5-1 
+
+                                 5-1  34 
+                       Figure 5-1 Diagram between this chapter and chapters 3 and 4
+       3 
+ 4 
+
+ 3  4 
+
+
+
+
+5.2 
+
+      
+
+
+
+                                                                        79
+                                                    
+
+
+
+
+5.2.1 
+
+       5-2 
+
+Acoustic
+
+CQT  LBP12,2  HOG-Gray
+FC1-CQT
+Layer fusionTFRs fusion
+
+                             5-2 
+             Figure 5-2 Diagram of acoustic and time-frequency feature fusionarchitecture
+      
+
+       1
+       2
+       3
+       5-1  1  2  1 
+        Acoustic+LB P 12,2                     Acoustic+
+
+                                                                        80
+   
+
+HOG-GrayAcoustic+LBP12,2+HOG-Gray 2 
+Acoustic+FC1-CQT
+Acoustic+Layer fusion
+Acoustic+TFRs fusion
+ 3  5-2 
+
+                                     5-1  1  2 
+      Table 5-1 Different feature combination methods based on two feature fusion architecture
+
+                                            
+
++   Acoustic+LBP12,2                        A+L
++   Acoustic+HOG-Gray                       A+H
+
++   Acoustic+LBP12,2+HOG-Gray               A+L+H
++   Acoustic+FC1-CQT                        A+F
+
++   Acoustic+Layer fusion                   A+LF
+
++   Acoustic+TFRs fusion                    A+TF
+
+                               5-2  3 
+Table 5-2 Different feature combination methods based on feature fusion architecture 3
+
+                                            
+
+++  Acoustic+LBP12,2+FC1-CQT                A+L+F
+++  Acoustic+LBP12,2+Layer fusion           A+L+LF
+++  Acoustic+LBP12,2+TFRs fusion            A+L+TF
+++  Acoustic+HOG-Gray+FC1-CQT               A+H+F
+
+++ Acoustic+HOG-Gray+Layer fusion           A+H+LF
+
+++ Acoustic+HOG-Gray+TFRs fusion            A+H+TF
+
+++  Acoustic+LBP12,2+HOG-Gray+FC1-CQT       A+L+H+F
+
+++  Acoustic+LBP12,2+HOG-Gray+Layer fusion  A+L+H+LF
+
+++  Acoustic+LBP12,2+HOG-Gray+TFRs fusion   A+L+H+TF
+
+       SVM 
+
+
+
+[172] K  K 
+
+
+
+
+
+
+Nested stratified
+cross validationNSCV
+
+      81
+         
+
+5.2.2 
+
+      
+ 5-2 
+
+
+      1
+      Concatenation fusion
+
+
+    
+
+         =                    5-1
+              
+
+
+
+
+
+[173]
+
+2
+
+(Canonical Correlation AnalysisCCA), 
+
+
+
+ [174]                     =  1, ...,   ×   =
+                                                  5-2
+1, ...,   ×CCA 5-2
+
+    ,      =        
+                
+
+ =  = 
+
+ = 
+
+   s.t.  T  = 1               5-3
+         T = 1
+
+
+
+    T                         5-4
+
+,  ×  ×
+
+ =   × =   ×    ,  
+
+ = ,   2×
+
+3
+
+      Decision fusion
+                           [175]           
+
+ SVM 
+
+ = 1, 2, ...,  
+
+
+                82
+  
+
+        =1                                                5-5
+
+                    
+
+                =1
+
+b 
+1 
+
+5.3 
+
+5.3.1 
+
+
+
+
+
+[176]
+
+
+
+
+
+ Bagging  Stacking 
+
+Bagging  Leo Breiman  1994 Bootstraping
+
+ X Bootstraping 
+
+
+
+1......
+
+
+  
+Bagging  5-3
+
+
+
+             =  1                                         5-6
+                
+                         
+
+                   =1
+
+           5-3  Bagging 
+  Figure 5-3 Diagram of bagging ensemble learning method
+
+                                           83
+                                                    
+
+      
+
+Bagging 
+
+      Stacking  5-4 
+
+
+
+
+      
+
+
+
+
+[177]
+
+                                   5-4  Stacking 
+                          Figure 5-4 Diagram of stacking ensemble learning method
+
+5.3.2 
+
+      
+ Bagging 
+
+[178]
+[179]
+
+      
+ Bagging 
+
+
+ SSLRB  5-5 SSLRB 
+
+                                                                        84
+                                        
+
+        SVM      SVM-Stacking            ROS  
+Bagging LR-Bagging based on RandomOverSamplerLR-Bagging
+
+                                    5-5  SSLRB 
+      Figure 5-5 Flowchart of SVM-Stacking with LR-bagging ensemble learning architecture
+
+                                                                        85
+      
+
+      1SSLRB  SVM-Stacking  SVM 
+SSLRB 
+
+
+ SVM 
+                                SVM1
+ kernel='rbf', C=100, gamma=0.1  SVM2  kernel='rbf', C=100, gamma=0.01    SVM3
+kernel='rbf', C=100, gamma=0.001SVM 
+ SVM  IR 
+
+
+
+       Santos 
+[180]
+
+ 3 
+
+SSLRB K-1
+
+
+
+      2SSLRB Logistic RegressionLR
+Bagging  SVM-Stacking 
+
+
+ LR-Bagging 
+
+      LR 
+[181]
+[0,1]
+
+      ()  =       1           5-7
+             1+exp-
+
+      
+
+
+      = 0 + 11 + 22 + ... +   5-8
+  1-
+
+     5-9    sigmoid                  0     
+{1......}{1......}
+
+  =       1                   5-9
+
+      1+exp- 0+11+22+...+
+
+             86
+        
+
+      Stacking 
+
+
+
+
+                              Bagging   
+Stacking  Bagging 
+ LR LR 
+ LR  LR 
+ 
+ LR  (|)M  LR 
+
+           =  1        (|)  5-10
+                 =1
+
+5.4 
+
+5.4.1 
+
+                 Intel(R) Core (TM) i7-10750H CPU 2.6GHz  RAM 16GB 
+NVIDIA GeForce GTX 1650 Ti GPU64  Windows 10 
+       Python 3.7  Scikit-learn  TensorFlow 2.6.2  Keras 2.6.0  PyCharm
+Community Edition 2020 
+ Adam  0.01
+ Matplotlib 3.3.1  Seaborn 0.11.1
+
+      
+ 2546  1273 
+1273 
+
+                                    [182]      
+
+                                   
+Imbalance rateIR
+IR [183]
+
+
+                   =        5-11
+                      
+
+      IR  1.5-3 
+IR  3-9  IR  10 
+IR 
+
+                           [184]               
+
+
+                       87
+      
+
+IR [39-41,185] IR 
+ 5-3 
+
+                                           5-3 
+                                   Table 5-3 Dataset split by different IR ratios
+
+                 IR
+
+D1    849  2122  1.5
+
+D2    468  1741  2.72
+
+D3    257  1530  4.95
+
+D4    141  1414  9.03
+
+D5    126  1399  10.10
+
+D6    96   1369  13.26
+
+      
+   Precision    Recall F1   F1-Score      G-
+mean        %                             
+ROC-AUCReceiver operating characteristic- Area under the curve
+PR-AUCPrecision and Recall - Area under the curveAUC [0,1]AUC 
+
+
+
+
+5.4.2 
+
+       1  2 
+
+
+ 3 
+
+
+5.4.2.1  1  2 
+
+      1 1  2 
+       5-4  1  2 
+ 1A+H 
+ A+L A+HA+L+H F1 
+ 97.80%97.79% 98.19% 206.283s
+
+
+       2A+TF 
+ 97.57% A+H97.64% A+L+H97.80%A+TF 
+
+                                                                        88
+              
+
+ 97.88%
+ A+TFA+H  A+L+H 
+A+L+H  371.002sA+H A+TF 
+ 70.291s
+
+             5-4  1  2 
+   Table 5-4 The results of pig cough recognition under architectures 1 and 2 with concatenation
+
+        (%)   F1  (%)       (%)    (%)    (s)
+
+A+L    96.03  96.04        96.12  95.99  170.207
+
+A+H    97.64  97.64        97.88  97.40  164.764
+
+A+L+H  97.80  97.79        98.19  97.40  371.002
+
+A+F    96.90  96.89        97.01  96.78  44.406
+
+A+LF   96.94  96.96        97.17  96.70  42.104
+
+A+TF   97.57  97.57        97.27  97.88  70.291
+
+      2 1  2  CCA 
+       5-5  1  2  CCA 
+     1   A+L+H     95.55%    A+L  A+H          
+264.799s       2   A+TF                      
+96.47% 78.066s
+
+            5-5  1  2  CCA 
+         Table 5-5 The results of pig cough recognition under architectures 1 and 2 with CCA
+
+        (%)   F1  (%)       (%)    (%)    (s)
+
+A+L    94.63  94.78        96.12  93.47  160.292
+
+A+H    93.71  93.89        96.28  91.62  169.119
+
+A+L+H  95.55  95.72        95.96  95.48  264.799
+
+A+F    95.19  95.39        96.39  94.41  59.528
+
+A+LF   94.60  94.79        96.53  93.11  60.134
+
+A+TF   96.47  96.63        97.18  96.09  78.066
+
+      3 1  2 
+       5-6  1  2 
+A+H  F1 
+ 95.01% 95.22%A+TF  F1  94.21%
+ 94.47%A+TF  41.354s A+H  141.415s
+       1  2 
+ 1  2  Acoustic 
+
+       CCA 
+
+                       89
+              
+
+CCA 
+
+ 3 
+
+           5-6  1  2 
+     Table 5-6 The results of pig cough recognition under architectures 1 and 2 with late fusion
+
+        (%)   F1  (%)   (%)    (%)    (s)
+
+A+L    93.43  93.13    94.14  92.73  170.010
+
+A+H    95.01  95.22    95.76  94.69  141.415
+
+A+L+H  93.98  94.26    94.79  93.73  274.368
+
+A+F    92.74  93.05    93.85  92.27  30.969
+
+A+LF   93.47  93.79    94.11  93.48  32.289
+
+A+TF   94.21  94.47    95.10  93.85  41.354
+
+5.4.2.2  1  2 
+
+      ,
+5-6 Fusion-no  Fusion-yes 
+
+
+                                     5-6 
+                         Figure 5-6 Barplots based on multi-features fusion combination
+       LBP 
+ 91.95% 96.03%
+ 4.08%HOG  94.06% 97.64% 3.58%
+LBP-HOG                93.51%   97.80%     4.29% 
+HOG  LBP  0.16%
+
+                                                                        90
+                                        
+
+
+
+
+      TFRs fusion  F1-CQT 
+Layer fusion 97.57% FC1-CQT 
+           92.94%   96.90% FC1-CQT            
+TFRs fusion  0.67%
+
+       A+HA+L+H  A+TF 
+ 5-7 
+
+              a) A+H                              b) A+L+H 
+a) Confusion matrix on Acoustic+HOG-Gray  b) Confusion matrix on Acoustic+L+H
+
+                                                             c) A+TF 
+                                            c) Confusion matrix on Acoustic+TFRs fusion
+
+                        5-7  1  2 
+   Figure 5-7 Confusion matrix for three feature sets based on feature fusion architecture 1 and 2
+
+       5-7 a)A+H  415 
+ 5-7 b) 5-7 c)
+416 
+
+       5-7 a)
+ 10 43.48% 5-
+
+                                                                        91
+                 
+
+7 a)A+L+H  4  8  5-7 a) 5-7 c)
+A+TF A+TF 
+
+
+       A+TF 
+1  2 
+
+
+
+
+5.4.2.3  3 
+
+       5-7  3 
+ Acoustic+LBP12,2  A+L+FA+L+LF 
+A+L+TF 
+ A+L+F  A+L+LF A+L+TF F1 
+ 97.56%97.61%97.25% 97.49% Acoustic+HOG-Gray 
+   A+H+F  A+H+LF  A+H+TF         A+H+F  A+H+LF   
+A+H+TF F1  98.04%98.04%
+98.28% 97.80% A+L+H+TF 
+F1  98.08%98.07% 97.96%
+554.737s
+
+                        5-7  3 
+  Table 5-7 The results of pig cough recognition under architectures 3 with concatenation fusion
+
+           (%)   F1  (%)       (%)    (%)    (s)
+
+A+L+F     97.45  97.45        97.58  97.33  257.83
+
+A+L+LF    97.21  97.21        97.32  97.09  297.971
+
+A+L+TF    97.56  97.61        97.25  97.49  312.880
+
+A+H+F     97.68  97.68        98.03  97.33  238.667
+
+A+H+LF    97.76  97.76        97.81  97.72  307.391
+
+A+H+TF    98.04  98.04        98.28  97.80  314.014
+
+A+L+H+F   97.76  97.75        98.18  97.33  495.456
+
+A+L+H+LF  97.80  97.81        97.66  97.96  527.169
+
+A+L+H+TF  98.08  98.07        98.20  97.96  554.737
+
+      
+ 1  2  A+TF  A+L+FA+L+LF
+ A+L+TF 
+ 5-8  A+H+FA+H+LF  A+H+TF 
+
+                          92
+                                        
+
+       5-8 a)- 5-8 c)A+H+F  A+H+LF 
+ 417  A+H+TF                418            
+A+H+LF  A+H  TF 
+A+H  LF 
+
+      a) A+H+F                      b) A+H+LF 
+a) Confusion matrix on A+H+F  b) Confusion matrix on A+H+LF
+
+                                                           c) A+H+TF 
+                                                    c) Confusion matrix on A+H+TF
+
+                       5-8  3  A+H 
+  Figure 5-8 Confusion matrix for A+H with deep features based on feature fusion architecture 3
+
+       5-9  A+L+H+FA+L+H+LF  A+L+H+TF 
+5-9 a)- 5-9 b)A+L+H+LF 
+ 5-9 b)- 5-9 c)A+L+H+TF 
+
+
+      
+ FLFTF 
+ TF 
+ LBP12,2  HOG-Gray 
+
+
+                                                                        93
+
+
+      a) A+L+H+F                      b) A+L+H+LF 
+a) Confusion matrix on A+L+H+F  b) Confusion matrix on A+L+H+LF
+
+                                                         c) A+L+H+TF 
+                                                  c) Confusion matrix on A+L+H+TF
+
+                     5-9  3  A+L+H 
+Figure 5-9 Confusion matrix for A+L+H with deep features based on feature fusion architecture 3
+
+       3  2  A+TF 
+ 5-10 
+
+       5-10 a)
+A+L+H+TF  98.08%
+A+TF 0.51%
+
+       5-10 b)A+TF  A+L+H+TF  70.291s  554.737s
+
+
+A+TF 
+ A+TF 
+
+                                                                        94
+
+
+a)                                                 b) 
+
+a) Recognition accuracy of feature fusion subsets  b) Computation time of feature fusion subsets
+
+ 5-10 
+
+Figure 5-10 Accuracy and computational time of pig cough recognitionof multi-fusion features
+
+5.4.3 
+
+      
+IR
+
+A+TF A-TFRs fusion 
+
+       IR  D1
+ IR=1.5   D2  IR=2.72    D3  IR=4.95   D4  IR=9.03        D5
+IR=10.10 D6IR=13.26
+
+
+5.4.3.1 
+
+       5-11  IR 
+AcousticTFRs fusion
+A-TFRs fusionA-TF 5-11 
+IR SVM 
+
+       5-11 a)Acoustic F1  93.26% 81.47%
+ 11.79%TFRs fusion  F1  92.34% 82.05% 10.29%A-TF 
+F1  96.45% 90.36% 6.09%
+D1D2D3Acoustic  F1  TFRs
+fusion IR Acoustic 
+
+
+
+       5-11 b) IR A-TF 
+
+                                                                        95
+                                                    
+
+    97.09%   93.29%    3.8% Acoustic        94.34%  
+88.39%  5.95%  TFRs fusion        94.03%    87.35%     6.68 
+Acoustic  TFRs fusion  IR Acoustic  TFRs fusion
+ Acoustic 
+
+
+        5-11 c)  Acoustic       IR         94.19%  
+83.93% 10.26% Acoustic  IR 
+ AcousticTFRs fusion A+TF
+ 96.80% 93.41% 3.39%
+
+       5-11 d)AcousticTFRs fusion  A-TF  14.36%14.32%
+9.36%
+A-TF 
+
+   a)  F1                                      b) 
+a) F1 score of three feature sets                b) G-mean result of three feature sets
+
+c)                                             d) 
+
+c) Precision result of three feature sets      d) Recall result of three feature sets
+
+ 5-11  IR 
+
+Figure 5-11 The results of pig cough recognition with three feature sets based on different IR ratio
+
+                                           96
+                                        
+
+       A-TF 
+A-TF 
+
+ A-TF 
+ GridSearch  SVM C  gamma IR 
+ SVM1kernel='rbf', C=100, gamma=0.1
+SVM2kernel='rbf', C=100, gamma=0.01 SVM3kernel='rbf', C=100, gamma=0.001
+
+5.4.3.2 
+
+      
+ ROC-AUC 
+PR-AUC 
+
+      ROC X
+Y ROC-AUC 
+
+
+       A-TF  ROC-AUC  5-12 
+ 5-12 a)- 5-12 f) IR  3 
+
+      ROC-AUC  IR 
+5-12 a)- 5-12 e) IR  1.5  ROC-AUC  0.96±0.02
+IR  10.10 ROC-AUC  0.92±0.07 5-12 e) 5-12
+f)ROC-AUC  0.92±0.07  0.92±0.04
+
+      
+ROC  IR 
+
+
+ ROC-AUC  5-12 e) 5-12 f)
+ROC-AUC 
+
+
+
+       D5IR=10.10 D6IR=13.26 A-TF 
+ 5-12 e) 5-12 f)
+ 5-13  5-13 a) 5-13 b) IR 
+ 317  312 
+
+ IR 
+
+
+                                                                        97
+
+
+a)  D1  ROC-AUC                        b)  D2  ROC-AUC 
+ a) ROC-AUC results of dataset D1       b) ROC-AUC results of dataset D2
+
+c)  D3  ROC-AUC                        d)  D4  ROC-AUC 
+ c) ROC-AUC results of dataset D3       d) ROC-AUC results of dataset D4
+
+e)  D5  ROC-AUC                        f)  D6  ROC-AUC
+
+e) ROC-AUC results of dataset D5       f) ROC-AUC results of dataset D6
+
+ 5-12  IR 
+
+Figure 5-12 ROC curves of A-TFRs features based on different IR ratio
+
+                                   98
+  
+
+  a)  D5                                 b)  D6 
+
+  a) Confusion matrix on dataset D5      b) Confusion matrix on dataset D6
+
+   5-13  IR 
+
+  Figure 5-13 Confusion matrix of A-TFRs features based on two IR ratios
+
+ ROC-AUCPrecisionRecallPR
+
+ ROC-AUC PR-AUC 
+
+
+
+ IR  5-14 
+
+5-14 a)- 5-14 f) IR  3 PR 
+
+
+
+PR-AUC  IR  5-14 a)
+
+ IR  1.5  PR-AUC  0.94±0.03 IR  13.26
+
+5-14 f) PR-AUC  0.80±0.09
+
+PR 
+
+
+
+PR 
+
+ 5-13  5-14 ROC  PR 
+
+ROC  PR
+
+
+
+ ROC PR-AUC 
+
+
+
+                                     99
+
+
+a)  D1  PR-AUC                         b)  D2  PR-AUC 
+ a) PR-AUC results of dataset D1        b) PR-AUC results of dataset D2
+
+c)  D3  PR-AUC                         d)  D4  PR-AUC 
+ c) PR-AUC results of dataset D3        d) PR-AUC results of dataset D4
+
+e)  D5  PR-AUC                         f)  D6  PR-AUC
+
+e) PR-AUC results of dataset D5        f) PR-AUC results of dataset D6
+
+ 5-14  IR 
+
+Figure 5-14 Precision and Recall curves of A-TFRs features based on different IR ratio
+
+ AUC  5-15
+
+ ROC-AUC  PR-AUC  IR  IR  ROC-AUCA-TF
+
+                                  100
+                                        
+
+ IR  PR-AUC 
+A-TF  SVM 
+PR-AUC 
+
+
+
+        5-15  IR -
+               Figure 5-15 Comparision of ROC-AUC and PR-AUC based on different IR
+
+5.4.4 
+
+       SSLRB 
+ SSLRB 
+
+
+5.4.4.1 SSLRB 
+
+       5.3  SSLRB  IR 
+SSLRB  C 
+
+      1SSLRB  C 
+       5-16  LR  3  C  IR  SSLRB 
+ 5-16 a) 5-16 b) F1  PR-AUC  C
+ 0.001,0.01,0.1,1,10,100,1000  C 
+       5-16 a) IR  1.59.0313.26  F1  C  0.1
+ 97.28%94.09% 92.19% IR  2.724.95  10.10 
+ F1  C  0.01  97.14%96.17% 92.77% IR 
+ 1.5  13.26 F1  5.09%
+       5-16 b) IR F1  IR  1.59.0313.26
+ PR-AUC  C  0.1  95.43%89.42%
+
+                                                                       101
+                                                    
+
+85.74% IR  2.724.95  10.10  F1  C  0.01 
+ 95.12%93.15% 86.90% IR  1.5  13.26 PR-
+AUC  9.69%
+
+                                                      a)  C  F1 
+                                                     a) F-score of different C values
+
+                                                  b)  C  PR-AUC 
+                                                    b) PR-AUC of different C values
+
+                          5-16  C  SSLRB 
+            Figure 5-16 Recognition performance of SSLRB based on different parameter C
+       5-16 a) 5-10 b) IR  1.5  2.72 
+ C  F1  PR-AUC  F1 PR-AUC  C 
+ C 
+
+                                                                       102
+                                        
+
+ C  0.1  0.01 
+
+
+       5-17  C  0.01  0.1  F1  PR-AUC 
+ IR 
+ 5  3  F1  PR-AUC 
+IR F1 PR-AUC
+ PR-AUC  IR 
+ C  0.1 0.01 IR 
+ IR C  0.01 
+ C  0.1  C  0.1 
+
+
+                    5-17  IR  SSLRB  F1  PRAUC 
+   Figure 5-17 Strip plot showing variations of the F1-score and PR-AUC by different IR values
+
+      2SSLRB  M 
+       LR 
+ SSLRB 
+ MM  2,3,4,5,6,10,15,20,30,40,50  5-18
+ IR  13.26  M 
+            M  3      F1    PRAUC         
+0.9219  0.8574 M  LR
+
+ SSLRB 
+ M  3
+
+                                                                       103
+                                                    
+
+                         5-18 SSLRB  LR 
+             Figure 5-18 F1-score and PRAUC of SSLRB with different M in LR classifier
+
+5.4.4.2 SSLRB 
+
+       SSLRB  A-TF
+Baseline
+RUSNearMissClusterCen  InstanceHardnessROS
+ADASYN  SMOTE  BorderlineSMOTE              SMOTEEN 
+SMOTETomek
+
+       3×3 
+
+
+ IR 
+
+       5-8  SSLRB  F1 SSLRB 
+ A-TF  SVM  Baseline  F1 
+     IR        0.84%  97.28%-96.44% 1.1%  96.96%-95.88% 1.3%
+ 95.79%-94.49% 0.86% 94.08%-93.22% 1.51% 92.68%-91.17% 1.85% 92.19%-
+90.34%
+
+       F1  IR  1.5 ADASYN
+ F1  96.88% ROS 96.93%IR  2.72 ADASYN 
+ ROS F1  96.96% 96.85% IR  4.95  13.26 
+BorderlineSMOTE F1  96.03% 91.60%IR  4.9.03  10.10
+ADASYN  F1  94.95% 92.49%
+
+       IR  F1 
+
+                                                                       104
+      
+
+RUSNearMissClusterCen  InstanceHardness  Baseline IR 
+1.5        0.28%  0.10%  0.36%  2.37%   IR   13.26       
+32.60%39.14%27.39% 36.23%SMOTETomek  IR 
+ SMOTEEN Baseline IR  13.26 SMOTETomek  F1 
+
+
+               5-8 SSLRB  IR  F1 %
+     Table 5-8 Comparision with SSLRB and other sampling methods of F1 score of pig cough
+
+                                     recognition based on different IR dataset
+
+      Algorithm         IR1.5  IR2.72  IR4.95 IR9.03 IR10.10 IR13.26
+
+None  Baseline          96.44  95.88   94.49  93.22 91.17 90.34
+
+      RUS               96.16  94.48   91.48  74.06 67.63 57.74
+
+       NearMiss         96.30  94.02   90.88  73.78  60.81  51.20
+      ClusterCen        96.08  96.09   90.34  73.64  71.47  62.95
+
+      InstanceHardness  94.07  89.77   83.91  65.44 55.35 54.11
+
+      ROS               96.93  96.85   95.14  93.94 91.54 90.58
+
+      ADASYN            96.88  96.96   95.35  94.95 92.49 91.48
+
+      SMOTE             96.67  96.75   95.87  93.75 92.35 90.46
+
+      BorderlineSMOTE 96.80    96.69   96.03  93.52 91.91 91.60
+
+        SMOTEEN         95.06  95.83   94.04  90.61  89.29  88.62
+      SMOTETomek        96.77  97.31   95.32  95.56  91.99  91.46
+
+      SSLRB             97.28  96.96   95.79  94.08 92.68 92.19
+
+       5-9  SSLRB  PRAUC  Baseline
+ PR-AUC       IR       PR-AUC      0.91% 0.9502-0.9429 
+1.27%  0.9475-0.9348  1.88 %  0.9243-0.9055  1.33 %  0.8908-0.8775  1.77 %  0.8673-
+0.84962.92%0.8574-0.8282
+
+       PR-AUC  IR  1.52.72
+9.03  10.10   ADASYN                PR-AUC      
+95.22%94.95%90.66% 86.64% IR  4.95  13.26 BorderlineSMOTE 
+PR-AUC  93.02% 84.88% Baseline ADASYN 
+ 0.93%1.47%2.91% 1.68%BorderlineSMOTE  2.47% 2.06%
+
+       IR  PR-AUC 
+InstanceHardnes NearMiss  IR  1.50  9.03 
+RUS  IR  4.95 PR-AUC  0.8458IR  2.7210.10  13.26
+ClusterCen SMOTETomek  IR 
+ SMOTEEN BaselineSMOTETomek  IR  PR-AUC 
+ 0.73%2.09%1.27%4%0.72%1.69%
+
+                               105
+                  
+
+                5-9 SSLRB  IR  PR-AUC 
+Table 5-9 Comparision SSLRB with other sampling methods of PRAUC of pig cough recognition
+
+                                            based on different IR dataset
+
+      Algorithm   IR1.5        IR2.72  IR4.95 IR9.03 IR10.10 IR13.26
+
+None  Baseline    0.9429       0.9348  0.9055 0.8775 0.8496 0.8282
+
+      RUS         0.9371       0.9020  0.8458 0.5869 0.5079 0.4029
+
+       NearMiss   0.9428       0.8956  0.8370  0.5946  0.4308  0.3346
+      ClusterCen  0.9361       0.9290  0.8265  0.5807  0.5504  0.4355
+
+      InstanceHardness 0.8954  0.8171  0.7265 0.4875 0.3819 0.3695
+
+      ROS         0.9562       0.9433  0.9180 0.9182 0.8719 0.8506
+
+      ADASYN      0.9508       0.9479  0.9159 0.8887 0.8489 0.8308
+
+      SMOTE       0.9522       0.9495  0.9188 0.9066 0.8664 0.8459
+
+      BorderlineSMOTE 0.9482   0.9456  0.9283 0.8852 0.8628 0.8281
+
+        SMOTEEN   0.9496       0.9462  0.9302  0.8822  0.8551  0.8488
+      SMOTETomek  0.9200       0.9281  0.8911  0.8295  0.8060  0.7943
+
+      SSLRB       0.9502       0.9557  0.9182 0.9175 0.8568 0.8451
+
+           5-8   5-9           A-TF            
+Baseline
+
+ IR 
+
+
+
+
+
+
+ SSLRB SSLRB 
+ SSLRB 
+
+
+
+5.5 
+
+      
+
+ SSLRB 
+
+
+                                                                       106
+                                        
+
+      1
+
+
+
+
+
+      2A-TF A-TF 
+ IR 
+A-TF 
+ ROC-AUC  PR-AUC 
+PR-AUC 
+
+      3 SSLRB 
+ SVM  LR 
+
+
+SSLRB 
+
+                                                                       107
+    
+
+6 
+
+6.1 
+
+      
+
+
+
+
+      1
+ XGBoost-SHAP  XGBoost-RFECV 
+
+  Acoustic                                 
+MFCC
+
+ SVM  94.46%
+      20  MFCC  13  MFCC      0.63%  1.14%        
+MFCC Acoustic 
+
+
+      2
+ Q 
+
+Q 
+ 93.98%
+ 92.56% VGG16VGG19  Resnet152 
+
+
+ 94.51%
+
+      3
+Acoustic-TFRs fusion
+A-TF 97.57%
+
+ A-TF 
+A-TF 
+A-TF  F1  90.36%
+ 8.89% 8.31% A-TF 
+
+
+      4
+
+    108
+                                                                  
+
+
+ SVM  F1
+             0.84%  97.28%-96.44%  1.1%  96.96%-95.88%  1.3%
+ 95.79%-94.49%  0.86% 94.08%-93.22%  1.51% 92.68%-91.17%  1.85% 92.19%-
+90.34%
+
+
+6.2 
+
+      1
+
+
+
+      2
+
+
+
+
+      3
+
+
+
+6.3 
+
+      
+
+
+      1
+      
+
+
+
+
+      
+
+
+      2
+      
+
+
+
+      
+
+                                                                       109
+                                                    
+
+
+
+
+                                                                       110
+                                                    
+
+                              
+
+[1] . 2022 [J]. , 2022(2): 1-5.
+[2] 2021  2022 [J]. , 2022(3): 39-40.
+[3] NORTON T, CHEN C, LARSEN M L V, et al. Review: precision livestock farming:
+
+         building `digital representations' to bring the animals closer to the farmer[J]. Animal, 2019,
+         13(12): 3009-3017.
+[4] . [D]. : 
+         , 2020.
+[5] RACEWICZ P, LUDWICZAK A, SKRZYPCZAK E, et al. Welfare health and productivity
+         in commercial pig herds[J]. Animals, 2021, 11(4): 1176.
+[6] , , . [J]. 
+         , 2020(5): 24-27.
+[7] MANTEUFFEL G, PUPPE B, SCHÖN P C. Vocalization of farm animals as a measure of
+         welfare[J]. Applied Animal Behaviour Science, 2004, 88(1-2): 163-182.
+[8] BENJAMIN M, YIK S. Precision livestock farming in swine welfare: a review for swine
+         practitioners[J]. Animals, 2019, 9(4): 133.
+[9] DAWKINS M S. Animal welfare and efficient farming: is conflict inevitable?[J]. Animal
+         Production Science, 2017, 57(2): 201.
+[10] TZANIDAKIS C, SIMITZIS P, ARVANITIS K, et al. An overview of the current trends in
+         precision pig farming technologies[J]. Livestock Science, 2021, 249: 104530.
+[11] . [D]. : , 2020.
+[12] . [J]. , 2022(19): 106-
+         108.
+[13] , . [J]. , 2018, 35(7): 84-85.
+[14] . [J]. , 2021(7): 14-15.
+[15] . [J]. , 2021, 32(2): 81+83.
+[16] MCLOUGHLIN M P, STEWART R, MCELLIGOTT A G. Automated bioacoustics:
+         methods in ecology and conservation and their potential for animal welfare monitoring[J].
+         Journal of The Royal Society Interface, 2019, 16(155): 20190225.
+[17] SHARMA G, UMAPATHY K, KRISHNAN S. Trends in audio signal feature extraction
+         methods[J]. Applied Acoustics, 2020, 158: 107020.
+[18] K. V. S. N. R R, MONTGOMERY J, GARG S, et al. Bioacoustics data analysis ­ A
+         taxonomy, survey and open challenges[J]. IEEE Access, 2020, 8: 57684-57708.
+[19] BISHOP J C, FALZON G, TROTTER M, et al. Livestock vocalisation classification in
+         farm soundscapes[J]. Computers and Electronics in Agriculture, 2019, 162: 531-542.
+[20] . [D]. : , 2017.
+[21] JAHNS G. Computational intelligence to recognize animal vocalization and diagnose
+
+                                                                       112
+                                                                   
+
+         animal health status[M]. MOEWES C, NÜRNBERGER A. Computational intelligence in
+         intelligent data analysis: Vol. 445. Berlin, Heidelberg: Springer Berlin Heidelberg, 2013:
+         239-249[2022-03-16].
+[22] FERRARI S, SILVA M, GUARINO M, et al. Cough sound analysis to identify respiratory
+         infection in pigs[J]. Computers and Electronics in Agriculture, 2008, 64(2): 318-325.
+[23] , , , . [J]. 
+         , 2017(11): 63-68.
+[24] , . [J]. , 2019(12): 33-35.
+[25] . ?[J]. , 2019, 36(04): 46-48.
+[26] CHAKI J. Pattern analysis based acoustic signal processing: a survey of the state-of-art[J].
+         International Journal of Speech Technology, 2021, 24(4): 913-955.
+[27] , , , . [C]//
+         , 2015: 107-112.
+[28] BRIEFER E F, SYPHERD C C R, LINHART P, et al. Classification of pig calls produced
+         from birth to slaughter according to their emotional valence and context of production[J].
+         Scientific Reports, 2022, 12(1): 3409.
+[29] MERCHAN F, GUERRA A, POVEDA H, et al. Bioacoustic classification of antillean
+         manatee vocalization spectrograms using deep convolutional neural networks[J]. Applied
+         Sciences, 2020, 10(9): 3286.
+[30] KNIGHT E C, POO HERNANDEZ S, BAYNE E M, et al. Pre-processing spectrogram
+         parameters improve the accuracy of bioacoustic classification using convolutional neural
+         networks[J]. Bioacoustics, 2020, 29(3): 337-355.
+[31] ZEBARI R, ABDULAZEEZ A, ZEEBAREE D, et al. A comprehensive review of
+         dimensionality reduction techniques for feature selection and feature extraction[J]. Journal
+         of Applied Science and Technology Trends, 2020, 1(2): 56-70.
+[32] STEVENS K N. Autocorrelation analysis of speech sounds[J]. The Journal of the
+         Acoustical Society of America, 1950, 22(6): 769-771.
+[33] FERRARI S, SILVA M, SALA V, et al. Bioacoustics: a tool for diagnosis of respiratory
+         pathologies in pig farms[J]. Journal of Agricultural Engineering, 2009, 40(1): 7-10.
+[34] SILVA M, FERRARI S, COSTA A, et al. Cough localization for the detection of
+         respiratory diseases in pig houses[J]. Computers and Electronics in Agriculture, 2008,
+         64(2): 286-292.
+[35] S. FERRARI, M. SILVA, M. GUARINO, et al. Analysis of cough sounds for diagnosis of
+         respiratory infections in intensive pig farming[J]. Transactions of the ASABE, 2008, 51(3):
+         1051-1055.
+[36] FU Z, LU G, TING K M, et al. A survey of audio-based music classification and
+         annotation[J]. IEEE Transactions on Multimedia, 2011, 13(2): 303-319.
+[37] ER M B. A novel approach for classification of speech emotions based on deep and
+
+                                                                       113
+                                                    
+
+         acoustic features[J]. IEEE Access, 2020, 8: 221640-221653.
+[38] AL-SHOSHAN A I. Speech and music classification and separation: A review[J]. Journal
+
+         of King Saud University - Engineering Sciences, 2006, 19(1): 95-132.
+[39] BERCKMANS D. Automatic detection of chronic pig coughing from continuous
+
+         registration in field situations[C]//3rd International Workshop MAVEBA, 2003: 251-254.
+[40] KEDEM B. Spectral analysis and discrimination by zero-crossings[J]. Proceedings of the
+
+         IEEE, 1986, 74(11): 1477-1493.
+[41] VAN HIRTUM A, BERCKMANS D. Fuzzy approach for improved recognition of citric
+
+         acid induced piglet coughing from continuous registration[J]. Journal of Sound and
+         Vibration, 2003, 266(3): 677-686.
+[42] VAN HIRTUM A, BERCKMANS D. Objective recognition of cough sound as biomarker
+         for aerial pollutants: aerial pollutants and cough sound[J]. Indoor Air, 2004, 14(1): 10-15.
+[43] EXADAKTYLOS V, SILVA M, AERTS J M, et al. Real-time recognition of sick pig
+         cough sounds[J]. Computers and Electronics in Agriculture, 2008, 63(2): 207-214.
+[44] GUARINO M, JANS P, COSTA A, et al. Field test of algorithm for automatic cough
+         detection in pig houses[J]. Computers and Electronics in Agriculture, 2008, 62(1): 22-28.
+[45] V EXADAKTYLOS, S FERRARI, M D SILVA, et al. A tool for labeling individual sounds
+         from continuous recordings: An application to bio-acoustics[C]//2009 American Society of
+         Agricultural and Biological Engineers, Reno, Nevada, 2009: 1-8.
+[46] SILVA M, EXADAKTYLOS V, FERRARI S, et al. The influence of respiratory disease on
+         the energy envelope dynamics of pig cough sounds[J]. Computers and Electronics in
+         Agriculture, 2009, 69: 80-85.
+[47] DAVIS S, MERMELSTEIN P. Comparison of parametric representations for monosyllabic
+         word recognition in continuously spoken sentences[J]. IEEE Transactions on Acoustics,
+         Speech, and Signal Processing, 1980, 28(4): 357-366.
+[48] CHUNG Y, OH S, LEE J, et al. Automatic detection and recognition of pig wasting
+         diseases using sound data in audio surveillance systems[J]. Sensors, 2013, 13(10): 12929-
+         12942.
+[49] GIESERT A L, BALKE W T, JAHNS G. Probabilistic analysis of coughs in pigs to
+         diagnose respiratory infections[J]. 2011,61: 237-242.
+[50] . [D]. : , 2021.
+[51] VALLETTA J J, TORNEY C, KINGS M, et al. Applications of machine learning in animal
+         behaviour studies[J]. Animal Behaviour, 2017, 124: 203-220.
+[52] WANG X, ZHAO X, HE Y, et al. Cough sound analysis to assess air quality in commercial
+         weaner barns[J]. Computers and Electronics in Agriculture, 2019, 160: 8-13.
+[53] , , , . [J]. , 2018,
+         49(3): 179-186.
+[54] GHORAANI B, KRISHNAN S. Time­frequency matrix feature extraction and
+
+                                                                       114
+                                                                   
+
+         classification of environmental audio signals[J]. IEEE Transactions on Audio, Speech, and
+         Language Processing, 2011, 19(7): 2197-2209.
+[55] YIN Y, TU D, SHEN W, et al. Recognition of sick pig cough sounds based on
+         convolutional neural network in field situations[J]. Information Processing in Agriculture,
+         2021, 8(3): 369-379.
+[56] HONG M, AHN H, ATIF O, et al. Field-applicable pig anomaly detection system using
+         vocalization for embedded board implementations[J]. Applied Sciences, 2020, 10(19): 6991.
+[57] , , , .  CNN [J]. 
+         , 2021, 37(20): 187-193.
+[58] LEE J, CHOI Y, PARK D, et al. Sound noise-robust porcine wasting diseases detection and
+         classification system using convolutional neural network[J]. The Journal of Korean
+         Institute of Information Technology, 2018, 16(5): 1-13.
+[59] SHEN W, TU D, YIN Y, et al. A new fusion feature based on convolutional neural network
+         for pig cough recognition in field situations[J]. Information Processing in Agriculture, 2021,
+         8(4): 573-580.
+[60] DEY N, ASHOUR A S, BORRA S. Classification in BioApps: automation of decision
+         making[M]. Cham: Springer International Publishing, 2018.
+[61] HÄRDLE W K, SIMAR L. Applied multivariate statistical analysis[M]. Berlin, Heidelberg:
+         Springer Berlin Heidelberg, 2015.
+[62] DOUGLAS C E, MICHAEL F A. On distribution-free multiple comparisons in the one-way
+         analysis of variance[J]. Communications in Statistics - Theory and Methods, 1991, 20(1):
+         127-139.
+[63] GUTIERREZ W M, KIM S, KIM D H, et al. Classification of porcine wasting diseases
+         using sound analysis[J]. Asian-Australasian Journal of Animal Sciences, 2010, 23(8): 1096-
+         1104.
+[64] ZHANG J, WANG Y, MOLINO P, et al. Manifold: a model-agnostic framework for
+         interpretation and diagnosis of machine learning models[J]. IEEE Transactions on
+         Visualization and Computer Graphics, 2019, 25(1): 364-373.
+[65] PAL N R, PAL K, KELLER J M, et al. A possibilistic fuzzy c-means clustering
+         algorithm[J]. IEEE Transactions on Fuzzy Systems, 2005, 13(4): 517-530.
+[66] LEE J, JIN L, PARK D, et al. Acoustic features for pig wasting disease detection[J]. IJIPM,
+         2015, 6(1):37-46.
+[67] WILPON J G, RABINER L R. Application of hidden Markov models to automatic speech
+         endpoint detection[J]. Computer Speech & Language, 1987, 2(3-4): 321-341.
+[68] , , , . [J]. 
+         , 2016(21): 97-99+103+294.
+[69]    .                    [D].   :       ,
+         2018.
+
+                                                                       115
+                                                    
+
+[70] NEETHIRAJAN S. The role of sensors, big data and machine learning in modern animal
+         farming[J]. Sensing and Bio-Sensing Research, 2020, 29: 100367.
+
+[71] CHATZIMPARMPAS A, MARTINS R M, KUCHER K, et al. FeatureEnVi: visual
+         analytics for feature engineering using stepwise selection and semi-automatic extraction
+         approaches[J]. 2021, arXiv.2103.14539.
+
+[72] PICZAK K J. Environmental sound classification with convolutional neural
+         networks[C]//2015 IEEE 25th International Workshop on Machine Learning for Signal
+         Processing (MLSP). Boston, MA, USA: IEEE, 2015: 1-6.
+
+[73] MOSHOU D, CHEDAD A, VAN HIRTUM A, et al. Neural recognition system for swine
+         cough[J]. Mathematics and Computers in Simulation, 2001, 56(4-5): 475-487.
+
+[74] D. MOSHOU, A. CHEDAD, A. VAN HIRTUM, et al. An intelligent alarm for early
+         detection of swine epidemics based on neural networks[J]. Transactions of the ASAE, 2001,
+         44(1): 167-174.
+
+[75] . [D]. : , 2019.
+[76] , , , .  BP [J]. ,
+
+         2022, 43(2): 148-154.
+[77] , , , . 
+
+         [J]. , 2022, 27(6): 172-181.
+[78] XIE J, HU K, ZHU M, et al. Investigation of different CNN-based models for improved
+
+         bird sound classification[J]. IEEE Access, 2019, 7: 175353-175361.
+[79] FERNANDES M S, CORDEIRO W, RECAMONDE-MENDOZA M. Detecting aedes
+
+         aegypti mosquitoes through audio classification with convolutional neural networks[J].
+         Computers in Biology and Medicine, 2021,129: 104152.
+[80] KO K, PARK S, KO H. Convolutional feature vectors and support vector machine for
+         animal sound classification[C]//2018 40th Annual International Conference of the IEEE
+         Engineering in Medicine and Biology Society (EMBC). Honolulu, HI: IEEE, 2018: 376-
+         379.
+[81] , , , .  DenseNet [J]. 
+         , 2022(20): 41-44+49.
+[82] . [D]. : , 2020.
+[83] , , , . [J]. 
+         , 2022, 53(5): 257-266.
+[84] , , , .  BiLSTM [J]. (),
+         2022, 39(2): 113-119.
+[85] , . [J]. , 2020, 47(5): 79-85.
+[86]   ,    ,    .               [J].       , 2020,
+         36(9): 195-204.
+[87] RODRIGUES DA COSTA M, FITZGERALD R M, MANZANILLA E G, et al. A cross-
+
+                                                                       116
+                                                                   
+
+         sectional survey on respiratory disease in a cohort of Irish pig farms[J]. Irish Veterinary
+         Journal, 2020, 73(1): 24.
+[88] SIBILA M, PIETERS M, MOLITOR T, et al. Current perspectives on the diagnosis and
+         epidemiology of Mycoplasma hyopneumoniae infection[J]. The Veterinary Journal, 2009,
+         181(3): 221-231.
+[89] JI N, YIN Y, SHEN W, et al. Pig sound analysis: a measure of welfare[J]. Smart
+         Agriculture, 2022, 4(2): 19-35.
+[90] MAES D, SIBILA M, KUHNERT P, et al. Update on Mycoplasma hyopneumoniae
+         infections in pigs: Knowledge gaps for improved disease control[J]. Transboundary and
+         Emerging Diseases, 2018, 65: 110-124.
+[91] PESSOA J, RODRIGUES DA COSTA M, GARCÍA MANZANILLA E, et al. Managing
+         respiratory disease in finisher pigs: combining quantitative assessments of clinical signs
+         and the prevalence of lung lesions at slaughter[J]. Preventive Veterinary Medicine, 2021,
+         186: 105208.
+[92] BATISTA G E A P A, PRATI R C, MONARD M C. A study of the behavior of several
+         methods for balancing machine learning training data[J]. ACM SIGKDD Explorations
+         Newsletter, 2004, 6(1): 20-29.
+[93] BARWICK J, LAMB D W, DOBOS R, et al. Identifying sheep activity from tri-axial
+         acceleration signals using a moving window classification model[J]. Remote Sensing, 2020,
+         12(4): 646.
+[94] LI G, XIONG Y, DU Q, et al. Classifying ingestive behavior of dairy cows via automatic
+         sound recognition[J]. Sensors, 2021, 21(15): 5231.
+[95] ANDERS F, KALAN A K, KÜHL H S, et al. Compensating class imbalance for acoustic
+         chimpanzee detection with convolutional recurrent neural networks[J]. Ecological
+         Informatics, 2021, 65: 101423.
+[96] ZHANG Y J, HUANG J F, GONG N, et al. Automatic detection and classification of
+         marmoset vocalizations using deep and recurrent neural networks[J]. The Journal of the
+         Acoustical Society of America, 2018, 144(1): 478-487.
+[97] CHAWLA N V, BOWYER K W, HALL L O, et al. SMOTE: synthetic minority over-
+         sampling technique[J]. Journal of Artificial Intelligence Research, 2002, 16: 321-357.
+[98] BRODIE S, ALLEN-ANKINS S, TOWSEY M, et al. Automated species identification of
+         frog choruses in environmental recordings using acoustic indices[J]. Ecological Indicators,
+         2020, 119: 106852.
+[99] WATANABE R N, BERNARDES P A, ROMANZINI E P, et al. Strategy to predict high
+         and low frequency behaviors using triaxial accelerometers in grazing of beef cattle[J].
+         Animals, 2021, 11(12): 3438.
+[100] HAN H, WANG W Y, MAO B H. Borderline-SMOTE: a new over-sampling method in
+         imbalanced data sets learning[J]. International conference on intelligent computing, 2005:
+
+                                                                       117
+                                                    
+
+         878-887.
+[101] JIN M, WANG C, JENSEN D B. Effect of de-noising by wavelet filtering and data
+
+         augmentation by borderline SMOTE on the classification of imbalanced datasets of pig
+         behavior[J]. Frontiers in Animal Science, 2021, 2: 666855.
+[102] . [D]. : ,
+         2022.
+[103] LIAO J, LI H, FENG A, et al. Domestic pig sound classification based on
+         TransformerCNN[J]. Applied Intelligence, 2022: 1-17.
+[104] , , , . 
+         [J]. , 2019, 51(3): 38-44.
+[105] .  CNN [D]. : , 2019.
+[106] , , , . [J]. , 2017,
+         36(3): 119-124.
+[107] ZHAO J, LI X, LIU W, et al. DNN-HMM based acoustic model for continuous pig cough
+         sound recognition[J]. International Journal of Agricultural and Biological Engineering,
+         2020, 13(3): 186-193.
+[108] , , , . [J]. ,
+         2017(23): 18-22.
+[109] . [D]. : , 2022.
+[110] CORDEIRO A F da S, NÄÄS I de A, OLIVEIRA S R de M, et al. Efficiency of distinct
+         data mining algorithms for classifying stress level in piglets from their vocalization[J].
+         Engenharia Agrícola, 2012, 32(2): 208-216.
+[111] TALLET C, LINHART P, POLICHT R, et al. Encoding of situations in the vocal repertoire
+         of piglets (Sus scrofa): a comparison of discrete and graded classifications[J]. PLoS ONE,
+         2013, 8(8): 1-13.
+[112] ZHANG S, JAFARI O, NAGARKAR P. A survey on machine learning techniques for auto
+         labeling of video, audio, and text data[J]. 2021. arXiv.2109.03784.
+[113] MESAROS A, HEITTOLA T, VIRTANEN T, et al. Sound Event Detection: A tutorial[J].
+         IEEE Signal Processing Magazine, 2021, 38(5): 67-83.
+[114] . [J]. , 2011, 17(12): 27-29.
+[115] RODRIGUEZ J D, PEREZ A, LOZANO J A. sensitivity analysis of k-fold cross validation
+         in prediction error estimation[J]. IEEE Transactions on Pattern Analysis and Machine
+         Intelligence, 2010, 32(3): 569-575.
+[116] WAINER J, CAWLEY G. Nested cross-validation when selecting classifiers is overzealous
+         for most practical applications[J]. Expert Systems with Applications, 2021, 182: 115222.
+[117] LUQUE A. The impact of class imbalance in classification performance metrics based on
+         the binary confusion matrix[J]. Pattern Recognition, 2019, 91: 216-231.
+[118] KNIGHT E C, HANNAH K C, FOLEY G J, et al. Recommendations for acoustic
+
+                                                                       118
+                                                                   
+
+         recognizer performance assessment with application to five common automated signal
+         recognition programs[J]. Avian Conservation and Ecology, 2017, 12(2): art14.
+[119] WANG Y, HAN K, WANG D. Acoustic features for classification based speech
+         separation[J]. Interspeech ISCA's 13th Annual Conference Portland, OR 2012: 9-13.
+[120] KE X, YUAN F, CHENG E. Integrated optimization of underwater acoustic ship-radiated
+         noise recognition based on two-dimensional feature fusion[J]. Applied Acoustics, 2020,
+         159: 107057.
+[121] MA B, GREER T, KNOX D, et al. A computational lens into how music characterizes
+         genre in film[J]. PLOS ONE, 2021, 16(4): e0249957.
+[122] XIE J, ZHU M. Handcrafted features and late fusion with deep learning for bird sound
+         classification[J]. Ecological Informatics, 2019, 52: 74-81.
+[123] WANG W, YUAN J, WANG B, et al. Robust classification of heart valve sound based on
+         adaptive EMD and feature fusion[J]. PLOS ONE, 2022, 17(12): e0276264.
+[124] FLORES-FUENTES W, RIVAS-LOPEZ M, SERGIYENKO O, et al. Combined application
+         of power spectrum centroid and support vector machines for measurement improvement in
+         optical scanning systems[J]. Signal Processing, 2014, 98: 37-51.
+[125] MA Y, NISHIHARA A. Efficient voice activity detection algorithm using long-term
+         spectral flatness measure[J]. EURASIP Journal on Audio, Speech, and Music Processing,
+         2013, 2013(1): 87.
+[126] SHEN W, JI N, YIN Y, et al. Investigation of acoustic and visual features for pig cough
+         classification[J]. Biosystems Engineering, 2022, 219: 281-293.
+[127] LUZ J S, OLIVEIRA M C, ARAÚJO F H D, et al. Ensemble of handcrafted and deep
+         features for urban sound classification[J]. Applied Acoustics, 2021, 175: 107819.
+[128] DAN-NING JIANG, LIE LU, HONG-JIANG ZHANG, et al. Music type classification by
+         spectral contrast feature[C]// IEEE International Conference on Multimedia and Expo.
+         Lausanne, Switzerland: IEEE, 2002: 113-116.
+[129] SADJADI S O, HANSEN J H L. Unsupervised Speech Activity Detection Using Voicing
+         Measures and Perceptual Spectral Flux[J]. IEEE Signal Processing Letters, 2013, 20(3): 4.
+[130] AKHTAR T, GILANI S O, MUSHTAQ Z, et al. Effective voting ensemble of homogenous
+         ensembling with multiple attribute-selection approaches for improved identification of
+         thyroid disorder[J]. Electronics, 2021, 10(23): 3026.
+[131] DONG W, HUANG Y, LEHANE B, et al. XGBoost algorithm-based prediction of concrete
+         electrical resistivity for structural health monitoring[J]. Automation in Construction, 2020,
+         114: 103155.
+[132]   .                        [D].   :     ,
+         2022.
+[133] LUNDBERG S M, ERION G G, LEE S I. Consistent Individualized Feature Attribution for
+         Tree Ensembles[J]. 2018. arXiv.1802.03888.
+
+                                                                       119
+                                                    
+
+[134] LUNDBERG S M, NAIR B, VAVILALA M S, et al. Explainable machine-learning
+         predictions for the prevention of hypoxaemia during surgery[J]. Nature Biomedical
+         Engineering, 2018, 2(10): 749-760.
+
+[135] AMIRIPARIAN S, GERCZUK M, OTTL S, et al. Snore sound classification using image-
+         based deep spectrum features[C]//Interspeech. ISCA, 2017: 3512-3516.
+
+[136] KUMAR S, THIRUVENKADAM S. An analysis of the impact of spectral contrast feature
+         in speech emotion recognition[J]. International Journal of Recent Contributions from
+         Engineering, Science & IT (iJES), 2021, 9(2): 87.
+
+[137] WANG Y, SHI F, CAO L, et al. Morphological segmentation analysis and texture-based
+         support vector machines classification on mice liver fibrosis microscopic images[J].
+         Current Bioinformatics, 2019, 14(4): 282-294.
+
+[138] ZEILER S, NICHELI R, MA N, et al. Robust audiovisual speech recognition using noise-
+         adaptive linear discriminant analysis[C]//2016 IEEE International Conference on Acoustics,
+         Speech and Signal Processing (ICASSP). Shanghai: IEEE, 2016: 2797-2801.
+
+[139] BONET-SOLÀ D, ALSINA-PAGÈS R M. A comparative survey of feature extraction and
+         machine learning methods in diverse acoustic environments[J]. Sensors, 2021, 21(4): 1274.
+
+[140] MARINOV D, KARAPETYAN D. Hyperparameter optimisation with early termination of
+         poor performers[C]//2019 11th Computer Science and Electronic Engineering (CEEC).
+         Colchester, United Kingdom: IEEE, 2019: 160-163.
+
+[141] ALIBRAHIM H, LUDWIG S A. Hyperparameter optimization: comparing genetic
+         algorithm against grid search and bayesian optimization[C]//2021 IEEE Congress on
+         Evolutionary Computation (CEC). Kraków, Poland: IEEE, 2021: 1551-1559.
+
+[142] MCFEE B, RAFFEL C, LIANG D, et al. librosa: audio and music signal analysis in
+         python[C]//Python in Science Conference. Austin, Texas, 2015: 18-24.
+
+[143] BEAUREGARD G T, HARISH M, WYSE L. Single pass spectrogram inversion[C]//2015
+         IEEE International Conference on Digital Signal Processing (DSP). Singapore: IEEE, 2015:
+         427-431.
+
+[144] PHAM L, PHAN H, NGUYEN T, et al. Robust acoustic scene classification using a multi-
+         spectrogram encoder-decoder framework[J]. Digital Signal Processing, 2021, 110: 102943.
+
+[145] AMIRIPARIAN S, GERCZUK M, OTTL S, et al. Bag-of-deep-features: noise-robust deep
+         feature representations for audio analysis[C]//2018 International Joint Conference on
+         Neural Networks (IJCNN). Rio de Janeiro: IEEE, 2018: 1-7.
+
+[146] XU L, WEI Z, ZAIDI S F A, et al. Speech enhancement based on nonnegative matrix
+         factorization in constant-Q frequency domain[J]. Applied Acoustics, 2021, 174: 107732.
+
+[147] NANNI L, MAGUOLO G, BRAHNAM S, et al. An ensemble of convolutional neural
+         networks for audio classification[J]. Applied Sciences, 2021, 11(13): 5796.
+
+[148] PHAM L, MCLOUGHLIN I, PHAN H, et al. A robust framework for acoustic scene
+         classification[C]//Interspeech 2019. ISCA, 2019: 3634-3638.
+
+                                                                       120
+                                                                   
+
+[149] QU Y, LI X, QIN Z, et al. Acoustic scene classification based on three-dimensional multi-
+         channel feature-correlated deep learning networks[J]. Scientific Reports, 2022, 12(1):
+         13730.
+
+[150] NISAR S, KHAN O U, TARIQ M. An efficient adaptive window size selection method for
+         improving spectrogram visualization[J]. Computational Intelligence and Neuroscience,
+         2016, 2016: 1-13.
+
+[151] SCHÖRKHUBER C, KLAPURI A. Constant-Q transform toolbox for music
+         processing[C]//7th sound and music computing conference, Barcelona, Spain. 2010: 3-64.
+
+[152] YANG B, CHEN S. A comparative study on local binary pattern (LBP) based face
+         recognition: LBP histogram versus LBP image[J]. Neurocomputing, 2013, 120: 365-379.
+
+[153] RAKOTOMAMONJY A, GASSO G. Histogram of gradients of time­frequency
+         representations for audio scene classification[J]. IEEE/ACM Transactions on Audio,
+         Speech, and Language Processing, 2015, 23(1): 12.
+
+[154] ANOWAR F, SADAOUI S, SELIM B. Conceptual and empirical comparison of
+         dimensionality reduction algorithms (PCA, KPCA, LDA, MDS, SVD, LLE, ISOMAP, LE,
+         ICA, t-SNE)[J]. Computer Science Review, 2021, 40: 100378.
+
+[155] JIANG J, WU Z, XU M, et al. Comparing feature dimension reduction algorithms for
+         GMM-SVM based speech emotion recognition[C]//2013 Asia-Pacific Signal and
+         Information Processing Association Annual Summit and Conference. Kaohsiung, Taiwan:
+         IEEE, 2013: 1-4.
+
+[156] CHANDOLA Y, VIRMANI J, BHADAURIA H S, et al. Hybrid computer-aided
+         classification system design using lightweight end-to-end Pre-trained CNN-based deep
+         feature extraction and PCA-SVM classifier for chest radiographs[M]. Deep Learning for
+         Chest Radiographs. Elsevier, 2021: 197-204.
+
+[157] PAUL R, LIU Y, LI Q, et al. Representation of deep features using radiologist defined
+         semantic features[C]//2018 International Joint Conference on Neural Networks (IJCNN).
+         Rio de Janeiro: IEEE, 2018: 1-7.
+
+[158] . [D]. 
+         : , 2021.
+
+[159] KUANG Y, WU Q, WANG Y, et al. Simplified inverse filter tracked affective acoustic
+         signals classification incorporating deep convolutional neural networks[J]. Applied Soft
+         Computing, 2020, 97: 106775.
+
+[160] BASHA S H S, DUBEY S R, PULABAIGARI V, et al. Impact of fully connected layers on
+         performance of convolutional neural networks for image classification[J]. Neurocomputing,
+         2020, 378: 112-119.
+
+[161] LECUN Y, BOTTOU L, BENGIO Y, et al. Gradient-based learning applied to document
+         recognition[J]. Proceedings of the IEEE, 1998, 86(11): 2278-2324.
+
+[162] SIMONYAN K, ZISSERMAN A. Very deep convolutional networks for large-scale image
+
+                                                                       121
+                                                    
+
+         recognition[J]. 2014. arXiv.1409.1556.
+[163] HE K, ZHANG X, REN S, et al. Deep residual learning for image recognition[C]//2016
+
+         IEEE Conference on Computer Vision and Pattern Recognition (CVPR). Las Vegas, NV,
+         USA: IEEE, 2016: 770-778.
+[164] ZEILER M D, FERGUS R. Visualizing and understanding convolutional networks
+         [C]//Computer Vision­ECCV 2014: 13th European Conference, Zurich, Switzerland, 2014:
+         818-833.
+[165] HAMAD Q S, SAMMA H, SUANDI S A. Feature selection of pre-trained shallow CNN
+         using the QLESCA optimizer: COVID-19 detection as a case study[J]. Applied Intelligence,
+         2023:1-23.
+[166] LI J, XIE S, CHEN Z, et al. A shallow convolutional neural network for apple
+         classification[J]. IEEE Access, 2020, 8: 111683-111692.
+[167] JUNAID M, GHAFOOR M, HASSAN A, et al. Multi-feature view-based shallow
+         convolutional neural network for road segmentation[J]. IEEE Access, 2020, 8: 36612-
+         36623.
+[168] HU Y, LI J, HUANG Y, et al. Channel-wise and spatial feature modulation network for
+         single image super-resolution[J]. IEEE Transactions on Circuits and Systems for Video
+         Technology, 2020, 30(11): 3911-3927.
+[169] CHEN L, ZHANG H, XIAO J, et al. SCA-CNN: spatial and channel-wise attention in
+         convolutional networks for image captioning[C]//2017 IEEE Conference on Computer
+         Vision and Pattern Recognition (CVPR). Honolulu, HI: IEEE, 2017: 6298-6306.
+[170] XIANG Z, TAN H, YE W. The excellent properties of a dense grid-based hog feature on
+         face recognition compared to Gabor and LBP[J]. IEEE Access, 2018, 6: 29306-29319.
+[171] ABDI H, WILLIAMS L J. Principal component analysis: principal component analysis[J].
+         Wiley Interdisciplinary Reviews: Computational Statistics, 2010, 2(4): 433-459.
+[172] SINGH V, PENCINA M, EINSTEIN A J, et al. Impact of train/test sample regimen on
+         performance estimate stability of machine learning in cardiovascular imaging[J]. Scientific
+         Reports, 2021, 11(1): 14490.
+[173] STAHLSCHMIDT S R, ULFENBORG B, SYNNERGREN J. Multimodal deep learning for
+         biomedical data fusion: a review[J]. Briefings in Bioinformatics, 2022, 23(2): 1-15.
+[174] SETUMIN S, AMINUDIN M F C, SUANDI S A. Canonical correlation analysis feature
+         fusion with patch of interest: a dynamic local feature matching for face sketch image
+         retrieval[J]. IEEE Access, 2020, 8: 137342-137355.
+[175] ZHENG L, WANG S, TIAN L, et al. Query-adaptive late fusion for image search and
+         person re-identification[C]//2015 IEEE Conference on Computer Vision and Pattern
+         Recognition (CVPR). Boston, MA, USA: IEEE, 2015: 1741-1750.
+[176] GUO Z, XU L, ALI ASGHARZADEHOLIAEE N. A homogeneous ensemble classifier for
+         breast cancer detection using parameters tuning of mlp neural network[J]. Applied
+
+                                                                       122
+                                                                   
+
+         Artificial Intelligence, 2022, 36(1): 2031820.
+[177] FOTOUHI S, ASADI S, KATTAN M W. A comprehensive data level analysis for cancer
+
+         diagnosis on imbalanced data[J]. Journal of Biomedical Informatics, 2019, 90: 103089.
+[178] MANNING C D. Computational linguistics and deep learning[J]. Computational
+
+         Linguistics, 2015, 41(4): 701-707.
+[179] GOLDBERG Y. A primer on neural network models for natural language processing[J].
+
+         Journal of Artificial Intelligence Research, 2016, 57: 345-420.
+[180] SANTOS M S, SOARES J P, ABREU P H, et al. Cross-validation for imbalanced datasets:
+
+         avoiding overoptimistic and overfitting approaches[J]. IEEE Computational Intelligence
+         Magazine, 2018, 13(4): 59-76.
+[181] ZIAN S, KAREEM S A, VARATHAN K D. An empirical evaluation of stacked ensembles
+         with different meta-learners in imbalanced classification[J]. IEEE Access, 2021, 9: 87434-
+         87452.
+[182] FERNÁNDEZ A, GARCÍA S, DEL JESUS M J, et al. A study of the behaviour of
+         linguistic fuzzy rule based classification systems in the framework of imbalanced data-
+         sets[J]. Fuzzy Sets and Systems, 2008, 159(18): 2378-2398.
+[183] GARCÍA V, SÁNCHEZ J S, MOLLINEDA R A. On the effectiveness of preprocessing
+         methods when dealing with different levels of class imbalance[J]. Knowledge-Based
+         Systems, 2012, 25(1): 13-21.
+[184] HERLAND M, BAUDER R A, KHOSHGOFTAAR T M. The effects of class rarity on the
+         evaluation of supervised healthcare fraud detection models[J]. Journal of Big Data, 2019,
+         6(1): 21.
+[185] ZHANG S, TIAN J, BANERJEE A, et al. Automatic recognition of porcine abnormalities
+         based on a sound detection and recognition system[J]. Transactions of the ASABE, 2019,
+         62(6): 1755-1765.
+
+                                                                       123
+

@@ -1,0 +1,692 @@
+
+Journal of Henan Agricultural Sciences
+ISSN 1004-3268,CN 41-1092/S
+
+
+
+   CNN-BiLSTM 
+  
+  2025-10-09
+  2025-12-19
+  
+   CNN-BiLSTM [J/OL].
+  https://link.cnki.net/urlid/41.1092.S.20251218.1914.002
+
+      
+
+
+
+
+
+
+
+
+
+      
+
+
+ISSN 2096-4188CN 11-6037/Z
+
+2025-12-19 16:20:00 https://link.cnki.net/urlid/41.1092.S.20251218.1914.002
+
+                                CNN-BiLSTM
+
+                      1,2  2 2  2  2 3  4 1 2
+
+               1.    3100232.    310021
+                        3.   3111194.    310058
+
+                      
+             
+             CNN-BiLSTM
+             
+             MFCC
+             
+             
+             
+              MFCC 
+              MFCC 
+             CNN-BiLSTM
+              83.67%85.19% 81.58%
+              84.03%82.79%~85.31%CNN-BiLSTM  83.93% Transformer
+             CNNLSTM  BiLSTM  CNN-BiLSTM 
+             
+
+                         CNN-BiLSTM 
+                               S126
+
+            A Pig Cough Sound Recognition Method Based on CNN-BiLSTM
+
+                    FU Xiaopeng1,2, ZHOU Xin2, WANG Xingbo2, XU Xing2, WU Yue2, XIE Ronghui3, SHAN Ying4,
+                                                             YE Chunlin1, ZHOU Weidong2
+
+               (1. School of Biological & Chemical Engineering, Zhejiang University of Science and Technology, Hangzhou 310023, China; 2.
+                     Institute of Animal Husbandry and Veterinary, Zhejiang Academy of Agricultural Sciences, Hangzhou 310021, China;
+                    3. Zhejiang Center of Animal Disease Control and Prevention, Hangzhou 311119, China; 4. College of Animal Sciences,
+                                                               Zhejiang University, Hangzhou 310058, China
+
+             Abstract: Respiratory diseases are one of the common and frequently-occurring diseases in large-scale pig
+             farms. Timely and accurate detection of typical clinical symptoms of coughing in pigs is crucial for early
+             warning and prevention. This study taked the sounds of coughing, squealing, and snoring of mid-pregnancy
+             sows as the research object and proposed a pig cough sound recognition model based on the fusion of
+             convolutional neural network and bidirectional long short-term memory network(CNN-BiLSTM). The pig sou
+
+             nds data was preprocessed through methods such as fourth-order Butterworth band-pass filtering for noise
+             reduction, first-order high-pass filtering for pre-emphasis, and short-time energy endpoint detection. The Mel
+             Frequency Cepstral Coefficients(MFCC) feature parameters of the preprocessed sound data were extracted
+             using methods such as framing, windowing, and fast Fourier transform, and the model recognition
+             performance is evaluated. The results showed that the fourth-order Butterworth band-pass filter for noise
+             reduction could significantly reduce the background noise of pig coughing, squealing, and snoring sounds,
+             without distorting the waveform and retaining the main energy of the pig sound signal. The first-order
+             high-pass filter for pre-emphasis could significantly enhance the energy in the high-frequency region, weaken
+
+               2025-10-09
+               2021C0205010401110124KH5601G
+               2001-E-mail2171794909@qq.com
+               1969-E-mailchlye2005@126.com
+
+                              1968-E-mailzhouwd@zaas.ac.cn
+the energy in the low-frequency region, and narrow the frequency range. Endpoint detection could quickly
+mark the effective speech segments of the pig sounds and reduce the interference of irrelevant information to
+the recognition model. The MFCC feature parameters extracted from the preprocessed sound data can well
+reflect the acoustic characteristics of the pig sounds, and the MFCC coefficients could be used as feature
+inputs for model recognition. The established deep neural network model of CNN-BiLSTM fusion had good
+convergence. The confusion matrix showed that the correct recognition rates of pig coughing, squealing, and
+snoring sounds were 83.67%, 85.19%, and 81.58% respectively, and it has good generalization ability. The
+five-fold cross-validation showed that the average accuracy rate was 84.03%(82.79%-85.31%). The accuracy
+rate of the CNN-BiLSTM model on the test set was 83.93%, which is superior to the Transformer, CNN,
+LSTM, and BiLSTM models. Therefore, the CNN-BiLSTM model proposed in this study has good
+performance in recognizing pig coughing sounds and can provide a new method for the early detection of
+respiratory diseases in pigs.
+Key words: Pig cough sounds; CNN-BiLSTM detection model; Characteristic parameters; Confusion matrix;
+Five-fold cross-validation
+
+      PRRS
+[1][2-4]
+
+
+
+
+      VAN HIRTUM [5]
+""""
+ 92% 21%
+[6]Power spectral density,PSD PSD 
+ C 
+ 83.4% 83.1%[7]
+GRU  10 dB 
+82.41%[8-10]
+
+CNN-BiLSTM
+
+ MFCC 
+
+
+1
+
+1.1
+       2024  10  10  70 kg3
+
+5 
+M18  0.5 m 1
+ 44 100 Hz 16  24 h 30 min  wav
+
+ 1 677  493  1 184 
+ 810  374 
+                                                             1 
+                                               Fig.1 Schematic diagram of pig sound collection
+
+1.2
+
+1.2.1  
+
+
+
+[11]
+
+     [12]
+
+flfh-3 dB 
+
+
+
+                  1
+      |()| =
+                    1 + (2-02)2                                                                 (1)
+
+     0 = lh= h - l
+      100 ~2 000 Hz
+
+ 100 ~2 000 Hz 44.1 kHz
+
+1.2.2  
+
+[13]
+
+          () = 1 - -1                                                                           (2)
+
+     () 0.95~0.97 0.97
+
+1.2.3  
+
+Short-time energy,STE
+
+[14]
+
+       25 ms 10 ms  25 ms  10 ms 
+
+
+      RMS
+
+      ()  =  1    -=10  2(  +    )                                                              (3)
+
+                
+
+     () n 2( + ) n+m 
+
+     [15]
+
+       =  + 0.5                                                                                 (4)
+
+        
+
+1.3
+
+     MFCC[16]MFCC 
+
+
+
+MFCC 
+
+MFCC 
+
+ 2 
+                                                           2 MFCC 
+
+                                                 Fig.2 Flow chart of MFCC feature extraction
+
+       25 ms 10 ms 
+
+
+
+
+  () = 0.54 - 0.46  (2) , 0     - 1                (5)
+
+                                               -1
+
+
+
+
+  () = ( + )(), 0     - 1                          (6)
+
+() i Mi
+
+[17]
+
+    () = =-11 ()-2                                 (7)
+
+FFT  512()()
+
+ FFT [18]
+
+  () = |()|2 = Re[()]2 + Im[()]2                   (8)
+
+[19]
+
+
+
+    () = =-11 () ()                                (9)
+
+()Mel 
+
+
+
+    () = (=-11 ()())                               (10)
+
+()
+
+DCT MFCC 
+
+    =  -=10  ()    ((+12))  ,  0   <               (11)
+
+                          
+
+ 24 MFCC 
+
+1.4 CNN-BiLSTM
+       CNN[20]LSTM[21]
+
+BiLSTM[22] CNN  BiLSTM 
+ BiLSTM CNN-BiLSTM
+
+
+       MFCC CNN 
+ CNN 
+BiLSTM 
+
+ ReLU 
+
+       2  1  32 3×3 2 
+64 3×32  2×2 
+ BiLSTM 
+ softmax 
+ 3 
+
+ 3 CNN-BiLSTM 
+
+Fig.3 Structure of CNN-BiLSTM pig cough sound recognition model
+
+ LSTM BiLSTM  LSTM 
+
+ LSTM 
+
+       CNN  = [1, 2, . . . , ]
+
+-1
+
+
+
+
+ = (, -1; )                                                      (12)
+
+ =LSTM(, +1; )                                                   (13)
+
+ = [; ]                                                          (14)
+
+      Wlstm LSTM Wlstm LSTM 
+       LSTM 
+
+       LSTM itftot
+
+
+ tanh 
+
+
+
+
+ 0  1 
+ tanh 
+
+       BiLSTM 
+
+
+1.5
+       Python 3.10  TensorFlow 2.12
+
+ NVIDIA RTX 3 080 GPU  Windows 11
+      1 677 /8:1:1
+
+ 1 341  395  946 
+ 168  49  119  168 
+ 49  119 
+
+      
+
+ CNN-BiLSTM 
+"+" 5 
+
+
+
+       0.001 32 100  Adam 
+ Early Stopping
+[23]
+
+
+
+      {((), ())}= 1() MFCC
+() OneHot  CNN BiLSTM 
+
+
+
+     () = cnn((); cnn)        (15)
+
+     () = Bilstm((); Bilstm)  (16)
+
+     ()CNN ()cnnCNN ()
+
+BiLSTM ()BilstmBiLSTM 
+
+      softmax 
+
+     () = (() + )             (17)
+
+     () softmax fc
+
+ 
+
+     
+
+
+
+      ()() = - =1  ()()       (18)
+
+      ()()( )
+
+1.6
+
+     [24]
+
+
+
+F1 
+      Accuracy
+
+
+
+      + 
+      =  +  +  +              (19)
+
+     Recall""
+
+     
+      =  +                    (20)
+
+     Precision""
+
+     
+      =  +                    (21)
+
+     F1 F1-score
+
+      ×                       (22)
+     1 = 2 ×  + 
+
+     TP""TN""
+
+FP""FN""
+
+2
+2.1
+       4 
+
+ 1.0 ~1.2 s 0.6 ~1.2 s 0.4 ~0.8 s
+
+
+
+ab cd ef 
+a and b are the waveforms before and after noise reduction of the coughing sound of pigs, c and d are the waveforms before and after noise reduction of
+the screaming sound of pigs, e and f are the waveforms before and after noise reduction of the snoring sound of pigs.
+
+                                                 4 
+                Fig.4 the comparison waveforms of various sounds samples of pigs before and after noise reduction
+
+2.2
+       5 
+
+ 0~0.2 s0.4~0.6 s  1.0~1.2
+s  0.2~1.2 s 
+ 0.4~0.8 s 
+
+       6 
+
+
+a b c 
+a is the waveform diagram of the coughing sound of the pigs after pre-emphasis, b is the waveform diagram of the screaming sound of the pigs after
+pre-emphasis, c is the waveform diagram of the snoring sound of the pigs after pre-emphasis.
+
+                                                    5 
+                            Fig.5 Waveform diagrams of various sounds samples of pigs after pre-emphasis
+
+ab cd ef 
+a and b are the MEL spectrograms before and after the pre-emphasis of the pigs coughing sound, c and d are the MEL spectrograms before and after the
+pre-emphasis of the pigs screaming sound, e and f are the MEL spectrograms before and after the pre-emphasis of the pigs snoring sound.
+
+                                            6 
+                      Fig.6 MEL spectrograms of various sounds samples of pigs before and after pre-emphasis
+
+2.3
+       7 
+
+ 0~0.2 s1.0~1.3 s 
+ 0.8~1.1 s 
+ 0.4~0.8 s 
+
+
+ab cd ef 
+
+a and b are the waveform diagrams and energy curves of the pigs coughing sound after endpoint detection, respectively; c and d are the waveform
+diagrams and energy curves of the pigs screaming sound after endpoint detection, respectively; e and f are the waveform diagrams and energy curves of
+the pigs snoring sound after endpoint detection, respectively.
+
+                                                    7 
+                           Fig.7 the effect diagrams of endpoint detection for various sounds samples of pigs
+
+2.4
+       12  MFCC  8  MFCC 
+
+X  MFCC Y Z  MFCC 
+
+ MFCC 
+
+
+a  MFCC b  MFCC c  MFCC 
+a is the MFCC feature map of a pigs coughing sound, b is the MFCC feature map of a pigs screaming sound, c is the MFCC feature map of a pigs snoring
+
+sound.
+
+                               8  MFCC 
+
+        Fig.8 MFCC feature maps of various sounds samples from pigs
+
+2.5
+2.5.1   9  100  F1 
+ 9a 
+ 70  9b 
+ F1  70 
+ Early Stopping 
+
+        a                     b
+
+        (a)Loss change curve  (b)Curves of changes in various indicators of the validation set
+
+         9 
+
+                            Fig.9 The performance curves of the model on the training set and validation set
+
+2.5.2   10 
+ 83.67% 85.19%
+ 81.58% 83.93% CNN-BiLSTM 
+
+
+ CNN-BiLSTM 
+
+
+                                                   10 CNN-BiLSTM 
+
+                                      Fig.10 Confusion matrix of the CNN-BiLSTM model on test set
+
+2.5.3   CNN-BiLSTM "
++"5-fold cross-validation[25]1
+2 5 3 1 
+ 4  5 
+4 F1 
+ 1  5 
+ 82.79% ~85.31% 84.03%
+ F1  CNN-BiLSTM 
+
+
+                               1                                                                 %
+                       Tab.1 5-fold cross-validation results                                   F1 
+                                                                                              F1score
+      Batch                                                   
+                                                               Recall
+                       Accuracy          Precision
+
+        1  Fold 1      83.68             82.86                83.31                           83.09
+        2  Fold 2      82.79             81.36                82.14                           81.75
+        3  Fold 3      83.87             83.34                83.58                           83.46
+        4  Fold 4      84.50             84.01                84.43                           84.22
+        5  Fold 5      85.31             84.63                84.89                           84.76
+   Average value       84.03             83.24                83.67                           83.46
+ Standard deviation    0.84              1.12                 0.95                            1.03
+
+2.5.4   CNN-BiLSTM 
+
+ CNNLSTMBiLSTM  Transformer[26]
+
+
+
+ 2  2 Transformer  83.65%
+
+CNN 
+
+CNN-BiLSTM  BiLSTMLSTM  CNN 
+
+ 83.93% 83.21% 83.63%
+
+F1  83.42%CNN-BiLSTM  CNN-BiLSTM 
+
+
+
+                                   2 
+             Tab.2 Comparison of recognition performance of different models on the test set
+
+ Model       /%        /%         /%                F1 /%                                     /s
+             Accuracy  Precision    Recall          F1score   /MBModel size                    Test time
+
+CNN-BiLSTM   83.93     83.21      83.63             83.42              3.71                   0.49
+
+Transformer  83.65     83.06      83.48             83.27              4.67                   0.65
+
+BiLSTM       81.16     80.32      80.76             80.54              3.54                   0.57
+
+LSTM         80.71     80.11      80.59             80.35              2.98                   0.52
+
+CNN          79.68     79.13      79.51             79.32              3.23                   0.47
+
+3
+
+      
+
+
+
+
+
+      
+MFCCMFCC
+MFCC
+MFCCCNNBiLSTM
+BiLSTMCNN-BiLSTM
+F170
+
+83.67%85.19%81.58%CNN-BiLSTM
+84.03%82.79%~85.31%
+
+
+       CNNLSTMBiLSTMCNN-BiLSTM  Transformer 
+CNN-BiLSTM  F1 
+83.93%83.21%83.63% 83.42% CNN-BiLSTM 
+ BiLSTMLSTM  CNN 
+ BiLSTMLSTM  CNN CNN-BiLSTM  0.49
+s CNN  0.47 s
+
+       CNN-BiLSTM 
+
+
+[1] , , . [J]. , 2024(6): 94-96.
+
+WANG A J, YANG L F, WANG J. Research on common respiratory diseases in winter and their prevention and
+
+control measures in pig farming[J]. Modern Animal Husbandry Science & Technology, 2024(6): 94-96.
+
+[2] , , , . [J]. , 2025, 42(7):
+
+68-70.
+
+SUN Y, ZHAO L P, XUAN S H, et al. Study on epidemiology, diagnostic methods and prevention and control
+
+measures of porcine reproductive and respiratory syndrome[J]. Swine Industry Science, 2025, 42(7): 68-70.
+
+[3] , . [J]. , 2023(4): 40-42..
+
+CHEN L, WEN B. Etiology and diagnosis of pig cough[J]. Swine Industry Outlook, 2023(4): 40-42.
+
+[4] . [J]. , 2023, 25(8): 7-8.
+
+XU Y G. Differential analysis of common respiratory diseases in pigs based on sound[J]. China Animal Health, 2023,
+
+25(8): 7-8.
+
+[5] HIRTUM A V, GUARINO M, COSTA A, et al. Automatic detection of chronic pig coughing from continuous registration
+
+in field situations[C]//Proceedings of the 5th International Workshop on Models and Analysis of Vocal Emissions for
+
+Biomedical Applications, 2003: 251-254.
+
+[6] , , , . [J]. , 2016, 39(4): 681-687.
+
+XU Y N, SHEN M X, YAN L, et al. Research of predelivery Meishan sow cough recognition algorithm[J]. Journal of
+
+Nanjing Agricultural University, 2016, 39(4): 681-687.
+
+[7] . [D]. : , 2021.
+
+XIONG Z A. Design of cough monitoring system in finishing piggery[D]. Harbin: Harbin Engineering University, 2021.
+
+[8] , , .  CNN [J]. , 2025, 46(4): 270-282.
+
+FU X, LI X T, GOU Y. A CNN-based noise reduction method for acoustic logging while drill instrument signal
+
+       [J]. Chinese Journal of Scientific Instrument, 2025, 46(4): 270-282.
+[9] , , , .  CNN-SVM [J]. (
+
+), 2025, 38(4): 18-27.
+
+REN J H, ZHAN X, FAN T, et al. Speaker recognition based on multi-channel feature fusion with CNN-SVM       [J].
+
+Journal of Sichuan University of Science & Engineering(Natural Science Edition), 2025, 38(4): 18-27.
+
+[10] SHAH G, SHARMA A, JOSHI D, et al. A novel AVOA optimized DNN-BiLSTM-attention model for improved gesture
+
+classification using electromyography signal[J]. Results in Engineering, 2025, 27: 105648.
+[11] ZHANG H C, LI P C, JIN H Q, et al. Nonlinear wave energy dissipator with wave attenuation and energy harvesting at
+       low frequencies[J]. Ocean Engineering, 2022, 266: 112935.
+
+[12] JIMÉNEZ-ZACARÍAS L L, CAMPOS-CANTÓN I. Lorenz system manufacturing with a butter worth filter[J].
+       Integration, 2025, 103: 102386.
+
+[13] KUMAR A, MAKHDOOMI B S, KUSHWAHA A K. Tunable current-mode first-order resistorless multifunction filter
+       using CMOS DX-MOCCII[J]. Russian Microelectronics, 2024, 53(1): S54-S62.
+
+[14] XU W Z, MO H Q, TIAN L F, et al. An endpoint-detection algorithm of surface electromyography insensitive to
+       electrocardiogram interference[J]. Journal of Biomedical Engineering, 2018, 35(6): 953-958.
+
+[15] SAKTHIVEL K M, NANDHINI V. Adaptive threshold selection for extreme value analysis to predict return levels of
+       ozone layer depletion[J]. Natural Hazards, 2025, 121(11): 12741-12766.
+
+[16] SENATORI T, NARDONE D, GIUDICE L M, et al. Explainable instrument classification: From MFCC mean-vector
+       models to CNNs on MFCC and mel-spectrograms with T-SNE and GRAD-CAM insights[J]. Information, 2025, 16(10):
+       864-864.
+
+[17] AMIRIAN B, BRAHME A, LEBENSOHN R A, et al. A generalizable machine learning-assisted fast Fourier transform
+       algorithm to simulate the large strain phenomena in polycrystalline materials[J]. International Journal of Plasticity, 2025,
+       192: 104404.
+
+[18] JIANG Y, WANG X, ZHAO N, et al. Random vibration analysis of linear structures under time-varying coherent
+       nonstationary excitations: An enhanced evolutionary spectral method[J]. Mechanical Systems and Signal Processing,2025,
+       237: 113062.
+
+[19] , , , . [J]. , 2024, 41(11): 123-126.
+       LIAO H, SHEN X J, PAN Y B, et al. Simulation of substation switch fault monitoring based on Mel filter[J].
+       Computer Simulation, 2024, 41(11): 123-126.
+
+[20] ZHANG S Y, AN W T, LAN T L, et al. An analysis of the effects of various polarimetric features and decomposition
+       algorithms on PolSAR image classification through CNN[J]. Results in Engineering, 2025, 28: 107225.
+
+[21] LIU W, SHEN H, HU Y, et al. Polar ship trajectory prediction based on Kolmogorov-Arnold networks and LSTM[J].
+       Ocean Engineering, 2025, 336: 121702.
+
+[22] LI X L, HUO T M, ZHU L Q, et al. Modified BiLSTM network for interval prediction based on Aerospace Load
+       System[J]. Neurocomputing, 2025, 651: 130887.
+
+[23] TOGKOUSIDIS A, STAMATAKIS A, GASCUEL O. Accelerating maximum likelihood phylogenetic inference viaearly
+       stopping to evade(over-) optimization[J]. Systematic Biology, 2025: syaf043.
+
+[24] CHOI J. Efficient prompt optimization for relevance evaluation via LLM-based confusion matrix feedback[J]. Applied
+       Sciences, 2025, 15(9): 5198.
+
+[25] TEODORESCU V, OBREJA BRAOVEANU L. Assessing the validity of k-fold cross-validation for model selection:
+       Evidence from bankruptcy prediction using random forest and XGBoost[J]. Computation, 2025, 13(5): 127.
+
+[26] AHN J M, JEONG W, LEE H, et al. Hyperspectral imaging-based land use classification using a hybrid Convolutional
+       Neural network-vision transformer model[J]. Environmental Technology & Innovation, 2025, 39: 104317.
+

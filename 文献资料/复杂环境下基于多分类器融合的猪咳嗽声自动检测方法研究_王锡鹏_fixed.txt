@@ -1,0 +1,2257 @@
+     S828                                    10224     
+                                               S211401019  
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+                                  
+                    
+            
+ 
+ 
+ 
+
+Classified Index S828                                     Code10224 
+Confidential  (yes/no) no                                  No. S211401019  
+ 
+ 
+ 
+Dissertation for the Master Degree 
+ 
+ 
+Research on automatic detection method 
+of pig cough sound based on multi-
+classifier fusion in a complex 
+environment 
+ 
+Candidate: Wang Xipeng 
+Supervisor : Prof. Shen Weizheng 
+Degree Category:  Master of Science in Engineering  
+College: College of Electrical Engineering  and Information  
+First level discipline: Computer Science and Technology  
+Second level discipline: Computer Science and Technology  
+ 
+Harbin   China 
+June    2024
+   
+1.  ........................................................................................................ 1 
+1.1  ............................................................................... 1 
+1.2  ............................................................................... 2 
+1.2.1  ..................................................................... 2 
+1.2.2  ............................................................. 3 
+1.2.3  ................................................................. 6 
+1.3  ....................................................................... 6 
+1.4  ....................................................................... 8 
+2.  ......................................... 10 
+2.1  ................................................ 10 
+2.2  ............................................ 11 
+2.3  ............................................................................. 12 
+2.3.1  ................................................................... 12 
+2.3.2  ....................................................... 13 
+2.4  ........................................................ 17 
+2.4.1  ................................................................... 18 
+2.4.2  ........................................................................... 18 
+2.4.3  ................................................................... 19 
+2.5  ......................................................................................... 19 
+3.  ......................................... 20 
+3.1  ..................................................................... 20 
+3.1.1  ........................................................................... 20 
+3.1.2  ....................................................... 21 
+3.2  ................................ 22 
+3.3  ............................................................................. 24 
+3.3.1  ........................................................................... 24 
+3.3.2 ............................................... 24 
+3.3.3  .......................... 25 
+3.3.4  .......................... 27 
+3.3.5  ...................................... 29 
+3.4  ......................................................................................... 30 
+4.  ............................................. 31 
+4.1  ......................................................................... 31 
+4.1.1  ................................................................................... 31 
+4.1.2  ................................................................................... 32 
+4.2  ......................................................................................... 33 
+4.2.1  ................................................................................... 33 
+4.2.2  ................................................................................... 34 
+4.2.3  ........................................................................... 35 
+4.3  ......................................................................................... 35 
+4.3.1  ................................................................... 36 
+4.3.2  ................................................................... 36 
+4.3.3  ................................................................... 38 
+4.3.4  ....................................................................... 40 
+4.4  ............................................................................. 40 
+4.5  ............................................................................. 41 
+4.5.1  ........................................................................... 41 
+4.5.2 ............................................... 42 
+4.5.3  ....................................................... 43 
+4.5.4  ....................................................... 46 
+4.6  ......................................................................................... 47 
+5.  ............................. 48 
+5.1  ......................................................................... 48 
+5.1.1  .............. 48 
+5.1.2  .......................... 49 
+5.2  ......................................................................... 49 
+5.2.1 ........................................... 49 
+5.2.2  .................. 51 
+5.3  ......................................................................... 51 
+5.4  ......................................................................... 52 
+5.5  ............................................................................. 53 
+5.5.1  ................................................... 53 
+5.5.2  ................................................... 53 
+5.5.3  ............................................................... 55 
+5.6  ......................................................................................... 56 
+6. .......................................................................................... 57 
+6.1  ................................................................................................. 57 
+6.2  ................................................................................................. 58 
+ ................................................................................................... 59 
+   
+ 
+ I 
+   
+ 
+  
+ 
+
+
+  
+
+
+  
+
+
+
+  
+1  
+ 7-40  316  25  10  
+ 3408  3133  
+  
+  
+2  
+  
+ 
+  97.6%
+ 75.8% 
+3 
+
+
+  1%  
+
+
+  -  
+ 
+ 96.0% 
+  
+
+
+ 
+ 
+ II 
+
+  
+ 
+      
+ 
+Abstract 
+ 
+ III 
+Research on automatic detection method of pig cough 
+sound based on multi-classifier  fusion in a complex 
+environment  
+Abstract 
+ 
+Respiratory disease is one of the most common  of diseases in intensive pig breeding mode. Pig 
+respiratory diseases have the characteristics of strong infectivity and high mortality. If they cannot 
+be detected in time, it is easy to cause large -scale infection and seriously affect economic benefits. 
+The traditional way of manual inspection is ineff icient and prone to missed detection. With the help 
+of contact less acoustic intelligent perception technology, monitoring the sound in the pig house and 
+recognizing the cough sound of pigs can realize the ear ly warning of pig respiratory diseases, which 
+is of great significance to improve pig production and realize healthy pig breeding.  
+The sound environment of the real pig house is very complex, including the interference s of 
+environmental control equipment, feeding machines and other strong noises. At the same time, 
+multiple pig screams  and pig coughs may be overlapped , which brings great challenges to high -
+precision pig cough detection. At present, most of the existing methods base on manually segmented  
+single sound dataset, and do not consider the complex situations such as the overlap of multiple 
+sounds. Although good classification results are achieved, there is still a certain gap between  them 
+and the detection results in the real pig house environment. To solve this problem, this paper studied 
+the pig cough automatic detection method based on multi -classifier fusion in  a complex environment, 
+established a continuous sound dataset in a complex environment, and studied the multiple voice 
+activity detection algorithm based on adaptive dynamic threshold and the classification algorithm 
+based on multi -classifier fusion for the complexity of pig house environment. The main work of this 
+paper is as follows : 
+(1) A continuous sound dataset in a complex piggery environment is established , including 
+continuous cough segments and continuous noncough segments.  There are 316 continuous cough 
+segments, 7 -40 seconds per segment, and 25 continuous noncough segments, 10 minutes per 
+segment.  The dataset contains a total of 3408 coughs and 3133 noncoughs. With the help of 
+veterinarians , the onset and offset  of all coughs in the dataset are annotated. Finally, the time -
+frequency features of this dataset are statistically an alyzed, and the complexity of the data is 
+explained. This dataset provides data support for subsequent research.  
+(2) A multiple voice activity detection  algorithm based on adaptive dynamic threshold is 
+constructed. The noise environment of the real pig house is complex and changeable, and the sound 
+overlap often occurs, which leads to the obvious limitations of the traditional voice activity detection  
+ 
+ 
+ IV 
+method. In this paper, a new voice activity detection  algorithm is proposed, which can adaptively 
+adjust the number of voice activity detection  and its threshold value according to the specific 
+complex situation, the signal to noise ratio of single voice segment s and the duration of single voice 
+segment s. The experimental results show that the proposed method achieves a cough detection rate 
+of 97.6%, which is significantly higher than that of the traditional voice activity detection  method 
+of 75.8%.  
+(3) The pig cough sound recognition method based on multi -classifier fusion is constructed . 
+Considering the complexity of cough sound data and the imbalance of noncough sound data, the 
+data augmentation  method is studied to increase the diversity of data. The data is augment ed from 
+the perspectives of sound and image features. The results show that the performance  of sound data 
+augmentation  and image data augmentation  are close, and the performance  of noise addition is the 
+best, which can improve the accuracy by about 1%.  To solve the problem of sound classification in 
+a complex environment, a c lassification model based on multi -classifier fusion is constructed to 
+improve the classification accuracy. The key to multi -classifier fusion method  is to construct a set 
+of base classifier s with good performance and certain diversity. In this paper, multiple base 
+classifier s are constructed by studying the feature s of multiple different domains and multiple 
+different types of classification models. A multi -classifier selection algorithm based on accuracy -
+diversity metrics is proposed to optimize the selec tion of all base classifiers and select the optimal 
+base classifier fusion scheme. The experimental results show that through data augmentation  and 
+multi-classifier fusion , the classification accuracy of the model in a complex environment can be 
+effectively improved, and the accuracy can reach 96.0%.  Finally, for the results of automatic 
+detection of pig cough sound, a continuous cough judgment algorithm is proposed to realize the 
+recognition of continuous cough.  
+In summary, this paper constructs a multiple voice activity detection  algorithm based on 
+adaptive dynamic threshold to achieve high -precision automatic detection and segmentation of the 
+vocal segment in continuous sound, and constructs a multi -classifier fusion algorithm to achieve 
+high-precision cough classification in a complex environment . This study provides technical means 
+for the automatic detection of pig cough in the real pig house environment, and provides effective 
+monitoring means and technical s olutions for healthy pig breeding.  
+ 
+Key words:  Pig, Cough sound recognition , Audio detection , Ensemble  learning , Healthy breeding  
+ 
+Candidate: Wang Xipeng  
+Speciality : Computer Science and Technology  
+Supervisor: Prof. Shen Weizheng 
+  
+  
+ 
+ 1 
+1.  
+1.1  
+ 2022 
+ 5541    
+ [1, 2]  
+ [3]
+
+
+
+ 30%-70% 10%-30%
+
+[4]
+  
+
+ 
+
+
+
+
+[5]  
+
+   
+ 
+
+  
+
+
+
+  
+   
+ YQ2023C012 
+ 32172784   
+ 
+ 
+ 
+ 
+ 2 
+1.2   
+    
+   
+1.2.1   
+    
+  
+ 
+   
+ MFCC  
+  C  FCM
+ [6] 
+ [7]   
+ [8] BARK 
+ [9] 
+  
+ 
+ [10]  [11] 
+MFCC  Gammatone  GFCC  MFCC
+  GFCC  FCM 
+ [12]  Teager   [13]
+  [14] 
+    [15, 16] 
+  24  
+ [17] 
+      
+ [18]
+
+ [19] 
+ [20]    [21]
+ [22]
+
+ 
+  
+  
+ Gammatone  Gabor  LTSV  
+  
+ 
+ 3 
+ DNN [23]Khalid Hasam 
+  
+  
+ [24]Mihalache Serban  MLPs RNN
+ CNN CNN  MLPs  [25]Li Shu 
+  LSTM 
+ [26, 27] Zhang Xiao lei  LSTM 
+ ROC  [28] Q 
+CQT DNN  [29, 30] 
+  [31]Korkmaz Yunus 
+ MFCC  LSTM 
+  [32]Mu Wenpeng 
+ Transformer  [33]Sharma Shilpa  ANN
+ K   [34, 35] Heo Youngjun 
+ [36] CNN 
+ [37]  MFCC  GFCC  
+  [38]Li Nan 
+   
+    [39]Zhang Weiwei
+   [40]
+
+  
+ 
+  
+ 96%[41] 
+
+   SVM
+ LSTM   LSTM  
+
+ Web  [42]  
+   
+1.2.2   
+
+ 
+ D Moshou A V Hirtum 
+
+ 
+ 
+ 4 
+ PSD [43]
+ PNN[44] FCM[45]  12 
+   FCM 
+[45] 94% [46]V Exadaktylos 
+   [43-46] 
+
+ 85% [47]
+    
+ 
+ Guarino M    
+ 22  5 *6 
+  44   159   433  
+  DTW
+ 90%[48, 49]Y Chung  22 
+ 1.8 *4.8  
+
+  300  200  
+ MFCC  SVDD
+ 94% SRC
+ 
+  91%[50] 
+
+  
+
+   MFCC  PSD  
+HMMFCMSVMDTW  HMM [51]
+  2.5  1.2  1.5
+   
+ 
+ FCM  
+[52]  
+  MFCC  LPCC  HMM
+  MFCC  MFCC  
+ 93%[53, 54]   1640   820
+ 150  120  100  90  360 
+  MFCC  MFCC  (VQ)SVM  HMM 
+ HMM  SVM  HMM-SVM   HMM-SVM 
+
+  
+ 
+ 5 
+ 94.21%[55, 56] 6
+*8  6-8    1095  
+ 375  308  412  
+   MFCC  MFCC 
+ SVM  SVDD 
+ [57]  2.1 *3.2  10 
+  1560  780  
+SVM  DTW  85% [58, 59]
+ 
+   
+  
+      10 
+ 5   30  1400 
+ 594 
+ 5    94.29% [60]
+
+  - BiLSTM-CTC -
+ DNN-HMM 93.24% [61-63]
+  5  5  
+ 283  1058 376  195 
+ 296     LS-SVM BiLSTM-
+CTC  BiLSTM-CTC  
+[64]  CNN    CNN 
+ 96.71%  [65]  6 
+ 2.1 *3.2    4334 
+  1353  2981  VGG16 
+ResNet34 DenseNet121  CNN  DenseNet121 
+ 93.8% [66-68]
+ 
+  
+ 
+  21  128 
+   4551  
+ 2744  1807   
+ MFCC  CNN  Softmax  SVM  96.6%
+ AlexNet 
+ 95.4% [69-71]   
+ CQT 
+ 
+ 
+ 6 
+
+
+  97.57% [72-74]
+Yin  MFCC  LPCC  AlexNet  CQT
+ 
+ 99.2% [75]Wang Buyu 
+  
+
+   99.77% [76, 77] 
+ [75]
+ 99.2% 
+[75]  
+   
+1.2.3    
+  
+1 
+    
+
+ 
+
+
+ 1/5
+ 
+  
+2   
+  
+ 
+  
+3 
+ 
+ 
+  
+1.3    
+ 
+  1-1  
+  
+ 
+ 7 
+    
+   
+1   
+  
+    
+2   
+  
+ 
+  
+3 
+ 
+ 
+LSTM  
+  
+4   
+   
+    
+  
+ 
+ 
+ 8 
+ 
+ 1-1   
+Fig.1-1 Schematic diagram of the technical flow  
+1.4   
+ 1-2 
+  
+
+  
+    
+ 
+
+    
+
+  
+ 
+ 9 
+      
+
+   
+  
+
+  
+   
+   
+     
+   
+    
+  
+ 
+ 1-2   
+Fig.1-2 Research content and arrangement of sections  
+ 
+ 
+
+ 
+ 
+ 10 
+2.   
+2.1   
+ 4 
+ 2-1   27.5  12.8  3.2
+ 12  9   4.15 m  3.6 m  3.6 m 
+ 2.75 m
+ 1.35  15 
+ 128 
+ 12 
+  13   
+ 
+ 2-1   
+Fig.2-1 Distribution map of piggery  
+ (LIQI LM320E   ) (Conexant Smart Audio HD) 
+  7   1.4 
+ 0.8  44100 Hz 16 bit .wav
+ 7  10   2-2 
+ (a) (b) (c) 
+ (d) (e)  (f)
+  
+
+ 
+ 
+ 11 
+ 
+ 2-2   
+Fig.2-2 Pig house environment and equipment layout  
+2.2   
+  Cool Edit Pro 2.1 
+   2-1 
+ 7-40  316 
+
+ 10  25  3408
+ 3133   2898   332 
+
+  
+ 2-1   
+Tab.2-1 Composition of the dataset  
+  
+  
+ 
+
+  
+
+ 
+
+ 
+  
+  316  740 s 3155 768 313 
+  25  10 min  253 2365 19 
+ 341 -- 3408 3133 332 
+
+ 
+ 
+ 12 
+2.3   
+2.3.1   
+ 2-3  (a) 7 
+(b) 11   (a)
+  (b) 
+  
+     
+ 
+ 2-3    
+Fig.2-3 Waveform of pig continuous coughs  in normal condition  
+    
+    
+   2-4  
+(a)
+ (b)
+
+
+
+ (c)
+  
+
+ 
+ 
+ 13 
+ 
+ 2-4   
+Fig.2-4 Examples of complex pig coughs 
+2.3.2   
+   
+  2-5  
+ 
+   
+
+ 
+ 
+ 14 
+ 
+a1  
+ (a1) The waveform of cough  
+a2  
+(a2) The spectrogram of cough  
+ 
+b1  
+(b1) The w aveform of complex cough  
+b2  
+(b2) The spectrogram of complex cough  
+ 
+c1  
+(c1) The waveform of groan 
+c2  
+(c2) The spectrogram of groan 
+
+ 
+ 
+ 15 
+ 
+d1  
+(d1) The waveform of scream  
+d2  
+(d2) The spectrogram of scream  
+ 
+e1  
+(e1) The waveform of knocking  
+e2  
+(e2) The spectrogram of knocking  
+ 2-5    
+Fig.2-5 Examples of waveform and  spectrogram  of partial sound  
+
+ MaxMinMeanS.D.[78, 79] 
+ 100-16000 H z
+ 2-2  2-6  
+ 2-6 
+
+ 0.48 
+
+
+  
+ 
+
+ 
+ 
+ 16 
+ 2-2    
+Tab.2-2 Statistical results of time -frequency features of different sounds  
+  
+ 
+    
+Min(s)  Max(s)  Mean(s)  S. D.  Min(Hz)  Max(Hz)  Mean(Hz)  S. D.  
+ 0.22 0.97 0.48 0.13 139.97 4478.91  613.56 424.41 
+  0.19 1.79 0.88 0.40 139.97  6933.69  823.21  654.09  
+ 0.20 1.63 0.90 0.38 139.97  1453.49  541.17  319.58 
+ 0.26 1.76 1.02 0.44 215.33 3090.01  1368.35  494.11  
+  0.19 1.62 0.59 0.31 150.73  2971.58  569.09  473.17  
+ 
+ 2-6   
+Fig.2-6 Statistical results of time -frequency features of different sounds  
+
+ 2-7 
+ 0.2-0.8 
+ 97.2% 48.7%
+ 0.97 
+ 0.2-0.97 
+ 200-600 
+ 65.5% 200-600 
+ 38.3%
+  
+  
+
+ 
+ 
+ 17 
+ 
+ 2-7   
+Fig.2-7 Data distribution of statistical features of cough and noncough  
+2.4    
+ 2-8  
+
+
+    
+ 
+
+ 
+ 
+ 18 
+ 
+ 2-8   
+Fig.2-8 The structure diagram of evaluation metrics  
+2.4.1   
+ Pwd Pmiss Pfalse  Pd
+  Nf  Nmiss  Nfalse 
+ PmissPfalse  Pd   
+ =   2-1 
+ =   2-2 
+ = 1     2-3 
+   Nwd 
+Nw  Pwd   
+ = / 2-4 
+2.4.2   
+  accuracy    recall 
+precision  F1 F1_score  TP
+ TN FN
+ FP  
+= ( + ) ( +  +  + ) 2-5 
+=  ( + ) 2-6 
+=  ( + ) 2-7 
+1_ = 2  ( ) (+ ) 2-8 
+ 
+
+ 
+ 
+ 19 
+2.4.3   
+  WER 
+
+
+       S 
+ I  D  Nc  WER
+  
+ = ( +  + )  2-9 
+  PmcPfc Pdc
+    
+
+
+ Ncc 
+Nmc   Nfc    
+ =   2-10 
+ =   2-11 
+ = 1     2-12 
+2.5   
+
+  
+1  
+  
+2 3408  3133  
+  
+3   
+
+
+  
+4    
+ 
+ 
+ 
+ 20 
+3.    
+   
+ 
+
+
+  
+  
+3.1   
+   
+  
+   
+3.1.1   
+ [80, 
+81]  
+ 6  MFCC 
+MFCC    
+3.1.1.1  
+
+ L i  yi(n) i  Ei 
+ 
+ =  
+2()
+
+=1
+3-1 
+3.1.1.2   
+
+
+   i 
+ yi(n)   Yi(n)Yi(n)={Yi(1), Yi(2),  , 
+Yi(N)}  
+ = 1
+ |()|
+
+=1
+3-2 
+ 
+ 
+ 21 
+   
+ = 1
+  1 [|()|  ]2
+
+=1
+3-3 
+3.1.1.3 MFCC   
+MFCC  MFCC 
+ MFCC   MFCC  
+ MFCC   
+3.1.1.4 MFCC   
+ MFCC  
+ [12]MFCC  
+  
+3.1.1.5   
+
+
+  i 
+ yi(n)  Yi(n)Yi(n)={Yi(1), Yi(2),  , 
+Yi(N)}  
+ = (()  1())
+2
+
+=1
+3-4 
+3.1.1.6   
+
+ 
+ 
+ i  yi(n)
+ Yi(n) Yi(n)={Yi(1), Yi(2),  , Yi(N)} 
+{ fi(1), fi(2),  , fi(N)}Yi(n) Ey Ef  
+ =
+ (  )(  )
+=1
+ (  )
+2
+=1
+3-5 
+3.1.2   
+
+ 3-1  (a)
+ (b)
+ 
+ 
+ 22 
+ TH TL(b)
+ AB 
+ AB  CD C  D
+ [80] 
+ 
+ 
+ 3-1   
+Fig.3-1 Schematic diagram of double  threshold voice activity detection  method  
+3.2   
+
+ 1
+  2 
+  
+1 2
+   
+
+3-2  K   i  
+PK  THi  TLi  i   bi
+ ai  THi  TLi T  Tmax  
+   
+
+ 
+ 
+ 23 
+ 
+ 3-2   
+Fig.3-2 The algorithm flow of proposed voice activity detection  method 
+ TH  TL
+ TH  TL N    Enoise  
+ =    3-6 
+ =    3-7 
+ a  b    a1  b1 
+  
+ Tmax    a2  b2  Tmax 
+   
+  Tmax    5 Tmax 
+ 2-2  Tmax  0.97    a  b 
+
+
+ 
+ 
+ 24 
+   Pd  
+      
+  
+0 = 1    0.2   3-8 
+ Pmiss  Pfalse   2-1  2-2  
+   Enoise  
+ E Enoise   
+ =    + (1  )   3-9 
+ [0.9, 0.98]   
+3.3   
+ 
+ 
+
+ 
+3.3.1   
+ 50   Enoise  3-9   0.92
+     5   2-2 
+ 0.22-0.97 
+ 0.2-1.1    
+3.3.2   
+ 3-1    
+    
+ 75.8% MFCC  MFCC(1) 
+ 62.0%  69.2%-75.3%  
+    22.4
+55.51516  97.6%  
+       66.7% 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 25 
+ 3-1   
+Tab.3-1 Performance comparison of different voice activity detection  methods  
+  Pwd Pmiss Pfalse  Pd 
+   75.8%  33.7%  13.0%  53.3%  
+    75.3%  34.3%  12.5%  53.2%  
+  MFCC   69.2%  43.3%  12.0%  44.7%  
+  MFCC(1) 62.0%  47.4%  14.9%  37.7%  
+    74.7%  37.0%  12.0%  51.0%  
+    72.1%  35.5%  14.6%  49.9%  
+   97.6%  13.3%  20.0%  66.7%  
+3.3.3   
+   
+ 3-3  2-3  
+  MFCC MFCC(1) 
+ 
+ 
+ 
+ 3-9    0.5  12.5 
+   
+  
+  
+  
+ 
+ a   
+(a) Detection effect of double threshold method based on energy  
+
+ 
+ 
+ 26 
+ 
+ b   
+ (b) Detection effect of double threshold method based on frequency band variance  
+ 
+c MFCC    
+(c) Detection effect of double threshold method based on MFCC inverse spectral distance  
+ 
+d MFCC(1)    
+(d) Detection effect of double threshold method based on MFCC(1)  
+
+ 
+ 
+ 27 
+ 
+e   
+(e) Detection effect of double threshold method based on spectral flux  
+ 
+f   
+(f) Detection effect of double threshold method based on spectral slope  
+ 3-3    
+Fig.3-3 The effect of different voice activity detection  methods in simple environment  
+3.3.4   
+ 
+ 3-4 
+
+ 
+   
+    
+    (a)
+  23   23 
+  
+
+ 
+ 
+ 28 
+ 23   
+ 
+a  
+(a) Detection effect of double threshold method based 
+on energy  
+b  
+ (b) Detection effect of double threshold method 
+based on frequency band variance  
+ 
+c MFCC   
+(c) Detection effect of double threshold method based 
+on MFCC inverse spectral distance  
+d MFCC(1)   
+(d) Detection effect of double threshold method based 
+on MFCC(1)  
+ 
+ 
+ 
+
+ 
+ 
+ 29 
+ 
+e  
+(e) Detection effect of double threshold method based 
+on spectral flux  
+f  
+(f) Detection effect of double threshold method based 
+on spectral slope  
+ 3-4   
+Fig.3-4 The effect of different voice activity detection  methods in complex environment  
+3.3.5   
+ 97.6% 
+   3-5 
+
+ 
+ 
+ 3-5   
+ 
+ 3-5    
+Fig.3-5 Example of the cause of missed detection of proposed voice activity detection  method  
+
+ 
+ 
+ 30 
+3.4   
+    
+1  
+ 75.8% 
+   
+2   
+  97.6% 
+  75.8%
+  
+ 
+ 
+ 
+ 31 
+4.    
+   
+ 
+  
+ MFCC  SVM 
+
+ 
+
+
+  
+4.1    
+
+
+ ImageNet  AudioSet 
+
+ [82]
+
+  
+4.1.1   
+
+  
+4-1  1
+(b) 2  
+ (c)  3
+ (d) 4
+ (e)  5
+ (f)  6
+ (g) 
+ 
+ 
+ 32 
+ 
+ 4-1   
+Fig.4-1 Examples of image augmentation  methods  
+4.1.2   
+
+ [83]
+ 4-2 
+ 1 (b)
+ 2 (c) 3
+ (d) 4
+  (e) 5 
+ (f) 
+ 
+ 4-2   
+Fig.4-2 Examples of sound augmentation  methods  
+
+ 
+ 
+ 33 
+4.2   
+  
+
+ MFCC  PSD
+ CQT  MFCC 
+  
+4.2.1   
+
+
+
+  
+4.2.1.1   
+
+
+ 4-3 
+ FFT
+
+
+MATLAB R2023b  mfcc  
+ 
+ 4-3 MFCC   
+Fig.4-3 Extraction process of MFCC  
+4.2.1.2   
+
+
+  
+ L  i  ()  
+
+ 
+ 
+ 34 
+() = 1
+ |((()))|2 4-1 
+window  fft   MATLAB 
+R2023b  pwelch   
+4.2.2   
+
+
+
+
+ CQT MFCC   
+4.2.2.1  
+
+
+
+ MATLAB R2023b 
+ spectrogram   
+4.2.2.2  
+
+
+
+
+  MATLAB R2023b  melSpectrogram  
+ 
+4.2.2.3 CQT  
+CQT  Q   CQT
+
+ QQ   
+ = 
+
+= 
++1  
+= 1
+2
+1
+  1
+,  = 0,1,    1 4-2 
+  = 12
+1
+ 1 k  B 
+ CQT   
+() = 1
+
+ ()()
+2
+
+
+1
+=0
+4-3 
+ 
+ 
+ 35 
+ = 
+
+
+,  = 0,1, . . . ,   1 ()
+  MATLAB R2023b  cqt CQT  
+4.2.2.4 MFCC   
+MFCC 
+
+
+ MATLAB  imagesc   
+4.2.2.5   
+
+
+
+
+   ()  2()  
+
+|()|
+2
+|| 
+
+
+<  4-4 
+() ()  ()
+ 4-4  ()  
+(, ) =  (),  ,()  = 1
+  () (  
+ ) 
+
+
+4-5 
+ a  b 
+ MATLAB R2023b  cwtfilterbank 
+  wt   imagesc 
+  
+4.2.3   
+
+
+
+ [84-86]
+  
+4.3   
+
+ 
+ 
+ 36 
+
+   LSTM  
+K KNN RF
+AudioSet  ImageNet  AudioSet 
+  
+4.3.1   
+
+ SVMKNN  RF 
+4.3.1.1   
+SVM  20  90  [87]
+  SVM 
+
+ SVM 
+    
+4.3.1.2 K   
+KNN  Cover  Hart  [88]
+ K 
+ K  KNN  K 
+ K 
+  K KNN   
+  
+4.3.1.3   
+RF  [89] Breiman  [90]RF 
+
+  RF 
+  
+4.3.2   
+ AudioSet 
+ 
+
+   
+ 
+ 
+ 
+ 37 
+4.3.2.1   
+ [84, 85]
+ 1D-CNN  1D-CNN-LSTM 4-1 
+Cov1D  Maxpool  FC  k 
+c  s  p  d  1D-CNN 
+
+ ReLU  Softmax  1D-CNN-LSTM  1D-CNN 
+ BiLSTM  Dropout 
+ Softmax   
+ 4-1    
+Tab.4-1 Self-built one -dimensional convolutional neural network framework  
+1D-CNN 1D-CNN-LSTM 
+  
+Cov1D ( k=11, c=64, s=5, p=5) Cov1D ( k=11, c=64, s=5, p=5) 
+    
+Cov1D ( k=3, c=64, s=1, p=2, d=2) Cov1D ( k=3, c=64, s=1, p=2, d=2) 
+ ReLU  ReLU 
+Maxpool  (k=4, s=4) Maxpool  (k=4, s=4) 
+Cov1D ( k=3, c=128, s=1, p=2, d=2) Cov1D ( k=3, c=128, s=1, p=2, d=2) 
+ ReLU  ReLU 
+Maxpool  (k=4, s=4) Maxpool  (k=4, s=4) 
+Cov1D ( k=3, c=256, s=1, p=2, d=2) Cov1D ( k=3, c=256, s=1, p=2, d=2) 
+ ReLU  ReLU 
+Maxpool  (k=4, s=4) Maxpool  (k=4, s=4) 
+Cov1D ( k=3, c=512, s=1, p=2, d=2) BiLSTM (  200) 
+ ReLU Dropout (50%)  
+Maxpool  (k=4, s=4) FC (2)  
+  Softmax  
+FC (512)   
+FC (2)   
+Softmax   
+  
+4.3.2.2  AudioSet   
+AudioSet  Google  [91]
+ 527  5000 
+ [86] AudioSet 
+ Res1dNet31  Res1dNet 51
+ 
+ 
+ 38 
+ 2
+  
+Res1dNet  LeeNet [85] LeeNet  11 
+ 3    2 
+  LeeNet   3 
+  1  2
+ 14  24  Res1dNet31
+ Res1dNet 51 
+4.3.3   
+
+ ImageNet  AudioSet   
+4.3.3.1  ImageNet   
+ImageNet  ImageNet 
+ ImageNet Large -Scale Visual Recognition Challenge (ILSVRC) [92] 1000
+ 100 
+   AlexNet [93]GoogLeNet [94]Vgg16 [95]Vgg19 [95]
+InceptionV3 [96]ResNet18 [97]ResNet50 [97]SqueezeNet [98]Xception [99]DenseNet201 [100]
+ MobileNetV2 [101]  ImageNet
+  
+  
+1AlexNet  ImageNet   8 
+ 5  3  AlexNet  ReLU  Dropout 
+   GPU  
+  
+2GoogLeNet  InceptionV 1 22  GoogLeNet
+ Inception  
+  
+3Vgg   3*3  
+    Vgg16Vgg19 
+Vgg 
+  
+4InceptionV3  Google  Inception   48 
+ InceptionV3  Batch Normalization 
+  
+5ResNet 
+ 
+ 
+ 
+ 39 
+  ResNet  ResNet18 ResNet50  
+6SqueezeNet    Fire 
+  
+  
+7Xception  InceptionV3 
+  
+8DenseNet201  DenseNet   201 
+
+  
+9MobileNetV2 
+ 
+  
+4.3.3.2  AudioSet   
+[86] AudioSet 
+ CNN10CNN14ResNet22ResNet38MobileNetV1
+ MobileNetV2    mixup [102] 
+ [86] Wavegram-CNN  Wavegram-
+Logmel -CNN  AudioSet 
+  
+1CNN10  CNN14  Vgg  10  14 CNN10
+ CNN14  4  6 
+ 3*3  Batch Normalization  ReLU  2*2 
+ 
+ Sigmoid  
+  Dropout   
+2ResNet22  ResNet38  ResNet  
+ 22  38 ResNet22  ResNet38  8  16  ResNet  
+  3*3 
+ 2*2    
+ Sigmoid   
+3MobileNetV1  MobileNetV2   MobileNet  
+ AudioSet    
+4Wavegram-CNN  
+ 11
+ 5 
+ 1  2 4  
+  [86]
+ 
+ 
+ 40 
+CNN14   
+5Wavegram-Logmel-CNN  Wavegram-CNN   
+   Wavegram-CNN 
+    
+4.3.4   
+LSTM  RNN 
+ [103]LSTM 
+it ft ot  
+ xt  ht-1   
+ = (  [1, ] + ) 4-6 
+ = (  [1, ] + ) 4-7 
+ = (  [1, ] + ) 4-8 
+ W  b   sigmoid  ht 
+ t   
+ =   () 4-9 
+   
+ = (  [1, ] + ) 4-10 
+   
+ =   1 +    4-11 
+4.4   
+ 
+ 
+
+
+
+  4-4 
+ LSTM 
+
+
+
+  
+ 
+ 
+ 41 
+ 
+ 4-4   
+Fig.4-4 The construction process of base classifiers  
+4.5   
+ 
+ 
+ LSTM 
+   
+4.5.1   
+ CPU  GPU  Intel Core i7 -14700HX  NVIDIA GeForce RTX 4060 
+CPU  5.5GHz  16GB  8GB
+MATLAB R2023b  Pytorch 1.13.0  
+AudioSet  [86] 
+ -30  30  -30 30
+ -100  100   
+ jitterColorHSV  0  0.1  
+ 0.75-1.25  -1  1   -1 
+1  0  2  -5  5 
+
+ 
+ 
+ 42 
+ 
+AudioSet  [86]
+ 0.9375  100-16000  20 
+ 10   MFCC  PSD  13  513
+ FFT  882 64
+ bump  VoicesPerOctave  12 SVM
+ RBFkernelScale autoKNN  autoRF
+ 100 
+   Adam  
+BiLSTM  200BatchSize  64 0.001 epoch  300
+ BatchSize  128 0.0001 epoch  200ImageNet 
+BatchSize  128 0.0001 epoch  30AudioSet BatchSize
+ 16 0.0001 epoch  50 
+4.5.2   
+ AlexNet 
+  4-2  4-3  4-2  
+4-2    
+  1%  
+ 0.5% 4-3 
+
+
+  
+ 4-2   
+Tab.4-2 Performance of different image augmentation  methods  
+        F1  
+ 93.0% 93.4% 90.7% 92.0% 
+ 93.2% 93.3% 91.0% 92.1% 
+ 93.5% 93.2% 91.9% 92.5% 
+ 93.3% 94.8% 90.1% 92.4% 
+  94.0% 93.3% 92.7% 93.0% 
+  94.0% 92.9% 93.1% 93.0% 
+  93.8% 93.9% 91.9% 92.9% 
+ 
+ 
+ 
+ 
+ 
+ 
+ 43 
+ 
+ 4-3   
+Tab.4-3 Performance of different sound augmentation  methods  
+        F1  
+  93.2% 93.6% 90.8% 92.2% 
+  93.3% 93.0% 91.5% 92.2% 
+  94.0% 93.3% 92.7% 93.0% 
+  93.3% 94.2% 90.6% 92.4% 
+ 92.6% 93.1% 90.1% 91.6% 
+
+ 4-4  4-5  4-5 
+
+ MFCC  SVM  0.6%
+ 1.3% 
+
+  
+ 4-4   
+Tab.4-4 Performance of the model before data augmentation  
+         F1  
+MFCC SVM 90.1%  89.3%  88.0%  88.6%  
+ 1D-CNN-LSTM 90.8%  91.8%  87.4%  89.5%  
+  AlexNet 93.0% 93.4% 90.7% 92.0% 
+  AlexNet 93.5% 94.6% 90.6% 92.6% 
+ 4-5   
+Tab.4-5 The performance of the model after data augmentation  
+         F1  
+MFCC SVM 89.5% 89.8% 86.3% 88.0% 
+ 1D-CNN-LSTM 89.5% 88.3% 87.5% 87.9% 
+  AlexNet 94.0% 93.3% 92.7% 93.0% 
+  AlexNet 94.1%  94.8%  91.8%  93.3%  
+4.5.3   
+4.5.3.1   
+ 4-6 
+ MFCC  SVM
+90.1% RF  SVM  KNN 86.6% PSD 
+ RF 89.1%KNN  SVM 
+ 
+ 
+ 44 
+SVM  81.0%  SVM  MFCC  RF 
+PSD   
+ 4-6   
+Tab.4-6 Performance of different machine learning models  
+         F1  
+MFCC SVM 90.1%  89.3%  88.0%  88.6%  
+MFCC KNN 86.6% 90.2% 80.8% 85.2% 
+MFCC RF 89.7% 91.2% 85.7% 88.3% 
+PSD SVM 81.0% 94.1% 71.0% 81.0% 
+PSD KNN 84.1% 83.4% 80.5% 81.9% 
+PSD RF 89.1% 93.5% 83.2% 88.1% 
+4.5.3.2 LSTM   
+ LSTM  4-7  PSD  89.6%
+ MFCC LSTM  4-6   LSTM
+ 4-7
+  
+ 4-7 LSTM   
+Tab.4-7 Performance of the LSTM model  
+         F1  
+MFCC LSTM 88.9%  90.1%  85.3%  87.6%  
+PSD LSTM 89.6%  90.3%  86.4%  88.3%  
+4.5.3.3   
+ 4-8  AudioSet 
+Res1dNet31  Res1dNet 51   1D-CNN  1D-CNN-LSTM1D-CNN-
+LSTM  90.8% 1D-CNNRes1dNet31  Res1dNet 51 
+ 93.3% [86] Res1dNet31 
+ AudioSet   Res1dNet31   
+ 4-8   
+Tab.4-8 Performance of different one -dimensional convolutional neural network models  
+        F1  
+1D-CNN 90.0%  90.3%  87.2%  88.5%  
+1D-CNN-LSTM 90.8%  91.8%  87.4%  89.5%  
+Res1dNet31  93.3%  89.7%  94.5%  92.0%  
+Res1dNet51  93.2%  89.0%  94.7%  91.8%  
+4.5.3.4   
+ ImageNet  AudioSet 
+ 
+ 
+ 45 
+ 4-9  4-10   AudioSet 
+ ImageNet  94% AudioSet 
+ 93%  93.8%  CNN14
+ResNet38MobileNetV1 MobileNetV2  Wavegram-Logmel -CNN ImageNet 
+ 94.0% 91.4%
+ AlexNet  Squeezenet 
+MobileNet  ImageNet 
+AlexNet  AudioSet   
+   ImageNet  AlexNet 
+ 4-64-74-8 
+ LSTM   
+ 4-9  ImageNet   
+Tab.4-9 Performance of ImageNet -based transfer learning model  
+       F1   (M) FLOPs(G) 
+AlexNet  94.0% 93.3% 92.7% 93.0% 61.1 0.72 
+GoogLenet 92.5% 92.1% 90.6% 91.3% 7 1.51 
+Vgg16 92.1% 89.9% 91.7% 90.7% 138.36  15.5 
+Vgg19 91.4% 89.6% 90.5% 90.0%  143.67 19.67 
+Inceptionv3  93.2% 94.3% 90.4% 92.3% 27.16 5.73 
+Resnet18  93.2% 92.0% 92.2% 92.1% 11.69 1.82 
+Resnet50  91.7% 89.7% 90.9% 90.3% 25.56 4.12 
+Squeezenet  93.0% 92.4% 91.3% 91.9% 1.24 0.36 
+Xception  92.8% 93.0% 90.7% 91.8% 22.86  8.42 
+DenseNet201  93.0% 92.1% 91.7% 91.9% 20.01  4.37 
+MobileNetV2  91.8% 89.7% 91.0% 90.4% 3.5 0.31 
+ 4-10  AudioSet   
+Tab.4-10 Performance of AudioSet -based transfer learning model  
+       F1  
+(M) 
+FLOPs(G) 
+CNN10 93.3% 89.8% 94.4% 92.0% 5.22 13.07  
+CNN14 93.8% 91.1% 94.3% 92.6% 80.8 20.1 
+ResNet22 93.4% 89.4% 94.9% 92.0% 63.68  14.03  
+ResNet38 93.7%  90.3%  94.6%  92.4%  73.78 23.47 
+MobileNetV1  93.8% 92.7% 92.9% 92.8% 4.8 0.80 
+MobileNetV2  93.9%  93.6%  92.3%  92.9%  4.08 0.38 
+Wavegram -CNN 93.0% 90.9% 92.7% 91.7% 80.99  22.12  
+Wavegram -Logmel -CNN 93.8%  90.4%  94.8%  92.6%  81.07 25.75 
+4.5.3.5   
+ 
+ 
+ 46 
+  4-84-94-10  4-5  
+ FLOPs 
+ FLOPs  4-
+5  ImageNet  AudioSet 
+ FLOPs
+ MobileNet  VGG  AudioSet  ImageNet 
+Res1dNet51  Res1dNet31  Res1dNet31  
+AlexNet   
+ 
+ 4-5   
+Fig.4-5 Precision and complexity of different transfer learning models  
+4.5.4    
+
+   4-11 
+  AlexNet  
+ 94% 92%-93%
+  Res1dNet31  93.3% 
+   90.1%
+ 90%
+
+  
+ 
+ 
+
+ 
+ 
+ 47 
+ 4-11   
+Tab.4-11 Performance of different base classifier s 
+         F1  
+MFCC SVM 90.1%  89.3%  88.0%  88.6%  
+PSD RF 89.1% 93.5% 83.2% 88.1% 
+MFCC LSTM 88.9%  90.1%  85.3%  87.6%  
+PSD LSTM 89.6%  90.3%  86.4%  88.3%  
+  AlexNet 93.1% 93.7% 90.6% 92.1% 
+  AlexNet 94.0% 93.3% 92.7% 93.0% 
+CQT  AlexNet 92.5% 93.2% 89.7% 91.4% 
+MFCC   AlexNet 91.8% 91.0% 90.0% 90.5% 
+  AlexNet 94.1%  94.8%  91.8%  93.3%  
+  Res1dNet31  93.3%  89.7%  94.5%  92.0%  
+4.6   
+  
+1   
+  1% 
+  
+2
+ LSTM   SVMKNN  RF MFCC
+ SVMPSD  RF  90.1% 89.1%  LSTM 
+ MFCC  PSD  88.9% 89.6%
+  AudioSet  
+ AudioSet  Res1dNet31  93.3% 
+ ImageNet  AudioSet   ImageNet
+ AlexNet  94.0% 
+3
+ 94%
+ 90.1% 
+4  
+ 
+ 
+ 
+ 48 
+5.    
+  
+    
+ 
+ 
+  
+   
+   
+5.1   
+
+
+   
+  
+  
+5.1.1   
+  5-1 
+  
+ SVM  
+ CNN   
+ 
+ 5-1   
+Fig.5-1 Homogeneous classifier fusion architecture based on acoustic features and depth features  
+
+ 
+ 
+ 49 
+5.1.2   
+ 5-2 
+
+ 
+     
+  
+ 
+ 5-2   
+Fig.5-2 Heterogeneous classifier fusion architecture based on multi -classifier selection  
+5.2   
+  10  10 
+ 
+ 
+   
+5.2.1   
+  
+   [104, 105]
+ 5-3     C1-C3 
+ 1- 3   (a)
+ (b)
+ (c)
+
+  
+
+ 
+ 
+ 50 
+ 
+ 5-3   
+Fig.5-3 Example of classifier fusion effect  
+ - AD 
+ Q  Q 
+ dis df[106] Ci  Cj 
+ 
+ 5-1   
+Tab.5-1 Example of classification result  
+ Ci   Ci   
+Cj   a c 
+Cj   b d 
+ a  Ci  Cj  bcd 
+  
+ =   
+ +  5-1 
+ =   
+( + )( + )( + )( + )
+5-2 
+ =  + 
+ +  +  +  5-3 
+ = 
+ +  +  +  5-4 
+ Acc  Dv  
+  -   
+ = ( + ) 2     5-5 
+ Dv  5-5  
+
+ Accmax  Accmin  Dvmax  Dvmin
+  
+ =   
+  
+5-6 
+ 
+
+ 
+ 
+ 51 
+5.2.2    
+
+
+
+ 5-4   n  C1-Cn  
+ AD  AD 
+ AD  AD 
+ n 
+  
+ 
+ 5-4   
+Fig.5-4 The algorithm flow of classifier selection  
+5.3   
+
+
+
+ C1
+C2Cn P1P2Pn
+  
+ = 1
+ 
+
+=1
+5-7 
+
+ [107]   
+  
+ 
+ 
+
+ 
+ 
+ 52 
+5.4   
+   [108, 109] 
+
+
+  
+ 5-5  M 
+K  N  Dij 
+ Dmax   
+
+
+ 3  Dmax 
+  
+ 
+ 5-5   
+Fig.5-5 The method flow of continuous cough determination  
+
+ 
+ 
+ 53 
+5.5   
+   
+      
+5.5.1   
+ MFCC  
+ AlexNet 
+ 5-2   5-2  94.1%
+ MFCC 
+ 94.5%  0.4%
+  
+ 5-2   
+Tab.5-2 Performance of homogeneous classifier fusion architecture  
+          F1  
+MFCC -- 90.1%  89.3%  88.0%  88.6%  
+--   94.0% 93.3% 92.7% 93.0% 
+--   94.1%  94.8%  91.8%  93.3%  
+MFCC   94.5%  94.5%  92.8%  93.6%  
+MFCC   94.4%  95.4%  91.9%  93.6%  
+5.5.2   
+   5-6 
+ 
+ Q 
+ Q 
+  Q 
+  
+ 
+ 
+ 54 
+ 
+ 5-6    
+Fig.5-6 The selection results of each diversity metrics  
+  5-3   5-2 
+  
+  94.5%  
+ 
+    95.3% 
+  4   96.0%
+ 94.1% 
+ 5-3   
+Tab.5-3 Performance of heterogeneous classifier fusion architecture  
+        F1  
+1 94.1%  94.8%  91.8%  93.3%  
+2 95.3% 95.2% 94.0% 94.6% 
+3 95.8% 95.2% 94.9% 95.1% 
+4 96.0% 96.0% 94.9% 95.4% 
+5 95.9% 95.5% 95.0% 95.2% 
+6 96.0% 95.7% 95.0% 95.4% 
+7 95.9% 96.6% 94.1% 95.3% 
+8 95.9% 96.4% 94.1% 95.3% 
+9 95.6% 96.8% 93.3% 95.0% 
+10 95.4% 96.4% 93.1% 94.7% 
+   5-2  5-7 
+ 4 
+  9  10    4 
+ 96.0%  94.1% 
+
+ 
+ 
+ 55 
+ 3   95.8%    -AlexNet 
+ -AlexNet  -Res1dNet31  
+ 
+ 5-7    
+Fig.5-7 The performance of classifier fusion varies with the number of base classifiers.  
+5.5.3   
+ Dmax  1.5 
+ 5-4  5-5  5-4  5-5  
+ 9.3%
+
+ 7.6% 8.4%
+  
+
+ 4   6.4%  
+   
+  7   92.9% 
+ 5-4   
+Tab.5-4 The continuous cough recognition results of homogeneous classifier fusion architecture  
+    Pdc Pmc Pfc WER 
+MFCC   90.3% 2.5% 7.2% 8.6% 
+MFCC   91.1% 2.4% 6.5% 8.4% 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 56 
+ 5-5    
+Tab.5-5 The continuous cough recognition results of heterogeneous classifier fusion architecture  
+  Pdc Pmc Pfc WER 
+1 88.1% 4.2% 7.7% 9.3% 
+2 90.5%  2.5% 7.0% 7.6% 
+3 90.5%  2.4% 7.1% 7.2% 
+4 91.6%  3.0% 5.4% 6.4% 
+5 92.4%  2.4% 5.2% 7.0% 
+6 92.3%  2.2% 5.5% 7.0% 
+7 92.9%  2.3% 4.8% 6.7% 
+8 92.8%  2.2% 5.0% 6.8% 
+9 92.7%  2.5% 4.8% 7.2% 
+10 92.8%  2.3% 4.9% 7.3% 
+5.6   
+ 
+  
+1 
+   
+ 96.0%    94.5%
+ 94.1% 
+2 
+ 
+  
+3    6.4% 
+ 
+ 
+ 
+ 57 
+6.   
+6.1  
+  
+    
+  
+ 
+  
+1  
+ 316  25 
+ 7-40  10  3408 
+3133 
+
+  
+2    
+
+ 75.8%
+
+ 97.6%
+  
+3   
+
+  1% 
+   LSTM 
+ 90.1%  LSTM 
+ 89.6%
+ AudioSet  Res1dNet31   93.3% 
+LSTM  ImageNet  AudioSet 
+  ImageNet  AlexNet  AudioSet 
+ CNN14  94% 
+  
+   
+ 94% Res1dNet31  93.3%
+ 90.1%  
+4  
+
+ 
+ 
+ 58 
+ 96.0% 94.5%
+ 
+ - 
+   Q 
+ Q  
+ 
+ 4  96.0%
+ 94.1%  
+   6.4%  
+6.2  
+
+  
+1  
+
+
+ 
+     
+ 
+
+  
+2  
+
+
+
+  
+  
+ 
+ 
+  
+ 
+ 
+ 60 
+ 
+[1]  (20232032) [J].  2023(06)7-11.  
+[2]  .     (2023-2032)
+[J].  2023(09)31-32.  
+[3] NORTON T CHEN C LARSEN M L V et al. Review precision livestock farming 
+building digital representations to bring the animals closer to the farmer[J]. Animal 2019
+13(12) 3009-3017. 
+[4] Baumann B Bilkei G. Emergency -culling and mortality in growing/fattening pigs in a large 
+Hungarian farrow -to-finish production unit[J]. Dtw Deutsche Tier鋜ztliche Wochenschrift 
+2002109(1) 26-33. 
+[5] BENJAMIN M YIK S. Precision livestock farming in swine welfare a review for swine 
+practitioners[J]. Animals 20199(4)133. 
+[6]   . 
+[J].  ( )202144 (02) 117-120. 
+[7]  .  [J]. 
+2021(04)25-28. 
+[8]  .  [J].  2021
+37(02) 45-50. 
+[9]   .  [J].  
+202134(02) 36-40+52. 
+[10]    . 
+[J].  202148(S1) 33-37. 
+[11]  .  [J].  202121(02) 
+43-46. 
+[12]  .  [D].  
+ 2021. 
+[13]   .  [J].  , 2021
+(15)47-50.  
+[14]  .  [J]. 
+ 20215(21)108-111.  
+[15]   .  [J]. 
+ 202243(02) 267-273. 
+[16]   .  [J].  
+20232(01) 63-70. 
+[17]  .  [J]. 
+202242(S1) 310-315. 
+ 
+ 
+ 61 
+[18]   .  [J].  2023
+42(05) 1042-1051. 
+[19]   .  [J]. 
+ 202251(06) 10-18.  
+[20]  .  [J].  202320(06) 111-
+114. 
+[21]   .  [J].  202347(04) 
+66-68.  
+[22] .  [J].  (
+)202335(03) 48-53. 
+[23]   .  [J].  
+202143(03) 1-6+33.  
+[24] Khalid H Tariq SKim T Set al. ORV AEone-class residual variational autoencoder for 
+voice activity detection in noisy environment[J]. Neural Processing Letters 202254(3)
+1565-1586. 
+[25] Mihalache S Burileanu D. Using voice activity detection and deep neural networks with 
+hybrid speech feature extraction for deceptive speech detection[J]. Sensors 202222(3)
+1228. 
+[26] Li S Li YFeng T et al. Voice activity detection using a local -global attention model[J]. 
+Applied Acoustics 2022195108802.  
+[27] .  [D].  
+ 2022.  
+[28] Zhang X L Xu M. AUC optimization for deep learning -based voice activity detection[J]. 
+EURASIP Journal on Audio Speech and Music Processing 20222022(1) 27. 
+[29]   .  Q  VDR  [J]. 
+ 202248(02) 128-135.  
+[30] .  VDR  [D].   
+ 2023.  
+[31]     .  [J]. 
+ 202245(24) 145-150.  
+[32] Korkmaz Y Boyac A. Hybrid voice activity detection system based on LSTM and auditory 
+speech features[J]. Biomedical Signal Processing and Control 202380104408.  
+[33] Mu WLiu B. V oice activity detection optimized by adaptive attention span transformer[J]. 
+IEEE Access 20231131238-31243. 
+[34] Sharma S Malhotra R Sharma Aet al. Unsupervised voice activity detection with improved 
+signal-to-noise ratio in noisy environment[J]. International Journal of Nanotechnology 2023
+20(1-4)421-432. 
+[35] Sharma S Malhotra R Sharma A. An improved model for unsupervised voice activity 
+ 
+ 
+ 62 
+detection[J]. International Journal of Nanotechnology 202320(1-4)235-258. 
+[36] Heo YLee S. Supervised Contrastive Learning for Voice Activity Detection[J]. Electronics 
+202312(3) 705. 
+[37]  .  [J]. 
+202319(02) 13-19. 
+[38]  .  [J]. 
+ 202344(03) 197-203. 
+[39] Li NWang LGe Met al. Robust voice activity detection using an auditory -inspired masked 
+modulation encoder based convolutional attention network[J]. Speech Communication 2024
+157103024.  
+[40] Zhang WLiu XDu Het al. Voice activity detection for audio signal of voyage data recorder 
+using residue network and attention mechanism[J]. Ships and Offshore Structures 2024
+19(2) 243-251. 
+[41]  .  [J]. 
+ 201636(06) 72-76. 
+[42]  .  [D].  
+ 2021.  
+[43] D Moshou A Chedad A Van Hirtum et al. An Intelligent Alarm for Early Detection of 
+Swine Epidemics Based on Neural Networks[J]. Transactions of the ASABE 200144(1)
+167-174. 
+[44] Chedad A Moshou D Aerts J M et al. Recognition system for pig cough based on 
+probabilistic neural networks[J]. journal of agricultural engineering research 200179(4)
+449-457. 
+[45] A V Hirtum D Berckmans. Fuzzy approach for improved recognition of citric acid induced 
+piglet coughing from continuous registration[J]. Journal of Sound and Vibration 2003266
+677-686. 
+[46] A Van Hirtum D Berckmans. Objective recognition of cough sound as biomarker for aerial 
+pollutants[J]. Indoor Air 200414(1) 10-15. 
+[47] V Exadaktylos M SilvaJ M Aertset al. Real-time recognition of sick pig cough sounds[J]. 
+Computers & Electronics in Agriculture 200863(2)207-214. 
+[48] Hirtum A VGuarino M Costa Aet al. Automatic detection of chronic pig coughing from 
+continuous registration in field situations[J]. Computers & Electronics in Agriculture 2004
+1-20. 
+[49] M Guarino P JansA Costaet al. Field test of algorithm for automatic cough detection in 
+pig houses[J]. Computers & Electronics in Agriculture 200862(1)22-28. 
+[50] Y ChungS OhJ LeeD ParkH H ChangS Kim. Automatic Detection and Recognition 
+of Pig Wasting Diseases Using Sound Data in Audio Surveillance Systems[J]. Sensors 2013
+1312929-12942. 
+ 
+ 
+ 63 
+[51]   .  [C]. 
+ . 
+201599-104. 
+[52]  .  [D].  
+ 2016. 
+[53]  .  [D].  
+ 2017. 
+[54]    .  [J].  
+2017(23)18-22.  
+[55]  .  [J].  2017
+036(003) 119-124. 
+[56]  .  [D].  
+ 2018. 
+[57]  .  [D].  
+ . 2019.  
+[58]  .  [D]. 
+ 2022.  
+[59]    .  BP  [J].  2022
+43(02) 148-154. 
+[60]    .  [J].  2018
+049(003) 179-186. 
+[61]    .  [J]. 
+201935(06) 182-188. 
+[62] Zhao J Li X Liu W et al. DNN -HMM based acoustic model for continuous pig cough 
+sound recognition[J]. International Journal of Agricultural and Biological Engineering 2020
+13(3) 186-193. 
+[63] .  [D].  
+ 2019. 
+[64]  .  [D].  
+ 2020.  
+[65]    .  [J].  
+202253(05) 257-266. 
+[66] Hang SBin ZJun Het al. Research on Improved DenseNets Pig Cough Sound Recognition 
+Model Based on SENets[J]. Electronics 202211(21)3562-3562. 
+[67]  .  DenseNet  [J]. 
+2022(20)41-44+49. 
+[68] .  [D]. 
+  2023.  
+ 
+ 
+ 64 
+[69] Weizheng S Ding TYanling Yet al. A new fusion feature based on convolutional neural 
+network for pig cough recognition in field situations[J]. Information Processing in Agriculture 
+20208(4)573580. 
+[70] Yanling Y Ding T Weizheng S et al. Recognition of sick pig cough sounds based on 
+convolutional neural network in field situations[J]. Information Processing in Agriculture 
+20208(3)369-379. 
+[71] .  [D].  
+ 2020.  
+[72] Weizheng S Nan J Yanling Yet al. Investigation of acoustic and visual features for pig 
+cough classification[J]. Biosystems Engineering 2022219281-293. 
+[73] Weizheng S Nan J Yanling Yet al. Fusion of acoustic and deep features for pig cough 
+sound recognition[J]. Computers and Electronics in Agriculture 2022197106994.  
+[74] .  [D].  
+  2023.  
+[75] Yin YJi N Wang X et al. An investigation of fusion strategies for boosting pig cough 
+sound recognition[J]. Computers and Electronics in Agriculture 2023205107645.  
+[76] Buyu W Weijun DNa Let al. A CNN -SVM Study Based on the Fusion of Spectrogram 
+and Thermal Imaging Heterogeneous Features for Pig Cough Recognition in Field Situation[J]. 
+International Journal of Pattern Recognition and Artificial Intelligence 202337(14). 
+[77] Wang BQi JAn Xet al. Heterogeneous fusion of biometric and deep physiological features 
+for accurate porcine cough recognition[J]. PloS one 202419(2) e0297655 -e0297655.  
+[78] S Ferrari M Silva M Guarino D Berckmans. Analysis of Cough Sounds for Diagnosis of 
+Respiratory Infections in Intensive Pig Farming[J]. Transactions of the ASABE 200851(3) 
+1051-1055. 
+[79] S Ferrari M SilvaM Guarino et al. Cough sound analysis to identify respiratory infection 
+in pigs[J]. Computers & Electronics in Agriculture 200864(2)318-325. 
+[80]  . MATLAB  - [M]. 
+2013. 
+[81] Zhang T Shao Y Wu Yet al. An overview of speech endpoint detection algorithms[J]. 
+Applied Acoustics 2020160107133.  
+[82] O. O A Robertas D Atika Q et al. Data Augmentation and Deep Learning Methods in 
+Sound Classification A Systematic Review[J]. Electronics 202211(22)3795-3795. 
+[83] Justin S  Pablo J B. Deep Convolutional Neural Networks and Data Augmentation for 
+Environmental Sound Classification[J]. IEEE Signal Processing Letters 201724(3)279-
+283. 
+[84] Dai WDai CQu Set al. Very deep convolutional neural networks for raw waveforms[C] . 
+//2017 IEEE international conference on acoustics speech and signal processing (ICASSP). 
+2017421-425. 
+ 
+ 
+ 65 
+[85] Lee J Park J Kim K L et al. Sample -level deep convolutional neural networks for music 
+auto-tagging using raw waveforms[J]. arXiv preprint arXiv 1703.01789 2017. 
+[86] Kong Q Cao YIqbal T et al. PANNs Large-scale pretrained audio neural networks for 
+audio pattern recognition[J]. IEEE -ACM Transactions on Audio Speech and Language 
+Processing 2020282880-2894. 
+[87] Cortes C Vapnik V. Support-vector networks[J]. Machine learning 199520273-297. 
+[88] Cover THart P. Nearest neighbor pattern classification[J]. IEEE transactions on information 
+theory 196713(1)21-27. 
+[89] Ho T K. The random subspace method for constructing decision forests[J]. IEEE transactions 
+on pattern analysis and machine intelligence 199820(8) 832-844. 
+[90] Breiman L. Random forests[J]. Machine learning 2001455-32. 
+[91] Gemmeke J FEllis D P WFreedman D et al. Audio SetAn ontology and human -labeled 
+dataset for audio events[C]  //2017 IEEE international conference on acoustics speech and 
+signal processing (ICASSP). IEEE 2017776-780. 
+[92] Russakovsky O Deng J Su Het al. Imagenet large scale visual recognition challenge[J]. 
+International journal of computer vision 2015115211-252. 
+[93] Krizhevsky A Sutskever I Hinton G E. ImageNet classification with deep convolutional 
+neural networks[J]. Communications of the ACM 201760(6)84-90. 
+[94] Szegedy C Liu WJia Yet al. Going deeper with convolutions[C]//Proceedings of the IEEE 
+conference on computer vision and pattern recognition. 2015 1-9. 
+[95] Simonyan K  Zisserman A. Very Deep Convolutional Networks for Large -Scale Image 
+Recognition[J]. Computer Science 2014. 
+[96] Szegedy C Vanhoucke VIoffe Set al. Rethinking the inception architecture for computer 
+vision[C]  //Proceedings of the IEEE conference on computer vision and pattern recognition. 
+20162818-2826. 
+[97] He KZhang XRen Set al. Deep residual learning for image recognition[C]  //Proceedings 
+of the IEEE conference on computer vision and pattern recognition. 2016 770-778. 
+[98] Iandola F NHan SMoskewicz M W et al. SqueezeNet AlexNet -level accuracy with 50x 
+fewer parameters and< 0.5 MB model size[J]. arXiv preprint arXiv 1602.07360 2016. 
+[99] Chollet F. Xception Deep learning with depthwise separable convolutions[C]  //Proceedings 
+of the IEEE conference on computer vision and pattern recognition. 2017 1251-1258. 
+[100] Huang G Liu Z Van Der Maaten L et al. Densely connected convolutional networks[C]  
+//Proceedings of the IEEE conference on computer vision and pattern recognition. 2017 
+4700-4708. 
+[101] Sandler M Howard AZhu Met al. Mobilenetv2 Inverted residuals and linear bottlenecks[C]  
+//Proceedings of the IEEE conference on computer vision and pattern recognition. 2018 
+4510-4520. 
+[102] Zhang H Cisse M Dauphin Y N et al. mixup Beyond empirical risk minimization[J]. 
+ 
+ 
+ 66 
+arXiv preprint arXiv 1710.09412 2017. 
+[103] Schmidhuber J Hochreiter S. Long short -term memory[J]. Neural Comput . 19979(8)
+1735-1780. 
+[104] Shiue Y RYou G RSu C Tet al. Balancing accuracy and diversity in ensemble learning 
+using a two-phase artificial bee colony approach[J]. Applied Soft Computing 2021105
+107212  
+[105] Sagi O Rokach L. Ensemble learning A survey[J]. Wiley interdisciplinary reviews data 
+mining and knowledge discovery 2018, 8(4) e1249. 
+[106] Kuncheva L I  Whitaker C J. Measures of diversity in classifier ensembles and their 
+relationship with the ensemble accuracy[J]. Machine learning 200351181-207. 
+[107] Jiang F Yu XDu Jet al. Ensemble learning based on approximate reducts and bootstrap 
+sampling[J]. Information Sciences 2021547797-813. 
+[108]  .  [J].  201517(3) 
+22-23. 
+[109]  .  [J].  2016(14) 269-270. 
+ 
+ 
+ 
+ 
+ 
+ 
