@@ -141,6 +141,14 @@ CASES = [
         "expect_syndrome": "邪袭肺卫",   # 按症状独立辨证，不被锚定
         "expect_conflict": True,          # 必须指出与上游辨病矛盾
     },
+    {
+        "no": "F", "desc": "★蓝耳病别名：上游'猪蓝耳病'（正确），症状耳尖发紫+繁殖障碍",
+        "disease": "猪蓝耳病",       # 别名输入（库内规范名：猪繁殖与呼吸综合征）
+        "symptoms": "耳尖发紫、呼吸急促、精神沉郁、母猪流产死胎",
+        "temp_c": 41.0, "weight_kg": 80, "severity": "重度",
+        "expect_syndrome": "疫热壅肺",
+        "expect_no_false_conflict": True,  # 别名归一后不应误判上游错误
+    },
 ]
 
 
@@ -172,6 +180,15 @@ def test_cases(only=None):
                   rc.get('conflict') is True, rc.get('reason', '')[:80])
                 t("案例E LLM冲突检查 → conflict=true + 给出证据方向",
                   dc.get('conflict') is True and dc.get('evidence_disease', '') != '',
+                  f"证据指向: {dc.get('evidence_disease', '')}")
+            # 案例F 额外验证：蓝耳病别名归一（不应误判上游错误）
+            if c.get("expect_no_false_conflict"):
+                rc = r['syndrome'].get('rule_cross_check') or {}
+                dc = r['syndrome'].get('disease_conflict') or {}
+                t("案例F 规则交叉验证 → 别名归一后不误报矛盾",
+                  rc.get('conflict') is False, rc.get('reason', '')[:80])
+                t("案例F LLM冲突检查 → 证据指向与上游一致（别名）",
+                  dc.get('conflict') is not True,
                   f"证据指向: {dc.get('evidence_disease', '')}")
         except Exception as e:
             t(f"案例{c['no']} 运行", False, str(e)[:120])

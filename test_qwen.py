@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from config import LLM_API_KEY, LLM_BASE_URL, LLM_MODEL, check_env
+from llm_client import get_client
 
 missing = check_env()
 if missing:
@@ -11,9 +12,7 @@ if missing:
     print("   检查项目根目录 .env 文件")
     exit(1)
 
-from openai import OpenAI
-
-client = OpenAI(api_key=LLM_API_KEY, base_url=LLM_BASE_URL)
+client = get_client()
 
 print(f"网关: {LLM_BASE_URL}")
 print(f"模型: {LLM_MODEL}")

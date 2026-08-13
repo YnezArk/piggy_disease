@@ -1,6 +1,7 @@
 # 依赖文件夹（体积巨大，必须忽略）
 node_modules/
 Data/
+__pycache__/
 
 # 构建输出目录（由源码生成，不需要提交）
 dist/
