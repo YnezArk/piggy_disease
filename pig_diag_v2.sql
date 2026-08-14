@@ -1144,17 +1144,19 @@ CREATE TABLE `disease`  (
   `created_at` datetime NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '疾病表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '疾病表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of disease
 -- ----------------------------
-INSERT INTO `disease` VALUES (1, '健康猪只', '猪气喘病,支原体肺炎,Mhp', NULL, '无呼吸道疾病的正常猪只', '呼吸平稳，无咳嗽，精神饱满', 'mycoplasma', 1, '2026-08-13 19:33:43');
+INSERT INTO `disease` VALUES (1, '健康猪只', '健康,正常', NULL, '无呼吸道疾病的正常猪只', '呼吸平稳，无咳嗽，精神饱满', 'normal', 1, '2026-08-13 19:33:43');
 INSERT INTO `disease` VALUES (2, '猪流行性感冒', '猪流感,SI,Swine Influenza', NULL, '流感病毒引起的急性呼吸道病', '鹅鸣样剧咳，突发高热，全群发病', 'influenza', 1, '2026-08-13 19:33:43');
-INSERT INTO `disease` VALUES (3, '猪蓝耳病', '猪巴氏杆菌病,锁喉风,肿脖子瘟,Pasteurella multocida', NULL, '猪繁殖与呼吸综合征病毒引起', '高调湿咳，渐进性加重，腹式呼吸', 'pasteurella', 1, '2026-08-13 19:33:43');
-INSERT INTO `disease` VALUES (4, '猪支原体肺炎', 'PRDC,多病原混合感染', NULL, '猪肺炎支原体引起的慢性呼吸道病', '慢性干咳，早晚加重，病程长', 'mixed', 1, '2026-08-13 19:33:43');
+INSERT INTO `disease` VALUES (3, '猪蓝耳病', '蓝耳病,猪蓝耳病,PRRS,猪繁殖与呼吸障碍综合征,神秘猪病,HP-PRRS', '猪繁殖与呼吸综合征病毒（PRRSV）', '动脉炎病毒科RNA病毒，免疫抑制性强（\"免疫抑制之王\"），猪唯一易感；妊娠母猪和1月龄内仔猪最易感，哺乳仔猪死亡率可达80%以上；接触/气溶胶/精液/垂直四种传播途径；冬春高发', '繁殖障碍+呼吸道症状，\"三高一低\"（高体温/高发病率/高死亡率/低治愈率）：母猪发热40-42.5℃、妊娠后期流产早产死胎木乃伊胎、耳尖及躯干发绀；仔猪呼吸困难、耳尖发紫继而全耳蓝紫色、共济失调、僵猪比例大；育肥猪两耳发蓝、生长发育缓慢；剖检间质性肺炎\"橡皮肺\"', 'prrs', 13, '2026-08-13 19:33:43');
+INSERT INTO `disease` VALUES (4, '猪支原体肺炎', '猪气喘病,支原体肺炎,Mhp', NULL, '猪肺炎支原体引起的慢性呼吸道病', '慢性干咳，早晚加重，病程长', 'mycoplasma', 1, '2026-08-13 19:33:43');
 INSERT INTO `disease` VALUES (5, '猪传染性胸膜肺炎', 'APP,胸膜肺炎放线杆菌病', NULL, '胸膜肺炎放线杆菌引起', '急骤痛咳，湿咳，全身重症，高致死率', 'app', 13, '2026-08-13 19:33:43');
-INSERT INTO `disease` VALUES (6, '猪繁殖与呼吸综合征', '蓝耳病,猪蓝耳病,PRRS,猪繁殖与呼吸障碍综合征,神秘猪病,HP-PRRS', '猪繁殖与呼吸综合征病毒（PRRSV）', '动脉炎病毒科RNA病毒，免疫抑制性强（\"免疫抑制之王\"），猪唯一易感；妊娠母猪和1月龄内仔猪最易感，哺乳仔猪死亡率可达80%以上；接触/气溶胶/精液/垂直四种传播途径；冬春高发', '繁殖障碍+呼吸道症状，\"三高一低\"（高体温/高发病率/高死亡率/低治愈率）：母猪发热40-42.5℃、妊娠后期流产早产死胎木乃伊胎、耳尖及躯干发绀；仔猪呼吸困难、耳尖发紫继而全耳蓝紫色、共济失调、僵猪比例大；育肥猪两耳发蓝、生长发育缓慢；剖检间质性肺炎\"橡皮肺\"', 'prrs', 13, '2026-08-13 19:33:43');
+INSERT INTO `disease` VALUES (7, '猪肺疫', '猪巴氏杆菌病,锁喉风,肿脖子瘟,Pasteurella multocida', '多杀性巴氏杆菌', '急性败血症、死亡快', '咳嗽、呼吸困难、颈部肿胀', 'pasteurella', 1, '2026-08-14 16:29:17');
+INSERT INTO `disease` VALUES (8, '混合感染', 'PRDC,多病原混合感染', '多种病原', '病程长、反复发作', '咳嗽、喘促、精神萎靡', 'mixed', 1, '2026-08-14 16:29:17');
+-- 注：原 id6 猪繁殖与呼吸综合征（label=prrs）已并入 id3 猪蓝耳病（2026-08-14 蓝耳双行合并）
 
 -- ----------------------------
 -- Table structure for farmer_guidance
@@ -1747,16 +1749,16 @@ CREATE TABLE `syndrome_mapping`  (
 -- Records of syndrome_mapping
 -- ----------------------------
 INSERT INTO `syndrome_mapping` VALUES (1, 38.5, 40.0, '湿咳、痰多、呼吸粗', '正常', '突发高烧+鹅鸣样剧咳+全群发病', 4, 2, '发热、咳嗽尖锐、流鼻涕、精神沉郁', 1, 1, '2026-08-13 19:33:43');
-INSERT INTO `syndrome_mapping` VALUES (2, 40.0, NULL, '干咳、鼻流清涕', '水样便', '夜间/静卧咳嗽加重+采食正常', 5, 4, '夜间咳多、干咳为主、病程长', 1, 1, '2026-08-13 19:33:43');
-INSERT INTO `syndrome_mapping` VALUES (3, 39.0, 41.0, '咳嗽、呼吸困难', '便秘', '久咳+消瘦+食欲不振', 6, 4, '消瘦、气短、久咳不止', 2, 1, '2026-08-13 19:33:43');
-INSERT INTO `syndrome_mapping` VALUES (4, 38.0, 39.5, '咳嗽、喘促', '稀溏', '湿咳+呼吸急促+渐进加重', 7, 3, '湿咳痰多、呼吸困难、病程较长', 1, 1, '2026-08-13 19:33:43');
+INSERT INTO `syndrome_mapping` VALUES (2, 40.0, NULL, '干咳、鼻流清涕', '水样便', '夜间/静卧咳嗽加重+采食正常', 5, 8, '夜间咳多、干咳为主、病程长', 1, 1, '2026-08-13 19:33:43');
+INSERT INTO `syndrome_mapping` VALUES (3, 39.0, 41.0, '咳嗽、呼吸困难', '便秘', '久咳+消瘦+食欲不振', 6, 8, '消瘦、气短、久咳不止', 2, 1, '2026-08-13 19:33:43');
+INSERT INTO `syndrome_mapping` VALUES (4, 38.0, 39.5, '咳嗽、喘促', '稀溏', '湿咳+呼吸急促+渐进加重', 7, 7, '湿咳痰多、呼吸困难、病程较长', 1, 1, '2026-08-13 19:33:43');
 INSERT INTO `syndrome_mapping` VALUES (5, 39.5, 42.0, '阵咳似尖叫、呼吸急促', '便秘', '急骤痛咳+高热+便秘', 8, 5, '发病急、高热、咳喘、便秘、口鼻流沫', 1, 13, '2026-08-13 19:33:43');
 INSERT INTO `syndrome_mapping` VALUES (6, 40.0, 42.0, '咳嗽、张口呼吸', '便秘', '犬坐姿势、口鼻血性泡沫', 2, 5, '高热41℃+、最急性24-36h死亡', 8, 13, '2026-08-13 19:33:43');
-INSERT INTO `syndrome_mapping` VALUES (7, NULL, 39.0, '干咳、晨夜加重', '正常', '体温正常、食欲尚可、病程长', 2, 1, '体温不高是支原体关键鉴别点', 9, 13, '2026-08-13 19:33:43');
+INSERT INTO `syndrome_mapping` VALUES (7, NULL, 39.0, '干咳、晨夜加重', '正常', '体温正常、食欲尚可、病程长', 2, 4, '体温不高是支原体关键鉴别点', 9, 13, '2026-08-13 19:33:43');
 INSERT INTO `syndrome_mapping` VALUES (8, NULL, NULL, '恶寒颤抖、鼻流清涕', '正常', '耳耷头低、腰弓毛乍、发热轻', 6, NULL, '风寒感冒、无高热', 7, 13, '2026-08-13 19:33:43');
 INSERT INTO `syndrome_mapping` VALUES (9, NULL, NULL, '咳嗽痰多色白易咯', '正常', '胸膈痞闷、肢体困重', 7, NULL, '湿痰证、苔白滑', 6, 13, '2026-08-13 19:33:43');
-INSERT INTO `syndrome_mapping` VALUES (10, 40.0, 42.5, '呼吸急促、咳嗽气喘', '正常', '耳尖发紫、精神沉郁、母猪流产死胎、三高一低', 2, 6, '蓝耳病急性型：高热40-42.5℃+呼吸急促+耳尖发绀，热毒壅肺', 8, 13, '2026-08-13 19:33:43');
-INSERT INTO `syndrome_mapping` VALUES (11, NULL, 39.5, '咳嗽、喘气', '腹泻（仔猪）', '耳尖发紫、病程长、发育迟缓、僵猪、免疫抑制', 3, 6, '蓝耳病慢性型：病程长、正虚邪恋（免疫抑制），耳尖发绀+僵猪为气阴两伤表现', 7, 13, '2026-08-13 19:33:43');
+INSERT INTO `syndrome_mapping` VALUES (10, 40.0, 42.5, '呼吸急促、咳嗽气喘', '正常', '耳尖发紫、精神沉郁、母猪流产死胎、三高一低', 2, 3, '蓝耳病急性型：高热40-42.5℃+呼吸急促+耳尖发绀，热毒壅肺', 8, 13, '2026-08-13 19:33:43');
+INSERT INTO `syndrome_mapping` VALUES (11, NULL, 39.5, '咳嗽、喘气', '腹泻（仔猪）', '耳尖发紫、病程长、发育迟缓、僵猪、免疫抑制', 3, 3, '蓝耳病慢性型：病程长、正虚邪恋（免疫抑制），耳尖发绀+僵猪为气阴两伤表现', 7, 13, '2026-08-13 19:33:43');
 
 -- ----------------------------
 -- Table structure for system_config

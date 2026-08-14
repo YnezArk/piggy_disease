@@ -30,12 +30,13 @@ N_FFT = 2048
 HOP_LENGTH = 512
 
 # ★ 标签与疾病ID的映射（五分类）
+# 2026-08-14 文件夹已重命名与 pig_diag_v2.disease.label 对齐：swine_influenza→influenza、contagious_pleuropneumonia→app
 LABEL_MAP = {
     "normal": 1,
-    "swine_influenza": 2,
+    "influenza": 2,
     "prrs": 3,
     "mycoplasma": 4,
-    "contagious_pleuropneumonia": 5
+    "app": 5
 }
 
 FEATURE_TYPES = ['MFCC', 'logFBank', '时域特征', '频域特征']
