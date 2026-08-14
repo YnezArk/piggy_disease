@@ -13,12 +13,12 @@ from datetime import datetime
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # 获取脚本所在目录
 AUDIO_ROOT = os.path.join(BASE_DIR, "pig_cough_data")  # 音频数据目录
 
-# ★ 数据库连接信息
+# ★ 数据库连接信息（2026-08-14 已迁移至 pig_diag_v2 单库）
 DB_CONFIG = {
     'host': 'localhost',
     'user': 'root',
-    'password': 'asus',
-    'database': 'pig_cough',
+    'password': '36987412',
+    'database': 'pig_diag_v2',
     'charset': 'utf8mb4'
 }
 
@@ -110,27 +110,30 @@ def main():
             try:
                 feat_dict = extract_features(file_path)
 
-                cough_type = label
-                raw_symptom = f"人工分类：{label}，文件名：{filename}"
-
+                # ① 写入诊断记录（v2 宽表：file_source 记录来源音频，可精确追溯）
                 sql_diagnosis = """
-                    INSERT INTO diagnosis_records 
-                    (group_id, disease_id, cough_type, raw_symptoms, diagnosis_time, model_version)
-                    VALUES (%s, %s, %s, %s, %s, %s)
+                    INSERT INTO diagnosis_record
+                    (pig_house, disease_id, file_source, created_at)
+                    VALUES (%s, %s, %s, %s)
                 """
                 cursor.execute(sql_diagnosis, (
-                    1, disease_id, cough_type, raw_symptom, datetime.now(), 'manual_v5'
+                    '猪舍待补充', disease_id, f"{label}/{filename}", datetime.now()
                 ))
                 record_id = cursor.lastrowid
 
-                for feat_type in FEATURE_TYPES:
-                    if feat_type in feat_dict:
-                        vector_json = json.dumps(feat_dict[feat_type])
-                        cursor.execute("""
-                            INSERT INTO acoustic_features 
-                            (record_id, feature_type, feature_dimension, feature_vector)
-                            VALUES (%s, %s, %s, %s)
-                        """, (record_id, feat_type, len(feat_dict[feat_type]), vector_json))
+                # ② 写入声学特征（v2 宽表：一个样本一行，四类特征并列）
+                cursor.execute("""
+                    INSERT INTO acoustic_feature
+                    (diagnosis_id, mfcc, logfbank, temporal, spectral, feature_dimension)
+                    VALUES (%s, %s, %s, %s, %s, %s)
+                """, (
+                    record_id,
+                    json.dumps(feat_dict['MFCC']),
+                    json.dumps(feat_dict['logFBank']),
+                    json.dumps(feat_dict['时域特征']),
+                    json.dumps(feat_dict['频域特征']),
+                    84
+                ))
 
                 total_inserted += 1
                 print(f"   ✅ 已处理: {filename} -> record_id={record_id}, disease={label}")
