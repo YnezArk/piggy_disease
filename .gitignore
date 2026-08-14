@@ -31,3 +31,5 @@ yarn-error.log*
 
 # 但保留示例配置文件（取反）
 !.env.example
+#训练数据
+*.wav
