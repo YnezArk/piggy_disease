@@ -34,13 +34,7 @@ LABEL_MAP = {"normal": 1, "influenza": 2, "prrs": 3, "mycoplasma": 4, "app": 5}
 LABEL_NAMES = list(LABEL_MAP.keys())          # 顺序即类别索引（0-based label）
 FEATURE_NAMES = ["mfcc", "logfbank", "temporal", "spectral"]
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-AUDIO_ROOT = os.path.join(BASE_DIR, "pig_cough_data")
-FEAT_DIR = os.path.join(BASE_DIR, "features")
-
-# 数据库连接（与根目录 .env / config.py 一致）
-DB_CONFIG = dict(host="localhost", user="root", password="36987412",
-                 database="pig_diag_v2", charset="utf8mb4")
+from config import DB_CONFIG, AUDIO_ROOT, FEAT_DIR   # 统一环境配置（.env，禁止硬编码）
 
 
 def extract_features_ext(file_path):
@@ -175,7 +169,7 @@ def verify_db():
         for src, k, err in bad[:5]:
             print(f"   {src} [{k}] err={err:.2e}")
         return False
-    print("\n✅ 全部 198 条与库内一致（误差 < 1e-6），特征管线可复算")
+    print(f"\n✅ 全部 {len(db)} 条与库内一致（误差 < 1e-6），特征管线可复算")
     return True
 
 

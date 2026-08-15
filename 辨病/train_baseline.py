@@ -24,13 +24,11 @@ from sklearn.metrics import (accuracy_score, classification_report,
                              confusion_matrix, f1_score, precision_recall_fscore_support)
 import joblib
 
+from config import DB_CONFIG, FEAT_DIR, MODEL_DIR   # 统一环境配置（.env，禁止硬编码）
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-FEAT_DIR = os.path.join(BASE_DIR, "features")
-MODEL_DIR = os.path.join(BASE_DIR, "models")
 LABEL_NAMES = ["normal", "influenza", "prrs", "mycoplasma", "app"]
 DISEASE_NAMES = ["健康猪只", "猪流行性感冒", "猪蓝耳病", "猪支原体肺炎", "猪传染性胸膜肺炎"]
-DB_CONFIG = dict(host="localhost", user="root", password="36987412",
-                 database="pig_diag_v2", charset="utf8mb4")
 
 
 def load_npz(name):

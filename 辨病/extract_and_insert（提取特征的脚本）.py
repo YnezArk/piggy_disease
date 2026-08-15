@@ -13,14 +13,8 @@ from datetime import datetime
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # 获取脚本所在目录
 AUDIO_ROOT = os.path.join(BASE_DIR, "pig_cough_data")  # 音频数据目录
 
-# ★ 数据库连接信息（2026-08-14 已迁移至 pig_diag_v2 单库）
-DB_CONFIG = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': '36987412',
-    'database': 'pig_diag_v2',
-    'charset': 'utf8mb4'
-}
+# ★ 数据库连接信息（统一从根目录 .env 读取，禁止硬编码）
+from config import DB_CONFIG
 
 # ★ 特征提取参数
 SAMPLE_RATE = 16000
