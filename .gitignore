@@ -33,3 +33,4 @@ yarn-error.log*
 !.env.example
 #训练数据
 *.wav
+*.aup3

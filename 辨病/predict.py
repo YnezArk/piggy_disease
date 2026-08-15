@@ -6,8 +6,8 @@
   {"label": "influenza", "disease": "猪流行性感冒", "confidence": 0.87,
    "cough_type": "湿咳", "symptoms": "自动生成的症状描述", "top3": [...]}
 
-- 默认使用 **SVM Baseline**（models/svm_baseline.joblib，实测 test Macro-F1 0.6333 最优），
-  可用 --model sslr 切 SSLRB 集成（0.5000）
+- 默认使用 **SSLRB 集成模型**（models/sslr.joblib，实测 test Macro-F1 0.7933 最优），
+  可用 --model svm 切 SVM Baseline（0.7667）
 - **决策口径（2026-08-14）：恒输出 5 类之一（健康 + 4 病），取置信度最高者，不做拒答**；
   猪肺疫/混合感染等无标注类别未来加数据后扩充类别，当前不做 unknown 拒绝
 - confidence 供论治层辨病纠错参考，不参与拒答
@@ -40,7 +40,7 @@ TYPICAL_SYMPTOMS = {
 MODEL_FILES = {"svm": "svm_baseline.joblib", "sslr": "sslr.joblib"}
 
 
-def load_model(name="svm"):
+def load_model(name="sslr"):
     path = os.path.join(MODEL_DIR, MODEL_FILES.get(name, name))
     if not os.path.exists(path):
         raise FileNotFoundError(f"模型不存在: {path}，请先运行 train_baseline.py 或 train_sslr.py")
@@ -84,7 +84,7 @@ if __name__ == "__main__":
         print(__doc__)
         sys.exit(1)
     wav = sys.argv[1]
-    name = sys.argv[2] if len(sys.argv) > 2 and sys.argv[2] in ("sslr", "svm") else "svm"
+    name = sys.argv[2] if len(sys.argv) > 2 and sys.argv[2] in ("sslr", "svm") else "sslr"
     try:
         r = diagnose(wav, model_name=name)
         print(json.dumps(r, ensure_ascii=False, indent=2))

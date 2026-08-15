@@ -76,8 +76,8 @@ def main():
     print("=" * 56)
 
     # 模型选择
-    ms = input("\n模型 (1=SVM Baseline[推荐] 2=SSLRB) [1]: ").strip()
-    model_name = "svm" if ms != "2" else "sslr"
+    ms = input("\n模型 (1=SSLRB[推荐] 2=SVM Baseline) [1]: ").strip()
+    model_name = "sslr" if ms != "2" else "svm"
     try:
         model = load_model(model_name)
     except FileNotFoundError as e:

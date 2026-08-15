@@ -80,7 +80,7 @@ def fit_predict_proba(X_tr, y_tr, X_te):
         Xr, yr = ros_oversample(meta_tr, y_tr)   # 每次 Bagging 独立上采样
         lr = LogisticRegression(max_iter=2000, random_state=42 + i)
         lr.fit(Xr, yr)
-        probs.append(lr.predict_proba(stack_meta(X_te, np.concatenate([y_tr, y_tr[:0]])) if False else _stack_on_fitted(X_tr, y_tr, X_te)))
+        probs.append(lr.predict_proba(_stack_on_fitted(X_tr, y_tr, X_te)))
     return np.mean(probs, axis=0)
 
 
@@ -129,14 +129,14 @@ def main():
     X_cv, y_cv = np.vstack([X_tr, X_va]), np.concatenate([y_tr, y_va])
     print(f"train {X_tr.shape} / val {X_va.shape} / test {X_te.shape} / CV {X_cv.shape}")
 
-    print("\n【Step 2 SSLRB】5 折分层 CV (train+val 178 条)")
+    print("\n【Step 2 SSLRB】5 折分层 CV (train+val 269 条)")
     mf, sd, acc = cv_eval(X_cv, y_cv)
     print(f"  Macro-F1 = {mf:.4f} ± {sd:.4f} | Acc = {acc:.4f}")
 
     # 固定划分
-    va_metrics = report("固定划分评估 (train 158 → val 20)", y_va, fit_predict_proba(X_tr, y_tr, X_va))
+    va_metrics = report("固定划分评估 (train 239 → val 30)", y_va, fit_predict_proba(X_tr, y_tr, X_va))
     # 最终模型
-    te_metrics = report("最终模型评估 (train+val 178 → test 20)", y_te, fit_predict_proba(X_cv, y_cv, X_te))
+    te_metrics = report("最终模型评估 (train+val 269 → test 30)", y_te, fit_predict_proba(X_cv, y_cv, X_te))
 
     # 保存最终模型（第二层 LR 权重 + 第一层 3 个 SVM）
     meta_tr = stack_meta(X_cv, y_cv)
@@ -167,15 +167,15 @@ def main():
             training_dataset_desc, hyperparameters, performance_metrics, model_path, is_active)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
         ON DUPLICATE KEY UPDATE performance_metrics=%s, is_active=1
-    """, ("辨病_SSLRB", "v1", "诊断",
+    """, ("辨病_SSLRB", "v2", "诊断",
           "SVM-Stacking(3×RBF C=100 γ∈{0.1,0.01,0.001}) + LR-Bagging(3) + ROS，84维特征",
-          "辨病_8_1_1_v1 (train158/val20/test20, 5类)",
+          "辨病_8_1_1_v2 (train239/val30/test30, 5类)",
           json.dumps({"svm": [p for p in SVMS], "lr": N_LR, "ros": "max-class"}),
           json.dumps(perf, ensure_ascii=False),
           "辨病/models/sslr.joblib", 1,
           json.dumps(perf, ensure_ascii=False)))
     conn.commit()
-    cur.execute("UPDATE model_version SET is_active=0 WHERE model_name='辨病_SSLRB' AND version<>'v1'")
+    cur.execute("UPDATE model_version SET is_active=0 WHERE model_name='辨病_SSLRB' AND version<>'v2'")
     conn.commit()
     conn.close()
     print("model_version 已落库")

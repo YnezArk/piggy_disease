@@ -3,8 +3,8 @@
 辨病模块 — Step 0 快速体检 + Step 1 SVM Baseline（仅 5 类有标注疾病）
 
 评估协议：
-  A. 5 折分层交叉验证（train+val 178 条）→ 主协议 Macro-F1 ± std
-  B. 固定划分（train 158 → val 20）→ 与路线文档 §4.3 验收对照
+  A. 5 折分层交叉验证（train+val 269 条）→ 主协议 Macro-F1 ± std
+  B. 固定划分（train 239 → val 30）→ 与路线文档 §4.3 验收对照
   C. 最终模型（train+val 178 全量重训）→ test 20 条独立评估（最终报告口径）
 
 用法：
@@ -73,12 +73,12 @@ def main():
     X_tr, y_tr, _ = load_npz("train")
     X_va, y_va, _ = load_npz("val")
     X_te, y_te, te_fids = load_npz("test")
-    X_cv = np.vstack([X_tr, X_va])      # 5 折 CV 用 178 条
+    X_cv = np.vstack([X_tr, X_va])      # 5 折 CV 用 269 条
     y_cv = np.concatenate([y_tr, y_va])
     print(f"train {X_tr.shape} / val {X_va.shape} / test {X_te.shape} / CV {X_cv.shape}")
 
     # ── Step 0: 快速体检（LR / RF / SVM RBF）──
-    print("\n【Step 0】5 折分层 CV 快速体检 (train+val 178 条)")
+    print("\n【Step 0】5 折分层 CV 快速体检 (train+val 269 条)")
     quick = {
         "LR": Pipeline([("sc", StandardScaler()),
                         ("clf", LogisticRegression(max_iter=2000, random_state=42))]),
@@ -100,10 +100,10 @@ def main():
     print(f"  5 折 CV: Macro-F1 = {mf:.4f} ± {sd:.4f} | Acc = {acc:.4f}")
 
     svm.fit(X_tr, y_tr)
-    va_metrics = report("固定划分评估 (train 158 → val 20)", y_va, svm.predict(X_va))
+    va_metrics = report("固定划分评估 (train 239 → val 30)", y_va, svm.predict(X_va))
 
     svm.fit(X_cv, y_cv)   # 全量重训
-    te_metrics = report("最终模型评估 (train+val 178 → test 20)", y_te, svm.predict(X_te))
+    te_metrics = report("最终模型评估 (train+val 269 → test 30)", y_te, svm.predict(X_te))
 
     joblib.dump(svm, os.path.join(MODEL_DIR, "svm_baseline.joblib"))
     print(f"\n模型已保存: models/svm_baseline.joblib")
@@ -112,7 +112,7 @@ def main():
     conn = pymysql.connect(**DB_CONFIG)
     cur = conn.cursor()
     cur.execute("SELECT model_id FROM model_version WHERE model_name=%s AND version=%s",
-                ("辨病_SVM_Baseline", "v1"))
+                ("辨病_SVM_Baseline", "v2"))
     perf = {
         "cv5_macro_f1": round(mf, 4), "cv5_acc": round(acc, 4),
         "test_macro_f1": round(te_metrics["macro_f1"], 4),
@@ -121,20 +121,20 @@ def main():
     }
     if cur.fetchone():
         cur.execute("UPDATE model_version SET performance_metrics=%s, is_active=1 WHERE model_name=%s AND version=%s",
-                    (json.dumps(perf, ensure_ascii=False), "辨病_SVM_Baseline", "v1"))
+                    (json.dumps(perf, ensure_ascii=False), "辨病_SVM_Baseline", "v2"))
     else:
         cur.execute("""
             INSERT INTO model_version (model_name, version, model_type, description,
                 training_dataset_desc, hyperparameters, performance_metrics, model_path, is_active)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """, ("辨病_SVM_Baseline", "v1", "诊断",
+        """, ("辨病_SVM_Baseline", "v2", "诊断",
               "SVM RBF (C=100, γ=0.01) + StandardScaler，84 维均值池化特征",
-              "辨病_8_1_1_v1 (train158/val20/test20, 5类)",
+              "辨病_8_1_1_v2 (train239/val30/test30, 5类)",
               json.dumps({"kernel": "rbf", "C": 100, "gamma": 0.01}),
               json.dumps(perf, ensure_ascii=False),
               "辨病/models/svm_baseline.joblib", 1))
     conn.commit()
-    cur.execute("UPDATE model_version SET is_active=0 WHERE model_name='辨病_SVM_Baseline' AND version<>'v1'")
+    cur.execute("UPDATE model_version SET is_active=0 WHERE model_name='辨病_SVM_Baseline' AND version<>'v2'")
     conn.commit()
     conn.close()
     print("model_version 已落库")
