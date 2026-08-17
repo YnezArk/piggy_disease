@@ -14,7 +14,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # 获取脚本所在目�
 AUDIO_ROOT = os.path.join(BASE_DIR, "pig_cough_data")  # 音频数据目录
 
 # ★ 数据库连接信息（统一从根目录 .env 读取，禁止硬编码）
-from config import DB_CONFIG
+from bianbing_config import DB_CONFIG
 
 # ★ 特征提取参数
 SAMPLE_RATE = 16000

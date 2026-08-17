@@ -4,7 +4,10 @@
 
 输出契约（与论治引擎 /api/diagnosis 对齐）：
   {"label": "influenza", "disease": "猪流行性感冒", "confidence": 0.87,
-   "cough_type": "湿咳", "symptoms": "自动生成的症状描述", "top3": [...]}
+   "cough_type": "湿咳", "typical_symptoms": "鹅鸣样剧咳，突发高热，全群发病", "top3": [...]}
+
+- typical_symptoms = 该病的模板典型症状，**仅供展示，不输入论治**；
+  论治所需实际症状由调用方手动传入（pipeline.py --symptoms / API symptoms 字段）
 
 - 默认使用 **SSLRB 集成模型**（models/sslr.joblib，实测 test Macro-F1 0.7933 最优），
   可用 --model svm 切 SVM Baseline（0.7667）
@@ -72,7 +75,7 @@ def diagnose(wav_path, model=None, model_name="sslr"):
         "disease": DISEASE_NAMES[top[0]],
         "confidence": round(float(proba[top[0]]), 4),
         "cough_type": "干咳/湿咳（待监测板块补充）",
-        "symptoms": TYPICAL_SYMPTOMS[label],
+        "typical_symptoms": TYPICAL_SYMPTOMS[label],
         "top3": [{"label": LABEL_NAMES[i], "disease": DISEASE_NAMES[i],
                   "confidence": round(float(proba[i]), 4)} for i in top[:3]],
     }

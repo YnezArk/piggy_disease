@@ -4,7 +4,7 @@
 
 功能：
   1. extract_features(path)     单条音频 → 84 维特征（与入库脚本逐参数一致）
-  2. build_feature_matrix()     全量提取 198 条标注样本 → (X, y, file_ids)
+  2. build_feature_matrix()     全量提取 299 条标注样本 → (X, y, file_ids)
   3. verify_db()                与库内 acoustic_feature 复算校验（误差 < 1e-6）
   4. split_dataset()            8:1:1 分层划分 → features/*.npz + 落库 training_dataset
 
@@ -34,7 +34,7 @@ LABEL_MAP = {"normal": 1, "influenza": 2, "prrs": 3, "mycoplasma": 4, "app": 5}
 LABEL_NAMES = list(LABEL_MAP.keys())          # 顺序即类别索引（0-based label）
 FEATURE_NAMES = ["mfcc", "logfbank", "temporal", "spectral"]
 
-from config import DB_CONFIG, AUDIO_ROOT, FEAT_DIR   # 统一环境配置（.env，禁止硬编码）
+from bianbing_config import DB_CONFIG, AUDIO_ROOT, FEAT_DIR   # 统一环境配置（.env，禁止硬编码）
 
 
 def extract_features_ext(file_path):
@@ -94,7 +94,7 @@ def extract_features(file_path):
 
 
 def build_feature_matrix():
-    """全量提取 5 类标注样本 → X(198,84), y(198,), file_ids(198,)。"""
+    """全量提取 5 类标注样本 → X(299,84), y(299,), file_ids(299,)。"""
     import librosa  # 延迟导入，verify-only 场景不依赖音频
 
     X, y, file_ids = [], [], []

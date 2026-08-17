@@ -57,7 +57,7 @@ def print_report(r, truth=None):
     else:
         print(f"  真实标签: 未知（未标注样本）")
     print(f"  置信度: {r['confidence']:.4f}")
-    print(f"  症状模板: {r['symptoms']}")
+    print(f"  典型症状(展示): {r.get('typical_symptoms', '')}")
 
     print("\n  概率分布:")
     for i, t in enumerate(r["top3"]):

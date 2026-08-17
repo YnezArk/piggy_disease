@@ -24,7 +24,7 @@ from sklearn.metrics import (accuracy_score, classification_report,
                              confusion_matrix, f1_score, precision_recall_fscore_support)
 import joblib
 
-from config import DB_CONFIG, FEAT_DIR, MODEL_DIR   # 统一环境配置（.env，禁止硬编码）
+from bianbing_config import DB_CONFIG, FEAT_DIR, MODEL_DIR   # 统一环境配置（.env，禁止硬编码）
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 LABEL_NAMES = ["normal", "influenza", "prrs", "mycoplasma", "app"]
