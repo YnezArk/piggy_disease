@@ -26,8 +26,8 @@ import joblib
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_DIR = os.path.join(BASE_DIR, "models")
-LABEL_NAMES = ["normal", "influenza", "prrs", "mycoplasma", "app"]
-DISEASE_NAMES = ["健康猪只", "猪流行性感冒", "猪蓝耳病", "猪支原体肺炎", "猪传染性胸膜肺炎"]
+LABEL_NAMES = ["normal", "influenza", "prrs", "mycoplasma", "app", "other_disease"]
+DISEASE_NAMES = ["健康猪只", "猪流行性感冒", "猪蓝耳病", "猪支原体肺炎", "猪传染性胸膜肺炎", "其他疾病"]
 # 注：system_config.diagnosis_threshold 保留（未来类别扩充/分级提示用），当前不参与拒答
 
 # 症状模板（供论治层 symptoms 字段；兼症由模型 Top2 概率叠加生成）
@@ -37,6 +37,7 @@ TYPICAL_SYMPTOMS = {
     "prrs": "高调湿咳，渐进性加重，腹式呼吸，耳尖发紫",
     "mycoplasma": "慢性干咳，早晚加重，病程长",
     "app": "急骤痛咳，湿咳，全身重症，高致死率",
+    "other_disease": "咳嗽、呼吸异常等非典型表现（未细分）",
 }
 
 
@@ -53,9 +54,10 @@ def load_model(name="sslr"):
 def predict_proba(model, X):
     """统一概率接口：SSLRB 字典结构 / SVM Pipeline 均可。"""
     if isinstance(model, dict):           # SSLRB: {"svms":[(sc,svm)...], "lrs":[...]}
-        meta = np.zeros((len(X), 3 * len(LABEL_NAMES)))
+        n_cls = len(LABEL_NAMES)
+        meta = np.zeros((len(X), len(model["svms"]) * n_cls))
         for i, (sc, svm) in enumerate(model["svms"]):
-            meta[:, i * 5:(i + 1) * 5] = svm.predict_proba(sc.transform(X))
+            meta[:, i * n_cls:(i + 1) * n_cls] = svm.predict_proba(sc.transform(X))
         return np.mean([lr.predict_proba(meta) for lr in model["lrs"]], axis=0)
     return model.predict_proba(X)         # sklearn Pipeline
 

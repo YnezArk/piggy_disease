@@ -1,7 +1,10 @@
 # 依赖文件夹（体积巨大，必须忽略）
 node_modules/
-Data/
+Data/*
+data/*
 __pycache__/
+!data/kg/
+!data/rag/
 
 # 构建输出目录（由源码生成，不需要提交）
 dist/

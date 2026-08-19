@@ -29,7 +29,7 @@ import joblib
 from bianbing_config import DB_CONFIG, FEAT_DIR, MODEL_DIR   # 统一环境配置（.env，禁止硬编码）
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-LABEL_NAMES = ["normal", "influenza", "prrs", "mycoplasma", "app"]
+LABEL_NAMES = ["normal", "influenza", "prrs", "mycoplasma", "app", "other_disease"]
 
 SVMS = [dict(C=100, gamma=0.1), dict(C=100, gamma=0.01), dict(C=100, gamma=0.001)]
 N_LR = 3
@@ -165,15 +165,15 @@ def main():
             training_dataset_desc, hyperparameters, performance_metrics, model_path, is_active)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
         ON DUPLICATE KEY UPDATE performance_metrics=%s, is_active=1
-    """, ("辨病_SSLRB", "v2", "诊断",
+    """, ("辨病_SSLRB", "v3", "诊断",
           "SVM-Stacking(3×RBF C=100 γ∈{0.1,0.01,0.001}) + LR-Bagging(3) + ROS，84维特征",
-          "辨病_8_1_1_v2 (train239/val30/test30, 5类)",
+          "辨病_8_1_1_v3 (6类540条)",
           json.dumps({"svm": [p for p in SVMS], "lr": N_LR, "ros": "max-class"}),
           json.dumps(perf, ensure_ascii=False),
           "辨病/models/sslr.joblib", 1,
           json.dumps(perf, ensure_ascii=False)))
     conn.commit()
-    cur.execute("UPDATE model_version SET is_active=0 WHERE model_name='辨病_SSLRB' AND version<>'v2'")
+    cur.execute("UPDATE model_version SET is_active=0 WHERE model_name='辨病_SSLRB' AND version<>'v3'")
     conn.commit()
     conn.close()
     print("model_version 已落库")

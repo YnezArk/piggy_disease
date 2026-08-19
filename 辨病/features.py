@@ -29,8 +29,8 @@ N_MFCC = 13
 N_FFT = 2048
 HOP_LENGTH = 512
 
-# 有标注数据的 5 类（key = 文件夹名 = disease.label）
-LABEL_MAP = {"normal": 1, "influenza": 2, "prrs": 3, "mycoplasma": 4, "app": 5}
+# 有标注数据的 6 类（key = 文件夹名 = disease.label；2026-08-17 纳入 other_disease）
+LABEL_MAP = {"normal": 1, "influenza": 2, "prrs": 3, "mycoplasma": 4, "app": 5, "other_disease": 6}
 LABEL_NAMES = list(LABEL_MAP.keys())          # 顺序即类别索引（0-based label）
 FEATURE_NAMES = ["mfcc", "logfbank", "temporal", "spectral"]
 
@@ -202,8 +202,8 @@ def split_dataset(seed=42):
         INSERT INTO training_dataset (dataset_name, dataset_type, description,
             record_ids, total_samples, label_distribution, created_by)
         VALUES (%s, %s, %s, %s, %s, %s, %s)
-    """, ("辨病_8_1_1_v2", "诊断",
-          "新数据集(299条)8:1:1分层划分，random_state=42；X=84维(13+64+3+4)均值池化；file_source 可追溯",
+    """, ("辨病_8_1_1_v3", "诊断",
+          "新数据集(540条,6类)8:1:1分层划分，random_state=42；X=84维(13+64+3+4)均值池化；file_source 可追溯",
           json.dumps({k: v.tolist() for k, v in parts.items()}, ensure_ascii=False),
           int(len(y)),
           json.dumps({int(k): int(v) for k, v in zip(*np.unique(y, return_counts=True))},

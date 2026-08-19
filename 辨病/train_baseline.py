@@ -27,8 +27,8 @@ import joblib
 from bianbing_config import DB_CONFIG, FEAT_DIR, MODEL_DIR   # 统一环境配置（.env，禁止硬编码）
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-LABEL_NAMES = ["normal", "influenza", "prrs", "mycoplasma", "app"]
-DISEASE_NAMES = ["健康猪只", "猪流行性感冒", "猪蓝耳病", "猪支原体肺炎", "猪传染性胸膜肺炎"]
+LABEL_NAMES = ["normal", "influenza", "prrs", "mycoplasma", "app", "other_disease"]
+DISEASE_NAMES = ["健康猪只", "猪流行性感冒", "猪蓝耳病", "猪支原体肺炎", "猪传染性胸膜肺炎", "其他疾病"]
 
 
 def load_npz(name):
@@ -110,7 +110,7 @@ def main():
     conn = pymysql.connect(**DB_CONFIG)
     cur = conn.cursor()
     cur.execute("SELECT model_id FROM model_version WHERE model_name=%s AND version=%s",
-                ("辨病_SVM_Baseline", "v2"))
+                ("辨病_SVM_Baseline", "v3"))
     perf = {
         "cv5_macro_f1": round(mf, 4), "cv5_acc": round(acc, 4),
         "test_macro_f1": round(te_metrics["macro_f1"], 4),
@@ -119,20 +119,20 @@ def main():
     }
     if cur.fetchone():
         cur.execute("UPDATE model_version SET performance_metrics=%s, is_active=1 WHERE model_name=%s AND version=%s",
-                    (json.dumps(perf, ensure_ascii=False), "辨病_SVM_Baseline", "v2"))
+                    (json.dumps(perf, ensure_ascii=False), "辨病_SVM_Baseline", "v3"))
     else:
         cur.execute("""
             INSERT INTO model_version (model_name, version, model_type, description,
                 training_dataset_desc, hyperparameters, performance_metrics, model_path, is_active)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """, ("辨病_SVM_Baseline", "v2", "诊断",
+        """, ("辨病_SVM_Baseline", "v3", "诊断",
               "SVM RBF (C=100, γ=0.01) + StandardScaler，84 维均值池化特征",
-              "辨病_8_1_1_v2 (train239/val30/test30, 5类)",
+              "辨病_8_1_1_v3 (6类540条)",
               json.dumps({"kernel": "rbf", "C": 100, "gamma": 0.01}),
               json.dumps(perf, ensure_ascii=False),
               "辨病/models/svm_baseline.joblib", 1))
     conn.commit()
-    cur.execute("UPDATE model_version SET is_active=0 WHERE model_name='辨病_SVM_Baseline' AND version<>'v2'")
+    cur.execute("UPDATE model_version SET is_active=0 WHERE model_name='辨病_SVM_Baseline' AND version<>'v3'")
     conn.commit()
     conn.close()
     print("model_version 已落库")

@@ -15,9 +15,9 @@ import sys
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 AUDIO_ROOT = os.path.join(BASE_DIR, "pig_cough_data")
-GROUPS = ["normal", "influenza", "prrs", "mycoplasma", "app", "unknown"]
-DISEASE_NAMES = ["健康猪只", "猪流行性感冒", "猪蓝耳病", "猪支原体肺炎", "猪传染性胸膜肺炎"]
-LABEL_NAMES = ["normal", "influenza", "prrs", "mycoplasma", "app"]
+GROUPS = ["normal", "influenza", "prrs", "mycoplasma", "app", "other_disease"]
+DISEASE_NAMES = ["健康猪只", "猪流行性感冒", "猪蓝耳病", "猪支原体肺炎", "猪传染性胸膜肺炎", "其他疾病"]
+LABEL_NAMES = ["normal", "influenza", "prrs", "mycoplasma", "app", "other_disease"]
 
 
 def list_samples():
