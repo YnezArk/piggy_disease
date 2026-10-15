@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  # 服务 1: 诊疗决策 API 应用
+  app:
+    # 👇 直接指定你打包上传的镜像名称
+    image: pig-diagnosis-api2  
+    container_name: pig_diag_app
+    ports:
+      - "5253:8000"                   # 端口映射: 宿主机8000 -> 容器8000
+    env_file:
+      - ./.env                        # 读取外部的 .env 文件
+    environment:
+      # 覆盖 .env 中的数据库配置，指向 docker 内部的 db 服务
+      - DB_HOST=db                    
+      - DB_PORT=3306
+    depends_on:
+      - db                            # 确保先启动数据库
+    restart: unless-stopped
+
+  # 服务 2: MySQL 数据库
+  db:
+    image: mysql:8.0                  # 使用 MySQL 8.0 镜像
+    container_name: pig_diag_db
+    environment:
+      MYSQL_ROOT_PASSWORD: 36987412   # 你的数据库密码
+      MYSQL_DATABASE: pig_diag_v2     # 你的数据库名
+    ports:
+      - "3306:3306"                   # 端口映射，方便外部工具连接
+    volumes:
+      - db_data:/var/lib/mysql        # 数据持久化
+      - ./db_init:/docker-entrypoint-initdb.d  # 自动导入SQL文件
+    restart: unless-stopped
+
+# 定义持久化卷
+volumes:
+  db_data:
