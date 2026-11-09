@@ -1,0 +1,6 @@
+# 监测模块（TF 在 Windows 原生环境只支持 CPU；训练/推理均可）
+-r base.txt
+tensorflow>=2.12
+flask>=2.2
+waitress>=3.0          # Windows 生产部署（可选）
+noisereduce>=3.0       # 可选降噪，当前默认不使用

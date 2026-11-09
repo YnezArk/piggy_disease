@@ -1,0 +1,97 @@
+# -*- coding: utf-8 -*-
+"""
+辨病模块 — 推理模块（wav → 疾病诊断）
+
+输出契约（与论治引擎 /api/diagnosis 对齐）：
+  {"label": "influenza", "disease": "猪流行性感冒", "confidence": 0.87,
+   "cough_type": "湿咳", "typical_symptoms": "鹅鸣样剧咳，突发高热，全群发病", "top3": [...]}
+
+- typical_symptoms = 该病的模板典型症状，**仅供展示，不输入论治**；
+  论治所需实际症状由调用方手动传入（pipeline.py --symptoms / API symptoms 字段）
+
+- 默认使用 **SSLRB 集成模型**（models/sslr.joblib，实测 test Macro-F1 0.7933 最优），
+  可用 --model svm 切 SVM Baseline（0.7667）
+- **决策口径：恒输出 6 类之一（健康 + 5 类疾病），取置信度最高者，不做拒答**；
+  猪肺疫/混合感染等无标注类别未来加数据后扩充类别，当前不做 unknown 拒绝
+- confidence 供论治层辨病纠错参考，不参与拒答
+
+用法：
+  python predict.py path/to/cough.wav
+"""
+import os
+import sys
+import json
+import numpy as np
+import joblib
+
+from bianbing_config import MODEL_DIR
+
+LABEL_NAMES = ["normal", "influenza", "prrs", "mycoplasma", "app", "other_disease"]
+DISEASE_NAMES = ["健康猪只", "猪流行性感冒", "猪蓝耳病", "猪支原体肺炎", "猪传染性胸膜肺炎", "其他疾病"]
+# 注：system_config.diagnosis_threshold 保留（未来类别扩充/分级提示用），当前不参与拒答
+
+# 症状模板（供论治层 symptoms 字段；兼症由模型 Top2 概率叠加生成）
+TYPICAL_SYMPTOMS = {
+    "normal": "呼吸平稳，无咳嗽，精神饱满",
+    "influenza": "鹅鸣样剧咳，突发高热，全群发病",
+    "prrs": "高调湿咳，渐进性加重，腹式呼吸，耳尖发紫",
+    "mycoplasma": "慢性干咳，早晚加重，病程长",
+    "app": "急骤痛咳，湿咳，全身重症，高致死率",
+    "other_disease": "咳嗽、呼吸异常等非典型表现（未细分）",
+}
+
+
+MODEL_FILES = {"svm": "svm_baseline.joblib", "sslr": "sslr.joblib"}
+
+
+def load_model(name="sslr"):
+    path = os.path.join(MODEL_DIR, MODEL_FILES.get(name, name))
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"模型不存在: {path}，请先运行 train_baseline.py 或 train_sslr.py")
+    return joblib.load(path)
+
+
+def predict_proba(model, X):
+    """统一概率接口：SSLRB 字典结构 / SVM Pipeline 均可。"""
+    if isinstance(model, dict):           # SSLRB: {"svms":[(sc,svm)...], "lrs":[...]}
+        n_cls = len(LABEL_NAMES)
+        meta = np.zeros((len(X), len(model["svms"]) * n_cls))
+        for i, (sc, svm) in enumerate(model["svms"]):
+            meta[:, i * n_cls:(i + 1) * n_cls] = svm.predict_proba(sc.transform(X))
+        return np.mean([lr.predict_proba(meta) for lr in model["lrs"]], axis=0)
+    return model.predict_proba(X)         # sklearn Pipeline
+
+
+def diagnose(wav_path, model=None, model_name="sslr"):
+    """wav → 诊断结果 dict（契约见模块 docstring）。"""
+    import features as F
+    if model is None:
+        model = load_model(model_name)
+    X = np.concatenate([F.extract_features(wav_path)[k] for k in F.FEATURE_NAMES]).reshape(1, -1)
+    proba = predict_proba(model, X)[0]
+    top = np.argsort(proba)[::-1]
+    label = LABEL_NAMES[top[0]]   # 恒输出 6 类之一，取置信度最高，不拒答
+
+    result = {
+        "label": label,
+        "disease": DISEASE_NAMES[top[0]],
+        "confidence": round(float(proba[top[0]]), 4),
+        "cough_type": "干咳/湿咳（待监测板块补充）",
+        "typical_symptoms": TYPICAL_SYMPTOMS[label],
+        "top3": [{"label": LABEL_NAMES[i], "disease": DISEASE_NAMES[i],
+                  "confidence": round(float(proba[i]), 4)} for i in top[:3]],
+    }
+    return result
+
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print(__doc__)
+        sys.exit(1)
+    wav = sys.argv[1]
+    name = sys.argv[2] if len(sys.argv) > 2 and sys.argv[2] in ("sslr", "svm") else "sslr"
+    try:
+        r = diagnose(wav, model_name=name)
+        print(json.dumps(r, ensure_ascii=False, indent=2))
+    except FileNotFoundError as e:
+        print(f"❌ {e}")

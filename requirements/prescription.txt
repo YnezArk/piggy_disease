@@ -1,0 +1,6 @@
+# 诊疗决策模块（RAG + LLM + API）
+-r base.txt
+openai>=1.0
+fastapi>=0.110
+uvicorn>=0.27
+python-multipart>=0.0.9

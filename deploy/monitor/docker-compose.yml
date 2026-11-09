@@ -1,0 +1,20 @@
+services:
+  cough-monitor:
+    build: .
+    image: pig-cough-monitor:latest
+    container_name: pig-cough-monitor
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - TZ=Asia/Shanghai
+      - RATE_WARNING=5
+      - RATE_DANGER=15
+      # 数据库/鉴权：在宿主机环境或 .env 中提供，不要写死在镜像里
+      - DB_HOST=${DB_HOST:-host.docker.internal}
+      - DB_PORT=${DB_PORT:-3306}
+      - DB_USER=${DB_USER:-root}
+      - DB_PASS=${DB_PASS:-}
+      - MONITOR_DB_NAME=${MONITOR_DB_NAME:-pig_cough_dataset}
+      - MONITOR_API_TOKEN=${MONITOR_API_TOKEN:-}
+    restart: unless-stopped

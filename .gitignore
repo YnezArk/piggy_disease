@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# 环境变量与密钥
+.env
+.env.*
+!.env.example
+
+# 运行时产物
+logs/
+data/uploads/
+data/monitor_in/
+data/monitor_done/
+data/processed/
+*.log
+
+# 模型训练/推理临时缓存
+.cache/
+.ipynb_checkpoints/
+
+# 归档区（确认后可整体删除）
+_archive/
+
+# 编辑器 / 系统
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# 大文件音频：如使用 Git，建议用 Git LFS 管理 data/raw 与 data/samples
+data/**/*.wav
+data/**/*.mp3
+
+_软著工具/
+results/
